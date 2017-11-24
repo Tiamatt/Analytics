@@ -4,7 +4,7 @@ header{
     line-height: 50px;
     padding: 0 20px;
     color: #fff;
-    background-color: rgba(19,35,47,1);
+    background-color: rgba(19,35,47,0.9);
 }
 p{
     font-family: 'Lobster', cursive;

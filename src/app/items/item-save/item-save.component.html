@@ -1,3 +1,6 @@
-<p>
-  item-save works!
-</p>
+<h3>{{title | uppercase}}</h3>
+<h6>NAME (must be unique)</h6>
+<h6>DESCRIPTION</h6>
+<app-checkboxes-simple [input]='brands' (onChangeOutput)="onBrandsChecked($event)"></app-checkboxes-simple>
+<p></p>
+<app-checkboxes-simple [input]='priceRanges' (onChangeOutput)="onPriceRangesChecked($event)"></app-checkboxes-simple>
