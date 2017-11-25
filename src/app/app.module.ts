@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {FilterApiService } from './shared/services/api/filterApi.service';
 // components (alphabetically)
 import { AppComponent } from './app.component';
+import { BreadcrumbNavComponent } from './shared/components/breadcrumb-nav/breadcrumb-nav.component';
 import { HeaderComponent } from './header/header.component';
 import { ItemSaveComponent } from './items/item-save/item-save.component';
 import { ItemListComponent } from './items/item-list/item-list.component';
@@ -19,23 +20,24 @@ import { RadiobuttonsSimpleComponent } from './shared/components/radiobuttons-si
 import { ItemGeneralSaveComponent } from './items/item-save/item-general-save/item-general-save.component';
 import { ItemDetailSaveComponent } from './items/item-save/item-detail-save/item-detail-save.component';
 import { ItemImageSaveComponent } from './items/item-save/item-image-save/item-image-save.component';
-import { BreadcrumbNavComponent } from './shared/components/breadcrumb-nav/breadcrumb-nav.component';
+import { ItemViewBoxComponent } from './items/item-view/item-view-box/item-view-box.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    ItemSaveComponent,
-    ItemListComponent,
-    ItemViewComponent,
-    MainNavComponent,
+    AppComponent, 
+    BreadcrumbNavComponent,
     CheckboxesSimpleComponent,
     CheckboxesAlphabetComponent,
-    RadiobuttonsSimpleComponent,
-    ItemGeneralSaveComponent,
+    HeaderComponent,
     ItemDetailSaveComponent,
+    ItemGeneralSaveComponent,
     ItemImageSaveComponent,
-    BreadcrumbNavComponent
+    ItemListComponent,
+    ItemSaveComponent,  
+    ItemViewBoxComponent,
+    ItemViewComponent,   
+    MainNavComponent,    
+    RadiobuttonsSimpleComponent
   ],
   imports: [
     AppRoutingModule,

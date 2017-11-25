@@ -1,0 +1,100 @@
+#breadcrumb{
+    list-style:none;
+    display: inline-block;
+}
+li{
+    float:left;
+}
+    li a{
+        color:#FFF;
+        font-size: 14px;
+        display:block;
+        background: #000;
+        text-decoration: none;
+        position:relative;
+        height: 40px;
+        line-height:40px;
+        padding: 0 10px 0 5px;
+        text-align: center;
+        margin-right: 23px;
+    }
+
+    
+    /* first li and last li */
+    #breadcrumb li:first-child a{
+        padding-left:15px;
+        border-radius: 4px 0 0 4px;
+    }
+    #breadcrumb li:first-child a:before{
+        border:none;
+    }
+    #breadcrumb li:last-child a{
+        padding-right:15px;
+        border-radius: 0 4px 4px 0;
+    }
+    #breadcrumb li:last-child a:after{
+        border:none;
+    }
+
+
+    /* link */
+    #breadcrumb a:before, a:after{
+        color:#FFF;   
+        content: "";
+        position:absolute;
+        top: 0;
+        border:0 solid #3498db;
+        border-width:20px 10px;
+        width: 0;
+        height: 0;
+    }
+    #breadcrumb a:before{
+        left:-20px;
+        border-left-color:transparent;
+    }
+    #breadcrumb a:after{
+        left:100%;
+        border-color:transparent;
+        border-left-color:rgba(23, 162, 184, 1);
+    }
+
+    
+    /* hover, active, active_M */
+    #breadcrumb a:hover, #breadcrumb a:active, #breadcrumb a.active_M{
+        color:#FFF;
+        background-color: rgba(23, 162, 184, 1);
+    }
+    #breadcrumb a:hover:before,#breadcrumb a:active:before, #breadcrumb a.active_M:before{
+        border-color:rgba(23, 162, 184, 1);
+        border-left-color:transparent;
+    }
+    #breadcrumb a:hover:after,#breadcrumb a:active:after,#breadcrumb a.active_M:after{
+        border-left-color:rgba(23, 162, 184, 1);
+    }
+
+    /* notVisited_M */
+    #breadcrumb a.notVisited_M{
+        color:#FFF;
+        background-color: rgba(134, 142, 150, 1);
+    }
+    #breadcrumb a.notVisited_M:before{
+        border-color:rgba(134, 142, 150, 1);
+        border-left-color:transparent;
+    }
+    #breadcrumb a.notVisited_M:after{
+        border-left-color:rgba(134, 142, 150, 1);
+    }
+
+
+    /* visited_M */
+    #breadcrumb a.visited_M{
+        color:#FFF;
+        background-color: rgba(40, 167, 69, 1);
+    }
+    #breadcrumb a.visited_M:before{
+        border-color:rgba(40, 167, 69, 1);
+        border-left-color:transparent;
+    }
+    #breadcrumb a.visited_M:after{
+        border-left-color:rgba(40, 167, 69, 1);
+    }

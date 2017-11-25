@@ -1,3 +1,7 @@
-<p>
-  breadcrumb-nav works!
-</p>
+<ul id="breadcrumb" *ngIf="input">
+  <li *ngFor="let a of input; let i=index" (click)="onLinkClick(i)">
+    <a [routerLink]="a.routerLink" 
+    [ngClass]="{active_M: a.linkStatus == 1, visited_M: a.linkStatus == 2, notVisited_M: a.linkStatus == 3}"
+    >{{a.stepName}}</a>
+  </li>
+</ul>

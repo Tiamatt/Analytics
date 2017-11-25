@@ -12,7 +12,6 @@ import { RadiobuttonsSimpleClass } from '../../../shared/models/models-for-compo
   styleUrls: ['./item-general-save.component.css', '../../../shared/styles/general.css']
 })
 export class ItemGeneralSaveComponent implements OnInit {
-  title: string = "Create new item";
   itemForm: FormGroup;
   genders: RadiobuttonsSimpleClass;
   categories: RadiobuttonsSimpleClass;

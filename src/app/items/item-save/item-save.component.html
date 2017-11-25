@@ -1,3 +1,11 @@
-<p>item-save</p>
-<app-breadcrumb-nav></app-breadcrumb-nav>
+<h4 class="page-title_M">{{title}}</h4>
+<app-breadcrumb-nav [input]="breadcrumbNav" (onLinkClickOutput)="onBreadcrumbLinkChange($event)"></app-breadcrumb-nav>
 <router-outlet></router-outlet>
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
