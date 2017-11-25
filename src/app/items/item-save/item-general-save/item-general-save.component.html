@@ -1,0 +1,34 @@
+<form>
+  <div class="form-group form-group_M">
+      <h4 class="page-title_M">{{title}}</h4>
+
+      <!-- Item name  (input) -->
+      <label class="control-title_M" for="itemName">{{'name' | uppercase}}</label>
+      <input type="text" id="itemName" class="form-control" placeholder="Enter item name" aria-describedby="itemNameNote">
+      <small id="itemNameNote" class="form-text text-muted">Must be unique.</small>
+      <br>
+
+      <!-- Item description (input) -->
+      <label class="control-title_M" for="itemDescription">{{'description' | uppercase}}</label>
+      <textarea rows="4" id="itemDescription" class="form-control" placeholder="Enter item description"></textarea>
+      <br>
+
+      <!-- Gender (single selection)-->
+      <app-radiobuttons-simple [input]='genders' (onSelectedOutput)="onGenderSelected($event)"></app-radiobuttons-simple>
+      <br>
+
+      <!-- Category (single selection)-->
+      <app-radiobuttons-simple [input]='categories' (onSelectedOutput)="onCategorySelected($event)"></app-radiobuttons-simple>
+      <br>
+
+      <!-- Brand (single selection)-->
+      <app-radiobuttons-simple [input]='brands' (onSelectedOutput)="onBrandSelected($event)"></app-radiobuttons-simple>
+      <br>
+
+      <!-- Notes (kali! only if create)-->
+      <label class="control-title_M">{{'notes' | uppercase}}</label>
+      <p>You also need to create item details and item images. Otherwise user will not see this item.</p>
+      <p>1. Proceed to add Item Details</p>
+      <p>2. Proceed to add Item Images</p>
+  </div>
+</form>

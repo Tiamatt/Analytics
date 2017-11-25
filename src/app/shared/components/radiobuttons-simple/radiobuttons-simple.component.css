@@ -37,7 +37,7 @@ h6.title_M{
     height: 16px;
     width: 16px;
     background-color: #ccc;
-    border-radius: 5px;
+    border-radius:  50%;
   }
   
   /* On mouse-over, add a grey background color */
@@ -64,13 +64,10 @@ h6.title_M{
   
   /* Style the checkmark/indicator */
   .container .checkmark:after {
-    left: 6px;
-    top: 3px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 1px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+    top: 5px;
+    left: 5px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
   }

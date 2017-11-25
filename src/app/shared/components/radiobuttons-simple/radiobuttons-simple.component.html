@@ -1,0 +1,16 @@
+<div *ngIf="input">
+  <h6 *ngIf="input.title" class="title_M">{{input.title | uppercase }}</h6>
+  <div [ngClass]="{box_M: input.isStyleBorder}">
+      <div *ngFor="let o of input.options">
+          <label class="container">
+              <input type="radio"
+                      [name]="input.uniqueId"
+                      value="{{o.id}}"
+                      [checked]="o.id == input.selectedId"
+                      (change)="onSelect(o.id)"/>
+              <span class="checkmark"></span>
+              {{o.name}}
+          </label>
+      </div>
+  </div>
+</div>

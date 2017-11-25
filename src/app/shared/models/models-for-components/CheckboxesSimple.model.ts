@@ -1,6 +1,6 @@
-import { IIdNameChecked } from "./IIdNameChecked.model";
+import { IIdNameChecked } from "./../IIdNameChecked.model";
 
-export class CheckboxSimpleClass{
+export class CheckboxesSimpleClass{
     uniqueId: string;
     title: string;
     options: IIdNameChecked[];

@@ -1,8 +1,15 @@
-h3{
+div.form-group_M{
+    max-width: 300px;
+}
+
+/* page title */
+h4.page-title_M{
     font-weight: 700;
     padding: 10px 0;
 }
-h6{
+/* control title */
+label.control-title_M{
     font-weight: 700;
     margin:  0 0 8px 0;
+    display: block;
 }
