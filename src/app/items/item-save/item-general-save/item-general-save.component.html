@@ -1,6 +1,7 @@
 <form [formGroup]="itemForm" (ngSubmit)="onSave()">
   <div class="form-group form-group_M">
 
+
     <!-- Item name  (enter) -->
     <label class="control-title_M" for="itemName">{{'name' | uppercase}}</label>
     <input type="text" id="itemName" class="form-control" placeholder="Enter item name" aria-describedby="itemNameNote" formControlName="itemName">
@@ -12,6 +13,7 @@
     </div>
     <br>
 
+
     <!-- Item description (enter) -->
     <label class="control-title_M" for="itemDescription">{{'description' | uppercase}}</label>
     <textarea rows="4" id="itemDescription" class="form-control" placeholder="Enter item description" formControlName="itemDescription"></textarea>
@@ -21,20 +23,36 @@
     </div>
     <br>
 
-    <!-- Gender (single selection)-->
+
+    <!-- Gender (single selection, radiobuttons)-->
     <app-radiobuttons-simple [input]='genders' (onSelectedOutput)="onGenderSelected($event)"></app-radiobuttons-simple>
     <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations && !isGenderValid"> * Gender must be selected</p>
     <br>
 
-    <!-- Category (single selection)-->
-    <app-radiobuttons-simple [input]='categories' (onSelectedOutput)="onCategorySelected($event)"></app-radiobuttons-simple>
-    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations && !isCategoryValid"> * Category must be selected</p>
+
+    <!-- Category (single selection, dropdowns)-->
+    <label class="control-title_M" for="category">{{'category' | uppercase}}</label>
+    <select id="category" formControlName="category" class="form-control">
+      <option value="-1" selected="selected">Select category...</option>
+      <option *ngFor="let option of categories" [value]="option.id">{{ option.name }}</option>
+    </select>
+    <div *ngIf="isShowAllValidations && !itemForm.get('category').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('category').errors['min']"> * Category must be selected</p>
+    </div>
     <br>
 
+
     <!-- Brand (single selection)-->
-    <app-radiobuttons-simple [input]='brands' (onSelectedOutput)="onBrandSelected($event)"></app-radiobuttons-simple>
-    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations && !isBrandValid"> * Brand must be selected</p>
+    <label class="control-title_M" for="brand">{{'brand' | uppercase}}</label>
+    <select id="brand" formControlName="brand" class="form-control">
+      <option value="-1" selected="selected">Select brand...</option>
+      <option *ngFor="let option of brands" [value]="option.id">{{ option.name }}</option>
+    </select>
+    <div *ngIf="isShowAllValidations && !itemForm.get('brand').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('brand').errors['min']"> * Brand must be selected</p>
+    </div>
     <br>
+
 
     <!-- Price (enter)-->
     <label class="control-title_M" for="price">{{'price' | uppercase}}</label>
@@ -49,6 +67,7 @@
     </div>
     <br>
 
+    <!-- Buttons - Save and Next -->
     <button type="submit" class="btn btn-success btn_M">Save</button>
     <input type="button" value="Next" class="btn btn-info btn_M" (click)="onNextClick()">
     <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>

@@ -19,14 +19,12 @@ export class ItemGeneralSaveComponent implements OnInit {
   item: ItemClass = new ItemClass();
   itemForm: FormGroup;
   genders: RadiobuttonsSimpleClass;
-  categories: RadiobuttonsSimpleClass;
-  brands: RadiobuttonsSimpleClass;
+  categories: IIdNameChecked;
+  brands: IIdNameChecked;
   // for validation
   existingItemNames: string[] = []; // to check if item name is unique
   isShowAllValidations: boolean = false;
   isGenderValid: boolean = false;
-  isCategoryValid: boolean = false;
-  isBrandValid: boolean = false;
 
   constructor(
     private filterApiService: FilterApiService,
@@ -45,6 +43,8 @@ export class ItemGeneralSaveComponent implements OnInit {
     this.itemForm = new FormGroup({
       'itemName': new FormControl(null, [RequiredWithTrimValidator, this.forbiddenItemNameValidator.bind(this), Validators.maxLength(50)]),
       'itemDescription': new FormControl(null, [RequiredWithTrimValidator, Validators.maxLength(2000)]),
+      'category': new FormControl(-1, Validators.min(1)),
+      'brand': new FormControl(-1, Validators.min(1)),
       'price': new FormControl(null, [RequiredWithTrimValidator, Validators.pattern('^[0-9]+\.[0-9][0-9]$')])
     });
   }
@@ -65,12 +65,7 @@ export class ItemGeneralSaveComponent implements OnInit {
   }  
   populateCategories(){
     this.filterApiService.getCategories().subscribe(
-      res => {
-        this.categories = new RadiobuttonsSimpleClass("categories_1", res);
-        this.categories.isStyleBorder = true;
-        this.categories.title = "Category";
-        //this.categories.selectedId = this.categories.options[0].id;
-      },
+      res => this.categories = res,
       err => {
         console.log("Error. Can't call GetCategories() HttpGet method");
       }
@@ -78,12 +73,7 @@ export class ItemGeneralSaveComponent implements OnInit {
   }
   populateBrands(){
       this.filterApiService.getBrands().subscribe(
-        res => {
-          this.brands = new RadiobuttonsSimpleClass("brands_1", res);
-          this.brands.isStyleBorder = true;
-          this.brands.title = "Brand";
-          //this.brands.selectedId = this.brands.options[0].id;
-        },
+        res => this.brands = res,
         err => {
           console.log("Error. Can't call GetBrands() HttpGet method");
         }
@@ -99,22 +89,13 @@ export class ItemGeneralSaveComponent implements OnInit {
   }
 
 
-  /* -------------- Get selected options from controls ------------------------- */
+ // get selected Gender from Custom RadiobuttonsSimple
   onGenderSelected(_selectedGenderId: number){
       this.item.genderId = _selectedGenderId;
       this.isGenderValid = true;
   }
-  onCategorySelected(_selectedCategoryId: number){  
-    this.item.categoryId = _selectedCategoryId;
-    this.isCategoryValid = true;
-  }  
-  onBrandSelected(_selectedBrandId: number){
-    this.item.brandId = _selectedBrandId;
-    this.isBrandValid = true;
-  }
-
-  /* -------------- Validations ------------------------- */
-  // itemName should be unique
+ 
+  // validation - itemName should be unique
   forbiddenItemNameValidator(control: FormControl){
     if(control.value == undefined) 
       return null; // if empty, then allow another validation handle it
@@ -136,21 +117,14 @@ export class ItemGeneralSaveComponent implements OnInit {
       this.isGenderValid = false;
       this.isShowAllValidations = true;
     }
-    else if(this.item.categoryId  == undefined || this.item.categoryId < 1)
-    {
-      this.isCategoryValid = false;
-      this.isShowAllValidations = true;
-    }
-    else if(this.item.brandId  == undefined || this.item.brandId < 1)
-    {
-      this.isBrandValid = false;
-      this.isShowAllValidations = true;
-    }
     else
-    {
+    {      
       this.isShowAllValidations = false;
       this.item.name = this.itemForm.value.itemName.trim();
       this.item.description = this.itemForm.value.itemDescription.trim();
+      // this.item.gender was assigned in onGenderSelected() function
+      this.item.categoryId = this.itemForm.value.category;
+      this.item.brandId = this.itemForm.value.brand;
       this.item.price = this.itemForm.value.price;
       console.log(this.item);
     }
