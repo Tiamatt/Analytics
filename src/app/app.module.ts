@@ -5,7 +5,8 @@ import { NgModule } from '@angular/core';
 // modules (alphabetically)
 import { AppRoutingModule } from './app-routing.module';
 // services (alphabetically)
-import {FilterApiService } from './shared/services/api/filterApi.service';
+import { FilterApiService } from './shared/services/api/filterApi.service';
+import { ItemApiService } from './shared/services/api/itemApi.service';
 // components (alphabetically)
 import { AppComponent } from './app.component';
 import { BreadcrumbNavComponent } from './shared/components/breadcrumb-nav/breadcrumb-nav.component';
@@ -47,7 +48,8 @@ import { ItemViewBoxComponent } from './items/item-view/item-view-box/item-view-
     ReactiveFormsModule
   ],
   providers: [
-    FilterApiService
+    FilterApiService,
+    ItemApiService
   ],
   bootstrap: [AppComponent]
 })

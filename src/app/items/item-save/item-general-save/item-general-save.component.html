@@ -1,32 +1,61 @@
-<form>
+<form [formGroup]="itemForm" (ngSubmit)="onSave()">
   <div class="form-group form-group_M">
-      <!-- Item name  (input) -->
-      <label class="control-title_M" for="itemName">{{'name' | uppercase}}</label>
-      <input type="text" id="itemName" class="form-control" placeholder="Enter item name" aria-describedby="itemNameNote">
-      <small id="itemNameNote" class="form-text text-muted">Must be unique.</small>
-      <br>
 
-      <!-- Item description (input) -->
-      <label class="control-title_M" for="itemDescription">{{'description' | uppercase}}</label>
-      <textarea rows="4" id="itemDescription" class="form-control" placeholder="Enter item description"></textarea>
-      <br>
+    <!-- Item name  (enter) -->
+    <label class="control-title_M" for="itemName">{{'name' | uppercase}}</label>
+    <input type="text" id="itemName" class="form-control" placeholder="Enter item name" aria-describedby="itemNameNote" formControlName="itemName">
+    <small id="itemNameNote" class="form-text text-muted">Must be unique</small>
+    <div *ngIf="isShowAllValidations && !itemForm.get('itemName').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('itemName').errors['requiredWithTrim']"> * Name can't be empty</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('itemName').errors['forbiddenItemName']"> * This Name already exists, please, use another</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('itemName').errors['maxlength']"> * Name shouldn't exceed 50 characters</p>
+    </div>
+    <br>
 
-      <!-- Gender (single selection)-->
-      <app-radiobuttons-simple [input]='genders' (onSelectedOutput)="onGenderSelected($event)"></app-radiobuttons-simple>
-      <br>
+    <!-- Item description (enter) -->
+    <label class="control-title_M" for="itemDescription">{{'description' | uppercase}}</label>
+    <textarea rows="4" id="itemDescription" class="form-control" placeholder="Enter item description" formControlName="itemDescription"></textarea>
+    <div *ngIf="isShowAllValidations && !itemForm.get('itemDescription').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('itemDescription').errors['requiredWithTrim']"> * Description can't be empty</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('itemDescription').errors['maxlength']"> * Description shouldn't exceed 2000 characters</p>
+    </div>
+    <br>
 
-      <!-- Category (single selection)-->
-      <app-radiobuttons-simple [input]='categories' (onSelectedOutput)="onCategorySelected($event)"></app-radiobuttons-simple>
-      <br>
+    <!-- Gender (single selection)-->
+    <app-radiobuttons-simple [input]='genders' (onSelectedOutput)="onGenderSelected($event)"></app-radiobuttons-simple>
+    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations && !isGenderValid"> * Gender must be selected</p>
+    <br>
 
-      <!-- Brand (single selection)-->
-      <app-radiobuttons-simple [input]='brands' (onSelectedOutput)="onBrandSelected($event)"></app-radiobuttons-simple>
-      <br>
+    <!-- Category (single selection)-->
+    <app-radiobuttons-simple [input]='categories' (onSelectedOutput)="onCategorySelected($event)"></app-radiobuttons-simple>
+    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations && !isCategoryValid"> * Category must be selected</p>
+    <br>
 
-      <!-- Notes (kali! only if create)-->
-      <label class="control-title_M">{{'notes' | uppercase}}</label>
-      <p>You also need to create item details and item images. Otherwise user will not see this item.</p>
-      <p>1. Proceed to add Item Details</p>
-      <p>2. Proceed to add Item Images</p>
+    <!-- Brand (single selection)-->
+    <app-radiobuttons-simple [input]='brands' (onSelectedOutput)="onBrandSelected($event)"></app-radiobuttons-simple>
+    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations && !isBrandValid"> * Brand must be selected</p>
+    <br>
+
+    <!-- Price (enter)-->
+    <label class="control-title_M" for="price">{{'price' | uppercase}}</label>
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <span class="input-group-addon">0.00</span>
+      <input type="text" id="price" formControlName="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+    </div>
+    <div *ngIf="isShowAllValidations && !itemForm.get('price').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('price').errors['requiredWithTrim']"> * Price can't be empty</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('price').errors['pattern']"> * Only numbers and one dot allowed</p>
+    </div>
+    <br>
+
+    <button type="submit" class="btn btn-success btn_M">Save</button>
+    <input type="button" value="Next" class="btn btn-info btn_M" (click)="onNextClick()">
+    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
+
+    <br>
+    <br>
+    <br>
+
   </div>
 </form>

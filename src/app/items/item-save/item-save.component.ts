@@ -22,7 +22,6 @@ export class ItemSaveComponent implements OnInit {
     this.breadcrumbNav[indexOfActiveLink].linkStatus = LinkStatusEnum.Visited;
     // change click link to active
     this.breadcrumbNav[_selectedIndex].linkStatus = LinkStatusEnum.Active;
-
   }
 
   populateBreadcrumbNav(){
@@ -35,7 +34,7 @@ export class ItemSaveComponent implements OnInit {
     let step3 = new BreadcrumbNavClass('3. Add images','/item-save/item-image-save',LinkStatusEnum.NotVisited);
     this.breadcrumbNav.push(step3);
 
-    let step4 = new BreadcrumbNavClass('4. View items','/item-save/item-view-box',LinkStatusEnum.NotVisited);
+    let step4 = new BreadcrumbNavClass('4. View item','/item-save/item-view-box',LinkStatusEnum.NotVisited);
     this.breadcrumbNav.push(step4);
   }
 
