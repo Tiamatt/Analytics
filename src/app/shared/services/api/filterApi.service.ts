@@ -6,12 +6,12 @@ import { IIdNameChecked } from "../../models/IIdNameChecked.model";
 @Injectable()
 
 export class FilterApiService{
-    header: HttpHeaders; // http header
-    apiUrl_base: string;
-    apiUrl_getGenders: string;
-    apiUrl_getCategories: string;
-    apiUrl_getBrands: string;
-    apiUrl_getPriceRanges: string;
+    private header: HttpHeaders; // http header
+    private apiUrl_base: string;
+    private apiUrl_getGenders: string;
+    private apiUrl_getCategories: string;
+    private apiUrl_getBrands: string;
+    private apiUrl_getPriceRanges: string;
 
     constructor(private http: HttpClient){
         this.apiUrl_base = 'https://localhost:44385/api/analytics/'; //kali
