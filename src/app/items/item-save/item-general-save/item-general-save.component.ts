@@ -120,13 +120,21 @@ export class ItemGeneralSaveComponent implements OnInit {
     else
     {      
       this.isShowAllValidations = false;
+
+      // populate item object
       this.item.name = this.itemForm.value.itemName.trim();
       this.item.description = this.itemForm.value.itemDescription.trim();
       // this.item.gender was assigned in onGenderSelected() function
       this.item.categoryId = this.itemForm.value.category;
       this.item.brandId = this.itemForm.value.brand;
       this.item.price = this.itemForm.value.price;
+
+      // save in db via api
       console.log(this.item);
+      this.itemApiService.insertItem(this.item).subscribe(
+        res => console.log(res),
+        err => console.log(err.error)
+      );
     }
   }
 

@@ -1,12 +1,20 @@
 export class ItemClass{
-    itemId: string; // [uniqueidentifier] NOT NULL
-    name: string; // [nvarchar](50) NOT NULL
-    description: string; // [nvarchar](2000) NOT NULL
-    brandId: number; // [int] NOT NULL,
-	categoryId: number; // [int] NOT NULL,
-	genderId: number; // [int] NOT NULL,
-    price: number; // [decimal](10, 2) NOT NULL,
-    employeeId: string; // [uniqueidentifier] NOT NULL
+    itemId: string; // NULL [uniqueidentifier]
+    name: string; // NOT NULL [nvarchar](50)
+    description: string; // NOT NULL [nvarchar](2000)
+	genderId: number; // NOT NULL [int]
+	genderName: string;
+	categoryId: number; // NOT NULL [int]
+	categoryName: string;
+	brandId: number; // NOT NULL [int]	
+	brandName: string;
+	
+    price: number; // NOT NULL [decimal](10, 2)
+	createdByFullName: string; // NULL string (FirstName + ' ' + MiddleName + ' ' + LastName)
+	createdDate: Date; // NULL Date
+	lastUpdatedByFullName: string; // NULL string (FirstName + ' ' + MiddleName + ' ' + LastName)
+	lastUpdatedDate: Date; // NULL Date
+	isActive: boolean; // NULL
 }
 
 /*

@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { IIdName } from "../../models/IIdName.model";
 import { IIdNameChecked } from "../../models/IIdNameChecked.model";
@@ -6,6 +6,7 @@ import { IIdNameChecked } from "../../models/IIdNameChecked.model";
 @Injectable()
 
 export class FilterApiService{
+    header: HttpHeaders; // http header
     apiUrl_base: string;
     apiUrl_getGenders: string;
     apiUrl_getCategories: string;
@@ -18,21 +19,25 @@ export class FilterApiService{
         this.apiUrl_getCategories = this.apiUrl_base + 'categories';
         this.apiUrl_getBrands = this.apiUrl_base + 'brands';
         this.apiUrl_getPriceRanges = this.apiUrl_base + 'price-ranges';
+
+        this.header = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'});
     }
 
     getGenders():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getGenders);
+        return this.http.get<IIdNameChecked[]>(this.apiUrl_getGenders, {headers: this.header});
     }
 
     getCategories():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getCategories);
+        return this.http.get<IIdNameChecked[]>(this.apiUrl_getCategories, {headers: this.header});
     }
 
     getBrands():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getBrands);
+        return this.http.get<IIdNameChecked[]>(this.apiUrl_getBrands, {headers: this.header});
     }
 
     getPriceRanges():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getPriceRanges); 
+        return this.http.get<IIdNameChecked[]>(this.apiUrl_getPriceRanges, {headers: this.header}); 
     }
 }
