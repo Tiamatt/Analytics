@@ -3,53 +3,5 @@
 <!-- filter panel -->
 <app-item-list-filter-panel [input]="itemListFilterPanel" (onSearchOutput)="onFiltersSearch($event)"></app-item-list-filter-panel>
 
-
-<!-- main table -->
-<table class="table table-responsive">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col" class="sortable-th_M" (click)="onSort('name')">Name</th>
-      <th scope="col" class="sortable-th_M" (click)="onSort('genderName')">Gender</th>
-      <th scope="col" class="sortable-th_M" (click)="onSort('categoryName')">Category</th>
-      <th scope="col" class="sortable-th_M" (click)="onSort('brandName')">Brand</th>
-      <th scope="col">Active</th>
-      <th scope="col">Details</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let d of tableData; let i=index">
-      <th scope="row">{{i+1}}</th>
-      <td>{{d.item.name}}</td>
-      <td>{{d.item.genderName}}</td>
-      <td>{{d.item.categoryName}}</td>
-      <td>{{d.item.brandName}}</td>
-      <td class="td-icon_M">
-          <i *ngIf="!d.item.isActive" class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
-          <i *ngIf="d.item.isActive"  class="fa fa-check-circle text-success" aria-hidden="true"></i>
-      </td>
-      <td class="td-icon_M">
-          <i class="fa fa-info-circle" aria-hidden="true"></i>
-      </td>
-      <td class="td-icon_M">
-          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-      </td>
-      <td class="td-icon_M">
-          <i class="fa fa-trash" aria-hidden="true"></i>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- pagination -->
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item" *ngFor="let page of pages" (click)="onPageChange(page)">
-        <a class="page-link page-link_M"  [ngClass]="{'page-current_M': currentPage == page}">
-          {{page}}
-        </a>
-      </li>
-    </ul>
-  </nav>
+<!-- main table-->
+<app-item-list-result-panel *ngIf="itemViewsTableData" [input]="itemViewsTableData"></app-item-list-result-panel>
