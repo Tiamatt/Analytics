@@ -1,9 +1,10 @@
 <h4 class="page-title_M">List of items</h4>
 
-<div class="filter-panel_M">
-  <p>Show active only</p>
-</div>
+<!-- filter panel -->
+<app-item-list-filter-panel [input]="itemListFilterPanel"></app-item-list-filter-panel>
 
+
+<!-- main table -->
 <table class="table table-responsive">
   <thead class="thead-light">
     <tr>
@@ -42,6 +43,7 @@
   </tbody>
 </table>
 
+<!-- pagination -->
 <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item" *ngFor="let page of pages" (click)="onPageChange(page)">

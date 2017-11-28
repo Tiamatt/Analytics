@@ -1,0 +1,63 @@
+<div *ngIf="input" class="container filter-panel_M">
+  
+      <div class="row filter-panel-row_M">
+
+        <!-- item name -->
+        <div *ngIf="input.isShowPartialName_txt" class="col-sm">
+          <label class="control-title_M" for="partialName">{{'name' | uppercase}}</label>
+          <input type="text" id="partialName" [(ngModel)]="input.partialName" class="form-control" placeholder="Enter (partial) item name">
+        </div>
+
+        <!-- ? -->   
+        <div class="col-sm">
+          <!-- ???? -->        
+        </div>
+
+      </div>
+  
+      <div class="row filter-panel-row_M">
+
+        <!-- isActive -->
+        <div *ngIf="input.isShowActive_ddl"  class="col-sm">          
+          <label class="control-title_M" for="isActive">{{'active' | uppercase}}</label>
+          <select id="isActive" class="form-control" [(ngModel)]="input.active">
+            <option value="0" selected="selected">All</option>
+            <option value="1">Active</option>
+            <option value="2">Not Active</option>
+          </select>      
+        </div>
+
+        <!-- gender -->
+        <div *ngIf="input.isShowGender_ddl" class="col-sm">
+          <label class="control-title_M" for="gender">{{'gender' | uppercase}}</label>
+          <select id="gender" class="form-control" [(ngModel)]="input.gender">
+            <option value="0" selected="selected">All</option>
+            <option value="1">Women</option>
+            <option value="2">Men</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="row filter-panel-row_M">
+
+        <!-- category -->
+        <div *ngIf="input.isShowCategory_chb" class="col-sm">
+          <app-checkboxes-simple [input]='categories' (onChangeOutput)="onCategoryChecked($event)"></app-checkboxes-simple>
+        </div>
+
+        <!-- brand -->
+        <div *ngIf="input.isShowBrand_chb" class="col-sm">
+          <app-checkboxes-simple [input]='brands' (onChangeOutput)="onBrandChecked($event)"></app-checkboxes-simple>
+        </div>
+
+      </div>
+  
+  
+      <div class="row filter-panel-row_M">
+          <div class="col">
+            <input type="button" value="Search" (click)="onSearch()" class="btn btn-info btn_M">
+          </div>
+      </div>
+  
+  </div>
+  
