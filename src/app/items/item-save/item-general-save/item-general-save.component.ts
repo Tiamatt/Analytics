@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { FilterApiService } from '../../../shared/services/api/filterApi.service';
 import { CheckboxesSimpleClass } from '../../../shared/models/models-for-components/CheckboxesSimple.model';
-import { IIdNameChecked } from '../../../shared/models/IIdNameChecked.model';
+import { IdNameCheckedClass } from '../../../shared/models/IdNameChecked.model';
 import { RadiobuttonsSimpleClass } from '../../../shared/models/models-for-components/RadiobuttonsSimple.model';
 import { ItemClass } from '../../../shared/models/Item.model';
 import { RequiredWithTrimValidator } from '../../../shared/custom-directives/validators/required-with-trim.validator';
@@ -19,8 +19,8 @@ export class ItemGeneralSaveComponent implements OnInit {
   item: ItemClass = new ItemClass();
   itemForm: FormGroup;
   genders: RadiobuttonsSimpleClass;
-  categories: IIdNameChecked;
-  brands: IIdNameChecked;
+  categories: IdNameCheckedClass;
+  brands: IdNameCheckedClass;
   // for validation
   existingItemNames: string[] = []; // to check if item name is unique
   isShowAllValidations: boolean = false;

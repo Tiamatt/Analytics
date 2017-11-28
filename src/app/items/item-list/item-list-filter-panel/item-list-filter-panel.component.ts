@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CheckboxesSimpleClass } from '../../../shared/models/models-for-components/CheckboxesSimple.model';
 import { FilterApiService } from '../../../shared/services/api/filterApi.service';
-import { IIdNameChecked } from '../../../shared/models/IIdNameChecked.model';
+import { IdNameCheckedClass } from '../../../shared/models/IdNameChecked.model';
 import { ItemListFilterPanelClass } from '../../../shared/models/ItemListFilterPanel.model';
 
 @Component({
@@ -51,27 +51,17 @@ export class ItemListFilterPanelComponent implements OnInit {
     );
   }
 
-  onCategoryChecked(_checkedCategories: IIdNameChecked[]){
+  onCategoryChecked(_checkedCategories: IdNameCheckedClass[]){
   }
-  onBrandChecked(_checkedBrands: IIdNameChecked[]){
+  onBrandChecked(_checkedBrands: IdNameCheckedClass[]){
   }
 
   onSearch(){
-    this.input.category = this.getSelectedValues(this.categories.options);
-    this.input.brand = this.getSelectedValues(this.brands.options);
+    this.input.category = IdNameCheckedClass.getArrayOfSelectedValues(this.categories.options);
+    this.input.brand = IdNameCheckedClass.getArrayOfSelectedValues(this.brands.options);
     console.log("onSearch"); // kali
     console.log(this.input); // kali
     this.onSearchOutput.emit(this.input);
-  }
-
-  private getSelectedValues(_idNameCheckedArr: IIdNameChecked[])
-  {
-    let result: number[] = [];
-    for(let i=0; i<_idNameCheckedArr.length; i++){
-      if(_idNameCheckedArr[i].checked)
-        result.push(_idNameCheckedArr[i].id);
-    }
-    return result;
   }
 
 }

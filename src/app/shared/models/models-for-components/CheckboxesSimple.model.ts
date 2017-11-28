@@ -1,12 +1,12 @@
-import { IIdNameChecked } from "./../IIdNameChecked.model";
+import { IdNameCheckedClass } from "./../IdNameChecked.model";
 
 export class CheckboxesSimpleClass{
     uniqueId: string;
     title: string;
-    options: IIdNameChecked[];
+    options: IdNameCheckedClass[];
     isStyleBorder: boolean;
 
-    constructor( _uniqueId: string, _options: IIdNameChecked[] ){
+    constructor( _uniqueId: string, _options: IdNameCheckedClass[] ){
         this.uniqueId = _uniqueId;
         this.options = _options;
     }

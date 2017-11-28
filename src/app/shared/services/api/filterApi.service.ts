@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { IIdName } from "../../models/IIdName.model";
-import { IIdNameChecked } from "../../models/IIdNameChecked.model";
+import { IdNameCheckedClass } from "../../models/IdNameChecked.model";
 
 @Injectable()
 
@@ -26,18 +26,18 @@ export class FilterApiService{
     }
 
     getGenders():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getGenders, {headers: this.header});
+        return this.http.get<IdNameCheckedClass[]>(this.apiUrl_getGenders, {headers: this.header});
     }
 
     getCategories():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getCategories, {headers: this.header});
+        return this.http.get<IdNameCheckedClass[]>(this.apiUrl_getCategories, {headers: this.header});
     }
 
     getBrands():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getBrands, {headers: this.header});
+        return this.http.get<IdNameCheckedClass[]>(this.apiUrl_getBrands, {headers: this.header});
     }
 
     getPriceRanges():any{
-        return this.http.get<IIdNameChecked[]>(this.apiUrl_getPriceRanges, {headers: this.header}); 
+        return this.http.get<IdNameCheckedClass[]>(this.apiUrl_getPriceRanges, {headers: this.header}); 
     }
 }
