@@ -1,3 +1,24 @@
+/*
+Note: call from other components:
+<app-item-list-filter-panel [input]="itemListFilterPanel" (onSearchOutput)="onFiltersSearch($event)"></app-item-list-filter-panel>
+
+Note: populate input
+populateItemListFilterPanel(){
+  this.itemListFilterPanel = ItemListFilterPanelClass.initializeObject();
+  this.itemListFilterPanel.isShowPartialName_txt = true;
+  this.itemListFilterPanel.isShowActive_ddl = true;
+  this.itemListFilterPanel.isShowGender_ddl = true;
+  this.itemListFilterPanel.isShowCategory_chb = true;
+  this.itemListFilterPanel.isShowBrand_chb = true;
+}
+
+Note: get output event
+ onFiltersSearch(_filters: ItemListFilterPanelClass){
+    console.log(_filters);
+  }
+*/
+
+
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CheckboxesSimpleClass } from '../../../shared/models/models-for-components/CheckboxesSimple.model';
 import { FilterApiService } from '../../../shared/services/api/filterApi.service';
@@ -26,6 +47,7 @@ export class ItemListFilterPanelComponent implements OnInit {
       this.populateBrands();
   }
 
+  /* -------------------  POPULATE ---------------------- */
   populateCategories(){
     this.filterApiService.getCategories().subscribe(
       res => {
@@ -51,16 +73,16 @@ export class ItemListFilterPanelComponent implements OnInit {
     );
   }
 
+
+  /* -------------------  EVENTS ---------------------- */
   onCategoryChecked(_checkedCategories: IdNameCheckedClass[]){
   }
   onBrandChecked(_checkedBrands: IdNameCheckedClass[]){
   }
-
   onSearch(){
     this.input.category = IdNameCheckedClass.getArrayOfSelectedValues(this.categories.options);
     this.input.brand = IdNameCheckedClass.getArrayOfSelectedValues(this.brands.options);
-    console.log("onSearch"); // kali
-    console.log(this.input); // kali
+    // output
     this.onSearchOutput.emit(this.input);
   }
 

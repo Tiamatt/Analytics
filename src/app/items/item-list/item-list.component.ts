@@ -23,20 +23,20 @@ export class ItemListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.initializeItemListFilterPanel();
+    this.populateItemListFilterPanel();
     this.populateItemViews();
-  }
+  }  
 
-  initializeItemListFilterPanel(){
-    this.itemListFilterPanel = new ItemListFilterPanelClass();
+
+  /* -------------------  POPULATE ---------------------- */
+  populateItemListFilterPanel(){
+    this.itemListFilterPanel = ItemListFilterPanelClass.initializeObject();
     this.itemListFilterPanel.isShowPartialName_txt = true;
     this.itemListFilterPanel.isShowActive_ddl = true;
     this.itemListFilterPanel.isShowGender_ddl = true;
     this.itemListFilterPanel.isShowCategory_chb = true;
     this.itemListFilterPanel.isShowBrand_chb = true;
   }
-
-  /* -------------------  POPULATE ---------------------- */
   populateItemViews(){
     this.itemApiService.getItemViews().subscribe(
       res => { 
@@ -54,6 +54,13 @@ export class ItemListComponent implements OnInit {
     );
   }
   
+  /* -------------------  EVENTS ---------------------- */
+  onFiltersSearch(_filters: ItemListFilterPanelClass){
+    console.log("onFiltersSearch"); // kali
+    console.log(_filters); // kali
+  }
+
+  
   onSort(_tableHeaderName: string){
     this.currentSortedTableHeaderName = _tableHeaderName;    
     this.isSortAsc = !this.isSortAsc;  // change sort direction to opposite
@@ -64,6 +71,8 @@ export class ItemListComponent implements OnInit {
     this.currentPage = _currentPage;    
     this.sortingAndPagingTable(this.currentSortedTableHeaderName);
   }
+
+
 
   /* -------------------- PRIVATE METHODS -------------------------- */
   private sortingAndPagingTable(_tableHeaderName: string){

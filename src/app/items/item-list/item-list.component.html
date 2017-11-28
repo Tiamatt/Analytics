@@ -1,7 +1,7 @@
 <h4 class="page-title_M">List of items</h4>
 
 <!-- filter panel -->
-<app-item-list-filter-panel [input]="itemListFilterPanel"></app-item-list-filter-panel>
+<app-item-list-filter-panel [input]="itemListFilterPanel" (onSearchOutput)="onFiltersSearch($event)"></app-item-list-filter-panel>
 
 
 <!-- main table -->

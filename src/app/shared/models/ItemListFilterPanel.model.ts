@@ -1,4 +1,5 @@
 export class ItemListFilterPanelClass{
+
     isShowPartialName_txt: boolean;
     partialName:string;
     isShowActive_ddl: boolean;
@@ -9,4 +10,22 @@ export class ItemListFilterPanelClass{
     category: number[];
     isShowBrand_chb: boolean;
     brand: number[];
+
+    // need to pass to server an object with full info
+    static initializeObject():ItemListFilterPanelClass{
+        let result =  new ItemListFilterPanelClass();
+        
+        result.isShowPartialName_txt = false;
+        result.partialName = null;
+        result.isShowActive_ddl = false;
+        result.active = 0;
+        result.isShowGender_ddl = false;
+        result.gender = 0;
+        result.isShowCategory_chb = false;
+        result.category = [];
+        result.isShowBrand_chb = false;
+        result.brand = [];
+
+        return result;
+    }
 }
