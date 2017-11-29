@@ -1,4 +1,4 @@
-<div *ngIf="input">
+<div *ngIf="input && input.length > 0; else elseBlock">
 
   <!-- main table -->
   <table class="table table-responsive">
@@ -51,3 +51,8 @@
   </nav>
 
 </div>
+
+
+<ng-template #elseBlock>
+  <div class="alert alert-danger maxWidth_M">Sorry, no results found</div>
+</ng-template>

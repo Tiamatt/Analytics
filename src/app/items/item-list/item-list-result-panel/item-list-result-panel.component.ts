@@ -1,35 +1,46 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ItemViewClass } from '../../../shared/models/ItemView.model';
 
 @Component({
   selector: 'app-item-list-result-panel',
   templateUrl: './item-list-result-panel.component.html',
-  styleUrls: ['./item-list-result-panel.component.css']
+  styleUrls: ['./item-list-result-panel.component.css', '../../../shared/styles/general.css']
 })
 
-export class ItemListResultPanelComponent implements OnInit {
+export class ItemListResultPanelComponent implements OnChanges {
+  // inputs, outputs
+  @Input() input: ItemViewClass[];
+  // fields
   tableData: ItemViewClass[];
   isSortAsc: boolean = true;
   pages: number[] = [1];
   currentPage: number = 1;
   currentSortedTableHeaderName: string = "name";
-  readonly maxRowsPerPage:number = 5;
+  readonly maxRowsPerPage:number = 10;
 
-  @Input() input: ItemViewClass[];
-  
   constructor() { }
 
-  ngOnInit() { 
+  ngOnChanges(_changes: SimpleChanges){
+    this.input = _changes.input.currentValue;
+    this.populatePages();
     // initial paging and sorting
     this.sortingAndPagingTable(this.currentSortedTableHeaderName);
-    
-    // get total numbers of pages
-    let totalNumberOfPages = Math.ceil(this.input.length / this.maxRowsPerPage);
-    console.log(totalNumberOfPages);
-    for(var i = 2; i<= totalNumberOfPages; i++){
-      this.pages.push(i);
-    }
+  } 
 
+
+  /* -------------------  POPULATE ---------------------- */
+  populatePages(){
+    // get total numbers of pages if need more than 1 page
+    if(this.input.length > this.maxRowsPerPage)
+    {
+      let totalNumberOfPages = Math.ceil(this.input.length / this.maxRowsPerPage);
+      // turn number to array
+      for(var i = 2; i<= totalNumberOfPages; i++){
+        this.pages.push(i);
+      }
+    }
+    else 
+      this.pages = [1];
   }
 
 
@@ -65,5 +76,6 @@ export class ItemListResultPanelComponent implements OnInit {
     let toRow = this.currentPage*this.maxRowsPerPage;
     this.tableData = this.tableData.slice(fromRow, toRow);
   }
+
 
 }

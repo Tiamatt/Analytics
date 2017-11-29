@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ItemClass } from "../../models/Item.model";
 import { ItemViewClass } from "../../models/ItemView.model";
+import { ItemListFilterPanelClass } from "../../models/ItemListFilterPanel.model";
 
 @Injectable()
 
@@ -28,8 +29,8 @@ export class ItemApiService{
         return this.http.get<string[]>(this.apiUrl_getItemNamesLowercase, {headers: this.header});
     }
 
-    getItemViews(): any{
-        return this.http.get<ItemViewClass[]>(this.apiUrl_getItemViews, {headers: this.header});
+    getItemViews(_filters: ItemListFilterPanelClass): any{
+        return this.http.post<ItemViewClass[]>(this.apiUrl_getItemViews, _filters, {headers: this.header});
     }
 
     insertItem(_newItem: ItemClass)

@@ -18,6 +18,7 @@ export class ItemListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.itemListFilterPanel = ItemListFilterPanelClass.initializeObject();
     this.populateItemListFilterPanel();
     this.populateItemViews();
   }  
@@ -33,10 +34,9 @@ export class ItemListComponent implements OnInit {
     this.itemListFilterPanel.isShowBrand_chb = true;
   }
   populateItemViews(){
-    this.itemApiService.getItemViews().subscribe(
+    this.itemApiService.getItemViews(this.itemListFilterPanel).subscribe(
       res => { 
         this.itemViewsTableData = res;
-        console.log(this.itemViewsTableData);
       },
       err => console.log(err)
     );
@@ -44,8 +44,8 @@ export class ItemListComponent implements OnInit {
   
   /* -------------------  EVENTS ---------------------- */
   onFiltersSearch(_filters: ItemListFilterPanelClass){
-    console.log("onFiltersSearch"); // kali
-    console.log(_filters); // kali
+    this.itemListFilterPanel = _filters;
+    this.populateItemViews();
   }
 
   
