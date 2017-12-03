@@ -1,4 +1,4 @@
-<div *ngIf="input && input.length > 0; else elseBlock">
+<div *ngIf="input && input.length > 0; else elseMajorBlock">
 
   <!-- main table -->
   <table class="table table-responsive">
@@ -22,7 +22,7 @@
         <td>{{d.item.genderName}}</td>
         <td>{{d.item.categoryName}}</td>
         <td>{{d.item.brandName}}</td>
-        <td class="td-icon_M">
+        <td class="td-icon_M" (click)="onShowInfoForIsActive(d)">
             <i *ngIf="!d.item.isActive" class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
             <i *ngIf="d.item.isActive"  class="fa fa-check-circle text-success" aria-hidden="true"></i>
         </td>
@@ -52,7 +52,21 @@
 
 </div>
 
+<div *ngIf="dataForInfoForIsActive" class="item-active-box_M">
+  <label class="control-title_M">{{'Information for "' + dataForInfoForIsActive.item.name + '" item' | uppercase}}</label>
+  <div *ngIf="dataForInfoForIsActive.infoForIsActive; else elseItemActiveBlock">
+    <p>This item is inactive for the following reasons:</p>
+    <p *ngFor="let msg of dataForInfoForIsActive.infoForIsActive">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{msg}}
+    </p>
+  </div>
+  <ng-template #elseItemActiveBlock>
+    <p>This item can be activated. Click button to activate.</p>
+    <button type="button" class="btn btn-info">Activate</button>
+  </ng-template>
+  
+</div>
 
-<ng-template #elseBlock>
+<ng-template #elseMajorBlock>
   <div class="alert alert-danger maxWidth_M">Sorry, no results found</div>
 </ng-template>

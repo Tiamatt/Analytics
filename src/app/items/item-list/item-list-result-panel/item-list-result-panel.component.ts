@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ItemViewClass } from '../../../shared/models/ItemView.model';
+import { ItemViewModel } from '../../item-view/item-view.model';
+
 
 @Component({
   selector: 'app-item-list-result-panel',
@@ -9,14 +10,15 @@ import { ItemViewClass } from '../../../shared/models/ItemView.model';
 
 export class ItemListResultPanelComponent implements OnChanges {
   // inputs, outputs
-  @Input() input: ItemViewClass[];
+  @Input() input: ItemViewModel[];
   // fields
-  tableData: ItemViewClass[];
+  tableData: ItemViewModel[];
+  dataForInfoForIsActive: ItemViewModel;
   isSortAsc: boolean = true;
   pages: number[] = [1];
   currentPage: number = 1;
   currentSortedTableHeaderName: string = "name";
-  readonly maxRowsPerPage:number = 10;
+  readonly maxRowsPerPage:number = 5;
 
   constructor() { }
 
@@ -54,6 +56,9 @@ export class ItemListResultPanelComponent implements OnChanges {
   onPageChange(_currentPage: number){
     this.currentPage = _currentPage;    
     this.sortingAndPagingTable(this.currentSortedTableHeaderName);
+  }
+  onShowInfoForIsActive(_selectedRow: ItemViewModel){
+    this.dataForInfoForIsActive =(!_selectedRow.item.isActive) ? _selectedRow : null; 
   }
 
 

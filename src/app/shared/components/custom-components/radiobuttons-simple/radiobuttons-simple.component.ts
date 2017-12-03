@@ -23,7 +23,7 @@ Note: get single selected value
 */
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { RadiobuttonsSimpleClass } from '../../models/models-for-components/RadiobuttonsSimple.model';
+import { RadiobuttonsSimpleClass } from './radiobuttons-simple.model';
 
 @Component({
   selector: 'app-radiobuttons-simple',

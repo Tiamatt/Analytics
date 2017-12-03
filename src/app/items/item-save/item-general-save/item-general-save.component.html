@@ -34,7 +34,7 @@
     <label class="control-title_M" for="category">{{'category' | uppercase}}</label>
     <select id="category" formControlName="category" class="form-control">
       <option value="-1" selected="selected">Select category...</option>
-      <option *ngFor="let option of categories" [value]="option.id">{{ option.name }}</option>
+      <option *ngFor="let option of categories" [value]="option.valueNum">{{ option.text }}</option>
     </select>
     <div *ngIf="isShowAllValidations && !itemForm.get('category').valid">
         <p class="alert alert-danger validation_M" *ngIf="itemForm.get('category').errors['min']"> * Category must be selected</p>
@@ -46,7 +46,7 @@
     <label class="control-title_M" for="brand">{{'brand' | uppercase}}</label>
     <select id="brand" formControlName="brand" class="form-control">
       <option value="-1" selected="selected">Select brand...</option>
-      <option *ngFor="let option of brands" [value]="option.id">{{ option.name }}</option>
+      <option *ngFor="let option of brands" [value]="option.valueNum">{{ option.text }}</option>
     </select>
     <div *ngIf="isShowAllValidations && !itemForm.get('brand').valid">
         <p class="alert alert-danger validation_M" *ngIf="itemForm.get('brand').errors['min']"> * Brand must be selected</p>

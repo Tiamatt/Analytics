@@ -1,13 +1,13 @@
-import { IdNameCheckedClass } from "../IdNameChecked.model";
+import { TextValueCheckedModel } from "../../../models/text-value-checked.model";
 
 export class RadiobuttonsSimpleClass{
     uniqueId: string;
     title: string;
-    options: IdNameCheckedClass[];
+    options: TextValueCheckedModel[];
     selectedId: number;
     isStyleBorder: boolean;
 
-    constructor( _uniqueId: string, _options: IdNameCheckedClass[] ){
+    constructor( _uniqueId: string, _options: TextValueCheckedModel[] ){
         this.uniqueId = _uniqueId;
         this.options = _options;
     }

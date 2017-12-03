@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { FilterApiService } from '../../../shared/services/api/filterApi.service';
-import { CheckboxesSimpleClass } from '../../../shared/models/models-for-components/CheckboxesSimple.model';
-import { IdNameCheckedClass } from '../../../shared/models/IdNameChecked.model';
-import { RadiobuttonsSimpleClass } from '../../../shared/models/models-for-components/RadiobuttonsSimple.model';
-import { ItemClass } from '../../../shared/models/Item.model';
+import { ItemModel } from '../../../shared/models/item.model';
 import { RequiredWithTrimValidator } from '../../../shared/custom-directives/validators/required-with-trim.validator';
 import { Observable } from 'rxjs/Observable';
 import { ItemApiService } from '../../../shared/services/api/itemApi.service';
+import { RadiobuttonsSimpleClass } from '../../../shared/components/custom-components/radiobuttons-simple/radiobuttons-simple.model';
+import { TextValueCheckedModel } from '../../../shared/models/text-value-checked.model';
 
 @Component({
   selector: 'app-item-general-save',
@@ -16,11 +15,11 @@ import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 })
 
 export class ItemGeneralSaveComponent implements OnInit {
-  item: ItemClass = new ItemClass();
+  item: ItemModel = new ItemModel();
   itemForm: FormGroup;
   genders: RadiobuttonsSimpleClass;
-  categories: IdNameCheckedClass;
-  brands: IdNameCheckedClass;
+  categories: TextValueCheckedModel;
+  brands: TextValueCheckedModel;
   // for validation
   existingItemNames: string[] = []; // to check if item name is unique
   isShowAllValidations: boolean = false;

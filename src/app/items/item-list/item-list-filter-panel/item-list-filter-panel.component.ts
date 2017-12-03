@@ -4,7 +4,7 @@ Note: call from other components:
 
 Note: populate input
 populateItemListFilterPanel(){
-  this.itemListFilterPanel = ItemListFilterPanelClass.initializeObject();
+  this.itemListFilterPanel = ItemListFilterPanelModel.initializeObject();
   this.itemListFilterPanel.isShowPartialName_txt = true;
   this.itemListFilterPanel.isShowActive_ddl = true;
   this.itemListFilterPanel.isShowGender_ddl = true;
@@ -13,17 +13,17 @@ populateItemListFilterPanel(){
 }
 
 Note: get output event
- onFiltersSearch(_filters: ItemListFilterPanelClass){
+ onFiltersSearch(_filters: ItemListFilterPanelModel){
     console.log(_filters);
   }
 */
 
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CheckboxesSimpleClass } from '../../../shared/models/models-for-components/CheckboxesSimple.model';
 import { FilterApiService } from '../../../shared/services/api/filterApi.service';
-import { IdNameCheckedClass } from '../../../shared/models/IdNameChecked.model';
-import { ItemListFilterPanelClass } from '../../../shared/models/ItemListFilterPanel.model';
+import { CheckboxesSimpleClass } from '../../../shared/components/custom-components/checkboxes-simple/checkboxes-simple.model';
+import { TextValueCheckedModel } from '../../../shared/models/text-value-checked.model';
+import { ItemListFilterPanelModel } from './item-list-filter-panel.model';
 
 @Component({
   selector: 'app-item-list-filter-panel',
@@ -32,8 +32,8 @@ import { ItemListFilterPanelClass } from '../../../shared/models/ItemListFilterP
 })
 export class ItemListFilterPanelComponent implements OnInit {
   
-  @Input() input: ItemListFilterPanelClass;
-  @Output() onSearchOutput = new EventEmitter<ItemListFilterPanelClass>();
+  @Input() input: ItemListFilterPanelModel;
+  @Output() onSearchOutput = new EventEmitter<ItemListFilterPanelModel>();
   
   categories: CheckboxesSimpleClass;
   brands: CheckboxesSimpleClass;
@@ -75,13 +75,13 @@ export class ItemListFilterPanelComponent implements OnInit {
 
 
   /* -------------------  EVENTS ---------------------- */
-  onCategoryChecked(_checkedCategories: IdNameCheckedClass[]){
+  onCategoryChecked(_checkedCategories: TextValueCheckedModel[]){
   }
-  onBrandChecked(_checkedBrands: IdNameCheckedClass[]){
+  onBrandChecked(_checkedBrands: TextValueCheckedModel[]){
   }
   onSearch(){
-    this.input.category = IdNameCheckedClass.getArrayOfSelectedValues(this.categories.options);
-    this.input.brand = IdNameCheckedClass.getArrayOfSelectedValues(this.brands.options);
+    this.input.category = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.categories.options);
+    this.input.brand = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.brands.options);
     // output
     this.onSearchOutput.emit(this.input);
   }

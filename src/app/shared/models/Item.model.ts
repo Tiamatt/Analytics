@@ -1,4 +1,4 @@
-export class ItemClass{
+export class ItemModel{
     itemId: string; // NULL [uniqueidentifier]
     name: string; // NOT NULL [nvarchar](50)
     description: string; // NOT NULL [nvarchar](2000)

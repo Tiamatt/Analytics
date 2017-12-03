@@ -18,15 +18,15 @@ populatePriceRanges(){
 }
 
 Note: get all checked/unchecked values
-onPriceRangesChecked(checkedPriceRanges: IdNameCheckedClass[]){
+onPriceRangesChecked(checkedPriceRanges: TextValueCheckedModel[]){
   // console.log('onPriceRangesChecked');
   // console.log(checkedPriceRanges);
 }
 */
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CheckboxesSimpleClass } from '../../models/models-for-components/CheckboxesSimple.model';
-import { IdNameCheckedClass } from '../../models/IdNameChecked.model';
+import { CheckboxesSimpleClass } from './checkboxes-simple.model';
+import { TextValueCheckedModel } from '../../../models/text-value-checked.model';
 
 @Component({
   selector: 'app-checkboxes-simple',
@@ -37,7 +37,7 @@ import { IdNameCheckedClass } from '../../models/IdNameChecked.model';
 export class CheckboxesSimpleComponent implements OnInit {
 
   @Input() input: CheckboxesSimpleClass;
-  @Output() onChangeOutput = new EventEmitter<IdNameCheckedClass[]>();
+  @Output() onChangeOutput = new EventEmitter<TextValueCheckedModel[]>();
 
   constructor() { }
 

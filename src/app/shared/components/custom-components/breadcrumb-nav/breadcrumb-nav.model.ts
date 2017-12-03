@@ -1,4 +1,4 @@
-import { LinkStatusEnum } from "../../enums/link-status.enum";
+import { LinkStatusEnum } from "../../../enums/link-status.enum";
 
 export class BreadcrumbNavClass{
     stepName: string;

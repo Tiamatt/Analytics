@@ -1,3 +1,14 @@
-<p>
-  item-detail-save works!
-</p>
+<form [formGroup]="itemForm" (ngSubmit)="onSave()">
+  <div class="form-group form-group_M">
+
+      <div *ngIf="input.item_ddl"  class="col-sm">          
+          <label class="control-title_M" for="item">{{'item' | uppercase}}</label>
+          <select id="item" class="form-control" [(ngModel)]="input.active">
+            <option value="0" selected="selected">All</option>
+            <option value="1">Active</option>
+            <option value="2">Not Active</option>
+          </select>      
+        </div>
+
+  </div>
+</form>

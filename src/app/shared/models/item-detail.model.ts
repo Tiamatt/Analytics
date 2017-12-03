@@ -1,4 +1,4 @@
-export class ItemDetailClass{
+export class ItemDetailModel{
     itemDetailId: string; // guid, PK
     itemId: string; // guid, FK
     itemName: string;

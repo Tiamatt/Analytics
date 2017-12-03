@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemViewClass } from '../../shared/models/ItemView.model';
 import { ItemApiService } from '../../shared/services/api/itemApi.service';
-import { ItemListFilterPanelClass } from '../../shared/models/ItemListFilterPanel.model';
+import { ItemViewModel } from '../item-view/item-view.model';
+import { ItemListFilterPanelModel } from './item-list-filter-panel/item-list-filter-panel.model';
 
 @Component({
   selector: 'app-item-list',
@@ -10,15 +10,15 @@ import { ItemListFilterPanelClass } from '../../shared/models/ItemListFilterPane
 })
 
 export class ItemListComponent implements OnInit {
-  itemListFilterPanel: ItemListFilterPanelClass;
-  itemViewsTableData: ItemViewClass[];
+  itemListFilterPanel: ItemListFilterPanelModel;
+  itemViewsTableData: ItemViewModel[];
 
   constructor(
     private itemApiService: ItemApiService
   ) { }
 
   ngOnInit() {
-    this.itemListFilterPanel = ItemListFilterPanelClass.initializeObject();
+    this.itemListFilterPanel = ItemListFilterPanelModel.initializeObject();
     this.populateItemListFilterPanel();
     this.populateItemViews();
   }  
@@ -26,7 +26,7 @@ export class ItemListComponent implements OnInit {
 
   /* -------------------  POPULATE ---------------------- */
   populateItemListFilterPanel(){
-    this.itemListFilterPanel = ItemListFilterPanelClass.initializeObject();
+    this.itemListFilterPanel = ItemListFilterPanelModel.initializeObject();
     this.itemListFilterPanel.isShowPartialName_txt = true;
     this.itemListFilterPanel.isShowActive_ddl = true;
     this.itemListFilterPanel.isShowGender_ddl = true;
@@ -43,7 +43,7 @@ export class ItemListComponent implements OnInit {
   }
   
   /* -------------------  EVENTS ---------------------- */
-  onFiltersSearch(_filters: ItemListFilterPanelClass){
+  onFiltersSearch(_filters: ItemListFilterPanelModel){
     this.itemListFilterPanel = _filters;
     this.populateItemViews();
   }

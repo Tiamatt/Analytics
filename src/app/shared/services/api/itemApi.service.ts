@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ItemClass } from "../../models/Item.model";
-import { ItemViewClass } from "../../models/ItemView.model";
-import { ItemListFilterPanelClass } from "../../models/ItemListFilterPanel.model";
+import { ItemModel } from "../../models/item.model";
+import { ItemListFilterPanelModel } from "../../../items/item-list/item-list-filter-panel/item-list-filter-panel.model";
+import { ItemViewModel } from "../../../items/item-view/item-view.model";
 
 @Injectable()
 
@@ -29,11 +29,17 @@ export class ItemApiService{
         return this.http.get<string[]>(this.apiUrl_getItemNamesLowercase, {headers: this.header});
     }
 
-    getItemViews(_filters: ItemListFilterPanelClass): any{
-        return this.http.post<ItemViewClass[]>(this.apiUrl_getItemViews, _filters, {headers: this.header});
+    // getItemsIdname():any{
+    //     return this.http.get<>
+    // }
+
+    // not all fields are populated!
+    getItemViews(_filters: ItemListFilterPanelModel): any{
+        return this.http.post<ItemViewModel[]>(this.apiUrl_getItemViews, _filters, {headers: this.header});
     }
 
-    insertItem(_newItem: ItemClass)
+
+    insertItem(_newItem: ItemModel)
     {
         return this.http.post(this.apiUrl_insertItem, _newItem, {headers: this.header});
     }

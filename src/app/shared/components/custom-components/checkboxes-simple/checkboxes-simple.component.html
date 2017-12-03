@@ -5,12 +5,12 @@
             <label class="container">
                 <input type="checkbox"
                         [name]="input.uniqueId"
-                        value="{{o.id}}"
-                        [checked]="o.checked"
-                        [(ngModel)]="o.checked"
+                        value="{{o.valueNum}}"
+                        [checked]="o.isChecked"
+                        [(ngModel)]="o.isChecked"
                         (change)="onChange()"/>
                 <span class="checkmark"></span>
-                {{o.name}}
+                {{o.text}}
             </label>
         </div>
     </div>

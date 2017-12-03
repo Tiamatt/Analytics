@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BreadcrumbNavClass } from '../../shared/models/models-for-components/BreadcrumbNav.model';
 import { LinkStatusEnum } from '../../shared/enums/link-status.enum';
+import { BreadcrumbNavClass } from '../../shared/components/custom-components/breadcrumb-nav/breadcrumb-nav.model';
 
 @Component({
   selector: 'app-item-save',

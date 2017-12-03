@@ -1,4 +1,4 @@
-export class ItemListFilterPanelClass{
+export class ItemListFilterPanelModel{
 
     isShowPartialName_txt: boolean;
     partialName:string;
@@ -12,8 +12,8 @@ export class ItemListFilterPanelClass{
     brand: number[];
 
     // need to pass to server an object with full info
-    static initializeObject():ItemListFilterPanelClass{
-        let result =  new ItemListFilterPanelClass();
+    static initializeObject():ItemListFilterPanelModel{
+        let result =  new ItemListFilterPanelModel();
         
         result.isShowPartialName_txt = false;
         result.partialName = null;
