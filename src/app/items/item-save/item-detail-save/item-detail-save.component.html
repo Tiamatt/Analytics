@@ -1,14 +1,91 @@
 <form [formGroup]="itemForm" (ngSubmit)="onSave()">
   <div class="form-group form-group_M">
 
-      <div *ngIf="input.item_ddl"  class="col-sm">          
-          <label class="control-title_M" for="item">{{'item' | uppercase}}</label>
-          <select id="item" class="form-control" [(ngModel)]="input.active">
-            <option value="0" selected="selected">All</option>
-            <option value="1">Active</option>
-            <option value="2">Not Active</option>
-          </select>      
-        </div>
+    <h4 class="page-title_M">{{title}}</h4>
+    
+    <!-- Item (single selection, dropdowns)-->
+    <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
+    <select id="itemsTvs" formControlName="itemsTvs" class="form-control">
+      <option value="-1" selected="selected">Select item...</option>
+      <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
+    </select>
+    <div *ngIf="isShowAllValidations && !itemForm.get('itemsTvs').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('itemsTvs').errors['min']"> * Item must be selected</p>
+    </div>
+    <br>
 
+
+    <!-- Size (single selection, dropdowns)-->
+    <label class="control-title_M" for="sizes">{{'size' | uppercase}}</label>
+    <select id="sizes" formControlName="sizes" class="form-control">
+      <option value="-1" selected="selected">Select size...</option>
+      <option *ngFor="let o of sizes" [value]="o.valueNum">{{ o.text }}</option>
+    </select>
+    <div *ngIf="isShowAllValidations && !itemForm.get('sizes').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('sizes').errors['min']"> * Size must be selected</p>
+    </div>
+    <br>
+
+
+    <!-- Color (single selection, dropdowns)-->
+    <label class="control-title_M" for="colors">{{'color' | uppercase}}</label>
+    <select id="colors" formControlName="colors" class="form-control">
+      <option value="-1" selected="selected">Select color...</option>
+      <option *ngFor="let o of colors" [value]="o.valueNum" [ngStyle]="{'color': o.extraText}">
+        {{ o.text }}
+      </option>
+    </select>
+    <div *ngIf="isShowAllValidations && !itemForm.get('colors').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('colors').errors['min']"> * Color must be selected</p>
+    </div>
+    <br>
+
+
+    <!-- Quantity (enter)-->
+    <label class="control-title_M" for="quantity">{{'quantity' | uppercase}}</label>
+    <div class="input-group">
+      <span class="input-group-addon">Number</span>
+      <input type="text" id="quantity" formControlName="quantity" class="form-control" aria-label="Amount">
+    </div>
+    <div *ngIf="isShowAllValidations && !itemForm.get('quantity').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['requiredWithTrim']"> * Quantity can't be empty</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['pattern']"> * Quantity should be a positive number</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['min']"> * Quantity should be more than zero</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['max']"> * Quantity should not exceed billion</p>
+    </div>
+    <br>
+
+
+    <!-- Action (single selection, radiobuttons)-->
+    <app-radiobuttons-simple [input]='itemActions' (onSelectedOutput)="onItemActionSelected($event)"></app-radiobuttons-simple>
+    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations && !isItemActionValid"> * Action must be selected</p>
+    <br>
+
+
+    <!-- Customer (single selection, dropdowns)-->
+    <div *ngIf="isShowCustomersDdl">
+      <label class="control-title_M" for="customers">{{'customer email' | uppercase}}</label>
+      <select id="customers" formControlName="customers" class="form-control">
+        <option value="-1" selected="selected">Select customer...</option>
+        <option *ngFor="let o of customers" [value]="o.valueStr">
+          {{ o.text }}
+        </option>
+      </select>
+      <div *ngIf="isShowAllValidations && !itemForm.get('customers').valid">
+          <p class="alert alert-danger validation_M" *ngIf="itemForm.get('customers').errors['min']"> * Customer must be selected</p>
+      </div>
+      <br>
+    </div>
+
+    <!-- Buttons - Save and Next -->
+    <button type="submit" class="btn btn-success btn_M">Save</button>
+    <input type="button" value="Next" class="btn btn-info btn_M" (click)="onNextClick()">
+    <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onResetClick()">
+    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
+
+    <br>
+    <br>
+    <br>
+    
   </div>
 </form>

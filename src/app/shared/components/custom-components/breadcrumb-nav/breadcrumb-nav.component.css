@@ -1,6 +1,7 @@
 #breadcrumb{
-    list-style:none;
+    list-style: none;
     display: inline-block;
+    margin: 0;
 }
 li{
     float:left;

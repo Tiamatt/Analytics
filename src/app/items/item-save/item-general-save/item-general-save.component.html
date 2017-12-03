@@ -1,7 +1,8 @@
 <form [formGroup]="itemForm" (ngSubmit)="onSave()">
   <div class="form-group form-group_M">
 
-
+    <h4 class="page-title_M">{{title}}</h4>
+    
     <!-- Item name  (enter) -->
     <label class="control-title_M" for="itemName">{{'name' | uppercase}}</label>
     <input type="text" id="itemName" class="form-control" placeholder="Enter item name" aria-describedby="itemNameNote" formControlName="itemName">
@@ -70,6 +71,7 @@
     <!-- Buttons - Save and Next -->
     <button type="submit" class="btn btn-success btn_M">Save</button>
     <input type="button" value="Next" class="btn btn-info btn_M" (click)="onNextClick()">
+    <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onResetClick()">
     <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
 
     <br>

@@ -2,13 +2,15 @@ export class ItemDetailModel{
     itemDetailId: string; // guid, PK
     itemId: string; // guid, FK
     itemName: string;
-    siteId: number;
+    sizeId: number;
     sizeName: string;
     colorId: number;
     colorName: string;
     quantity: number;
     itemActionId: number;
     itemActionName: string;
+    customerId: string;
+    customerEmail: string;
 }
 
 // CREATE TABLE [dbo].[ItemDetail](

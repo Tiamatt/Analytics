@@ -9,7 +9,7 @@ import { BreadcrumbNavClass } from '../../shared/components/custom-components/br
 })
 
 export class ItemSaveComponent implements OnInit {
-  title: string = "Create new item";
+  title: string = "Create item";
   breadcrumbNav: BreadcrumbNavClass[] = [];
   constructor( ) { }
   ngOnInit() {

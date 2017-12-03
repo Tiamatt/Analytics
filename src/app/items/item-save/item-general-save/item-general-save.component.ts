@@ -15,6 +15,7 @@ import { TextValueCheckedModel } from '../../../shared/models/text-value-checked
 })
 
 export class ItemGeneralSaveComponent implements OnInit {
+  title: string = "Create new item"; // kali, can be "update existing item"
   item: ItemModel = new ItemModel();
   itemForm: FormGroup;
   genders: RadiobuttonsSimpleClass;
@@ -38,17 +39,7 @@ export class ItemGeneralSaveComponent implements OnInit {
     this.generateItemForm();
   }
 
-  generateItemForm(){ 
-    this.itemForm = new FormGroup({
-      'itemName': new FormControl(null, [RequiredWithTrimValidator, this.forbiddenItemNameValidator.bind(this), Validators.maxLength(50)]),
-      'itemDescription': new FormControl(null, [RequiredWithTrimValidator, Validators.maxLength(2000)]),
-      'category': new FormControl(-1, Validators.min(1)),
-      'brand': new FormControl(-1, Validators.min(1)),
-      'price': new FormControl(null, [RequiredWithTrimValidator, Validators.pattern('^[0-9]+\.[0-9][0-9]$')])
-    });
-  }
-
-  /* -------------- Populate controls ------------------------- */  
+  /* -------------------  POPULATE ---------------------- */
   populateGenders(){
     this.filterApiService.getGenders().subscribe(
       res => {
@@ -87,8 +78,19 @@ export class ItemGeneralSaveComponent implements OnInit {
     );
   }
 
+  /* -------------------  EVENTS ---------------------- */
+  // generate html form
+  generateItemForm(){ 
+    this.itemForm = new FormGroup({
+      'itemName': new FormControl(null, [RequiredWithTrimValidator, this.forbiddenItemNameValidator.bind(this), Validators.maxLength(50)]),
+      'itemDescription': new FormControl(null, [RequiredWithTrimValidator, Validators.maxLength(2000)]),
+      'category': new FormControl(-1, Validators.min(1)),
+      'brand': new FormControl(-1, Validators.min(1)),
+      'price': new FormControl(null, [RequiredWithTrimValidator, Validators.pattern('^[0-9]+\.[0-9][0-9]$')])
+    });
+  }
 
- // get selected Gender from Custom RadiobuttonsSimple
+  // get selected Gender from Custom RadiobuttonsSimple
   onGenderSelected(_selectedGenderId: number){
       this.item.genderId = _selectedGenderId;
       this.isGenderValid = true;
@@ -137,8 +139,14 @@ export class ItemGeneralSaveComponent implements OnInit {
     }
   }
 
+  // "Next" button
   onNextClick(){
     // redirect
+  }
+
+  // "Reset" button
+  onResetClick(){
+    
   }
 
 }

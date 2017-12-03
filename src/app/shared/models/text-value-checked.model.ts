@@ -2,6 +2,7 @@ export class TextValueCheckedModel{
     valueStr: string;
     valueNum: number;
     text: string;
+    extraText: string;
     isChecked: boolean;
 
     constructor(){}
