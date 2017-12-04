@@ -1,7 +1,7 @@
-<form [formGroup]="itemForm" (ngSubmit)="onSave()">
+<form [formGroup]="itemDetailForm" (ngSubmit)="onSave()">
   <div class="form-group form-group_M">
 
-    <h4 class="page-title_M">{{title}}</h4>
+    <h4 class="page-title_M">Add item detail</h4>
     
     <!-- Item (single selection, dropdowns)-->
     <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
@@ -9,8 +9,8 @@
       <option value="-1" selected="selected">Select item...</option>
       <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
     </select>
-    <div *ngIf="isShowAllValidations && !itemForm.get('itemsTvs').valid">
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('itemsTvs').errors['min']"> * Item must be selected</p>
+    <div *ngIf="isShowAllValidations && !itemDetailForm.get('itemsTvs').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('itemsTvs').errors['min']"> * Item must be selected</p>
     </div>
     <br>
 
@@ -21,8 +21,8 @@
       <option value="-1" selected="selected">Select size...</option>
       <option *ngFor="let o of sizes" [value]="o.valueNum">{{ o.text }}</option>
     </select>
-    <div *ngIf="isShowAllValidations && !itemForm.get('sizes').valid">
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('sizes').errors['min']"> * Size must be selected</p>
+    <div *ngIf="isShowAllValidations && !itemDetailForm.get('sizes').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('sizes').errors['min']"> * Size must be selected</p>
     </div>
     <br>
 
@@ -35,8 +35,8 @@
         {{ o.text }}
       </option>
     </select>
-    <div *ngIf="isShowAllValidations && !itemForm.get('colors').valid">
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('colors').errors['min']"> * Color must be selected</p>
+    <div *ngIf="isShowAllValidations && !itemDetailForm.get('colors').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('colors').errors['min']"> * Color must be selected</p>
     </div>
     <br>
 
@@ -47,11 +47,11 @@
       <span class="input-group-addon">Number</span>
       <input type="text" id="quantity" formControlName="quantity" class="form-control" aria-label="Amount">
     </div>
-    <div *ngIf="isShowAllValidations && !itemForm.get('quantity').valid">
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['requiredWithTrim']"> * Quantity can't be empty</p>
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['pattern']"> * Quantity should be a positive number</p>
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['min']"> * Quantity should be more than zero</p>
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('quantity').errors['max']"> * Quantity should not exceed billion</p>
+    <div *ngIf="isShowAllValidations && !itemDetailForm.get('quantity').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('quantity').errors['requiredWithTrim']"> * Quantity can't be empty</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('quantity').errors['pattern']"> * Only digits are allowed</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('quantity').errors['min']"> * Quantity should be more than zero</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('quantity').errors['max']"> * Quantity should not exceed billion</p>
     </div>
     <br>
 
@@ -71,8 +71,8 @@
           {{ o.text }}
         </option>
       </select>
-      <div *ngIf="isShowAllValidations && !itemForm.get('customers').valid">
-          <p class="alert alert-danger validation_M" *ngIf="itemForm.get('customers').errors['min']"> * Customer must be selected</p>
+      <div *ngIf="isShowAllValidations && !itemDetailForm.get('customers').valid">
+          <p class="alert alert-danger validation_M" *ngIf="itemDetailForm.get('customers').errors['min']"> * Customer must be selected</p>
       </div>
       <br>
     </div>

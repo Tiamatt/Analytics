@@ -14,9 +14,8 @@ import { RequiredWithTrimValidator } from '../../../shared/custom-directives/val
 })
 
 export class ItemDetailSaveComponent implements OnInit {
-  title: string = "Create new item detail"; // kali, can be "update existing item detail"
   itemDetail: ItemDetailModel = new ItemDetailModel();
-  itemForm: FormGroup;
+  itemDetailForm: FormGroup;
   itemsTvc: TextValueCheckedModel;
   sizes: TextValueCheckedModel;
   colors: TextValueCheckedModel;
@@ -37,7 +36,7 @@ export class ItemDetailSaveComponent implements OnInit {
     this.populateColors();
     this.populateItemActions();
     this.populateCustomers();
-    this.generateItemForm();
+    this.generateItemDetailForm();
   }
 
   /* -------------------  POPULATE ---------------------- */
@@ -89,8 +88,8 @@ export class ItemDetailSaveComponent implements OnInit {
 
   /* -------------------  EVENTS ---------------------- */
   // generate html form
-  private generateItemForm(){ 
-    this.itemForm = new FormGroup({
+  private generateItemDetailForm(){ 
+    this.itemDetailForm = new FormGroup({
       'itemsTvs': new FormControl(-1, Validators.min(1)),
       'sizes': new FormControl(-1, Validators.min(1)),
       'colors': new FormControl(-1, Validators.min(1)),      
@@ -109,7 +108,7 @@ export class ItemDetailSaveComponent implements OnInit {
 
   // "Save" button
   onSave(){
-    if(!this.itemForm.valid)      
+    if(!this.itemDetailForm.valid)      
       this.isShowAllValidations = true;
     else if(this.itemDetail.itemActionId  == undefined || this.itemDetail.itemActionId  < 1)
     {
@@ -122,12 +121,12 @@ export class ItemDetailSaveComponent implements OnInit {
 
       // populate item object
       // this.itemDetail.itemDetailId will be specified in SQL Server 
-      this.itemDetail.itemId = this.itemForm.value.itemsTvs;
-      this.itemDetail.sizeId = this.itemForm.value.sizes;
-      this.itemDetail.colorId = this.itemForm.value.colors;
-      this.itemDetail.quantity = this.itemForm.value.quantity.trim();
+      this.itemDetail.itemId = this.itemDetailForm.value.itemsTvs;
+      this.itemDetail.sizeId = this.itemDetailForm.value.sizes;
+      this.itemDetail.colorId = this.itemDetailForm.value.colors;
+      this.itemDetail.quantity = this.itemDetailForm.value.quantity.trim();
       // this.itemDetail.itemActionId has been assigned in onItemActionSelected()
-      this.itemDetail.customerId = this.itemForm.value.customers;
+      this.itemDetail.customerId = this.itemDetailForm.value.customers;
 
       // save in db via api
       this.itemApiService.insertItemDetail(this.itemDetail).subscribe(
@@ -138,12 +137,12 @@ export class ItemDetailSaveComponent implements OnInit {
   }
 
   // "Next" button
-  onNextClick(){
+  onNextClick(){ // kali
     // redirect
   }
 
   // "Reset" button
-  onResetClick(){
+  onResetClick(){ // kali
     
   }
 

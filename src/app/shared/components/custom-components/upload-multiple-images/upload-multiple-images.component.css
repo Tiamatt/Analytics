@@ -1,0 +1,18 @@
+.col-sm-4_M{
+    padding: 0 15px 15px 0;
+}
+.card-img-top {
+    height: 230px;
+}
+    .card-body i{
+        float: right;
+        font-size: 1.5rem;
+    }
+    .card-body i:hover{
+    color: rgba(220, 53, 69, 1);
+    cursor: pointer;
+    }
+    .card-body span{
+        float: right;
+        padding-right: 10px;
+    }

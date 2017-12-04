@@ -1,3 +1,20 @@
-<p>
-  item-image-save works!
-</p>
+<form [formGroup]="itemImageForm" (ngSubmit)="onSave()">
+  <div class="form-group">
+
+    <h4 class="page-title_M">Add item image</h4>
+    
+    <!-- Item (single selection, dropdowns)-->
+    <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
+    <select id="itemsTvs" formControlName="itemsTvs" class="form-control">
+      <option value="-1" selected="selected">Select item...</option>
+      <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
+    </select>
+    <div *ngIf="isShowAllValidations && !itemImageForm.get('itemsTvs').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemImageForm.get('itemsTvs').errors['min']"> * Item must be selected</p>
+    </div>
+    <br>
+
+    <app-upload-multiple-images (onChangeOutput)="onUploadImages($event)"></app-upload-multiple-images>
+
+  </div>
+</form>

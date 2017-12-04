@@ -140,12 +140,12 @@ export class ItemGeneralSaveComponent implements OnInit {
   }
 
   // "Next" button
-  onNextClick(){
+  onNextClick(){ // kali
     // redirect
   }
 
   // "Reset" button
-  onResetClick(){
+  onResetClick(){ // kali
     
   }
 

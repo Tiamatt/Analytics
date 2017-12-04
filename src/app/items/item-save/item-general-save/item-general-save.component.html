@@ -64,7 +64,7 @@
     </div>
     <div *ngIf="isShowAllValidations && !itemForm.get('price').valid">
         <p class="alert alert-danger validation_M" *ngIf="itemForm.get('price').errors['requiredWithTrim']"> * Price can't be empty</p>
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('price').errors['pattern']"> * Only numbers and one dot allowed</p>
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('price').errors['pattern']"> * Only digits and one dot are allowed. Add two digits after dot.</p>
     </div>
     <br>
 
