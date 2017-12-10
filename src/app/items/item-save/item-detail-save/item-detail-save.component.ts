@@ -131,7 +131,7 @@ export class ItemDetailSaveComponent implements OnInit {
       // save in db via api
       this.itemApiService.insertItemDetail(this.itemDetail).subscribe(
         res => console.log(res),
-        err => console.log(err.error)
+        err => console.log(err)
       );
     }
   }

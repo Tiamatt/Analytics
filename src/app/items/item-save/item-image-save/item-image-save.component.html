@@ -15,6 +15,17 @@
     <br>
 
     <app-upload-multiple-images (onChangeOutput)="onUploadImages($event)"></app-upload-multiple-images>
+    <br>
+
+    <!-- Buttons - Save and Next -->
+    <button type="submit" class="btn btn-success btn_M">Save</button>
+    <input type="button" value="Next" class="btn btn-info btn_M" (click)="onNextClick()">
+    <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onResetClick()">
+    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
+
+    <br>
+    <br>
+    <br>
 
   </div>
 </form>

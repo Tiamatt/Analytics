@@ -1,36 +1,25 @@
-<nav>
+<nav [ngClass]="isExpandNav ? 'nav-expand_M' : 'nav-shrink_M'">
+
+  <div class="header_M">
+      <i class="fa fa-bars" aria-hidden="true" (click)="onShrinkExpandNav()"></i>
+      <p *ngIf="isExpandNav">Ng Analytics</p>     
+  </div>
+
+  <div class="clearfix"></div>
+
   <ul>
-    <li>
-      <ul>
-        <p>Items</p>
-        <li>
-          <a routerLink="/item-list">View list of items</a>
-        </li>
-        <li>
-          <a routerLink="/item-save">Create/update item</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-        <ul>
-          <p>Sales</p>
-          <li>
-            <a routerLink="/item-list">Total Sales</a>
-          </li>
-          <li>
-            <a routerLink="/item-list">Total inventory</a>
-          </li>
-          <li>
-              <a routerLink="/item-list">Total Returns</a>
-          </li>
-          <li>
-              <a routerLink="/item-list">Inventory to Sales Ratio</a>
-          </li>
-          <li>
-              <a routerLink="/item-list">Days of Supply</a>
-          </li>
+    <li *ngFor="let o of navData">
+        <p class="nav-title_M" (click)="onShowHideSubtitles(o.titleFaCaret, o.titleName)">
+          <i [class]="o.titleFaIcon" aria-hidden="true" (click)="onShrinkExpandNav()"></i>
+          <span *ngIf="isExpandNav">{{o.titleName}}</span>
+          <i [class]="o.titleFaCaret" aria-hidden="true" *ngIf="isExpandNav"></i>
+        </p>
+        <ul class="sub-nav-title_M" *ngIf="o.isShowSubtitles && isExpandNav">
+            <li *ngFor="let oo of o.subtitles">
+              <a [routerLink]="oo.routerLink">- {{oo.name}}</a>
+            </li>
         </ul>
-      </li>
+    </li>    
   </ul>
 
 </nav>

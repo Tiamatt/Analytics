@@ -2,8 +2,10 @@ export class ItemImageModel{
     itemImageId:string; // [uniqueidentifier] NOT NULL,
     itemId:string; //[uniqueidentifier] NOT NULL,
     itemName: string;
-	src:number; // [int] NOT NULL,
+	src:string; // [int] NOT NULL,
     isMain: boolean; // [bit] NOT NULL,
+    size: number;
+    imageType: string;
 }
 
 /* 

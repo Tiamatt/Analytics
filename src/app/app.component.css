@@ -1,7 +1,10 @@
-.wrapper_M{
+.app_M{
     background-color: rgba(244, 246, 246, 1);
 }
-.main-nav_M{
-    color: #fff;
-    background-color: rgba(19,35,47,1);
+
+.nav-expand_M{
+    margin-left: 222px;
+}
+.nav-shrink_M{
+    margin-left: 44px;
 }

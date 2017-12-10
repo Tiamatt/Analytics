@@ -14,9 +14,13 @@ export class ItemImageSaveComponent implements OnInit {
   itemImage: ItemImageModel = new ItemImageModel();
   itemImageForm: FormGroup;
   itemsTvc: TextValueCheckedModel;
+  images: UploadMultipleImagesModel[] = [];
   isShowAllValidations: boolean = false;
 
-  constructor(private itemApiService: ItemApiService) { }
+  constructor(
+    private itemApiService: ItemApiService
+    //private fileUploadApiService: FileUploadApiService
+  ) { }
 
   ngOnInit() {
     this.populateItemsTvc();
@@ -45,10 +49,27 @@ export class ItemImageSaveComponent implements OnInit {
 
   // "Save" button
   onSave(){
+
+
     if(!this.itemImageForm.valid)      
       this.isShowAllValidations = true;
     else{
+      let itemImages: ItemImageModel[] = [];
+      for(let i=0; i < this.images.length; i++)
+      {
+        let itemImage = new ItemImageModel();
+        itemImage.itemId = this.itemImageForm.value.itemsTvs;
+        itemImage.src = this.images[i].src;
+        itemImage.isMain = this.images[i].isMainFile;
+        itemImage.size = this.images[i].file.size;
+        itemImage.imageType = this.images[i].file.type;
+        itemImages.push(itemImage);
+      }
 
+      this.itemApiService.insertItemImage(itemImages).subscribe(
+        res => alert(res),
+        err => console.log(err.error)
+      );
     }
   }
 
@@ -62,9 +83,16 @@ export class ItemImageSaveComponent implements OnInit {
     
   }
 
-  onUploadImages(_val: UploadMultipleImagesModel[]){
-    console.log('onUploadImages');
-    console.log(_val);
+  onUploadImages(_images: UploadMultipleImagesModel[]){
+    console.log("Upload img before saving");
+    console.log(_images);
+    this.images = _images;
+  }
+
+  private uploadImages(){
+    if(this.images.length > 0) {
+    }
+
   }
 
 }

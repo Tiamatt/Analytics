@@ -13,7 +13,7 @@ export class ItemListResultPanelComponent implements OnChanges {
   @Input() input: ItemViewModel[];
   // fields
   tableData: ItemViewModel[];
-  dataForInfoForIsActive: ItemViewModel;
+  dataForItemActivities: ItemViewModel;
   isSortAsc: boolean = true;
   pages: number[] = [1];
   currentPage: number = 1;
@@ -57,8 +57,8 @@ export class ItemListResultPanelComponent implements OnChanges {
     this.currentPage = _currentPage;    
     this.sortingAndPagingTable(this.currentSortedTableHeaderName);
   }
-  onShowInfoForIsActive(_selectedRow: ItemViewModel){
-    this.dataForInfoForIsActive =(!_selectedRow.item.isActive) ? _selectedRow : null; 
+  onShowItemActivities(_selectedRow: ItemViewModel){
+    this.dataForItemActivities =(!_selectedRow.item.isActive) ? _selectedRow : null;
   }
 
 

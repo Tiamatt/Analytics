@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'app';
+  isExpandNav: boolean = true;
+
+  onShrinkExpandNav(_isExpandNav: boolean){
+    this.isExpandNav = _isExpandNav;
+  }
 }

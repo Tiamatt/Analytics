@@ -1,9 +1,11 @@
-<h4 class="page-title_M">List of items</h4>
+<div class="wrapper_M">
+    <h4 class="page-title_M">List of items</h4>
 
-<!-- filter panel -->
-<app-item-list-filter-panel [input]="itemListFilterPanel" (onSearchOutput)="onFiltersSearch($event)"></app-item-list-filter-panel>
+    <!-- filter panel -->
+    <app-item-list-filter-panel [input]="itemListFilterPanel" (onSearchOutput)="onFiltersSearch($event)"></app-item-list-filter-panel>
 
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 
-<!-- main table-->
-<app-item-list-result-panel *ngIf="itemViewsTableData" [input]="itemViewsTableData"></app-item-list-result-panel>
+    <!-- main table-->
+    <app-item-list-result-panel *ngIf="itemViewsTableData" [input]="itemViewsTableData"></app-item-list-result-panel>
+</div>

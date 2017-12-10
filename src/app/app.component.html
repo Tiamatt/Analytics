@@ -1,10 +1,7 @@
-<app-header></app-header>
-
-<div class="row wrapper_M">
-  <div class="col-sm-2 main-nav_M">
-    <app-main-nav></app-main-nav>
-  </div>
-  <div class="col-sm-10">
+<div class="app_M">
+  <app-main-nav (onShrinkExpandNavOutput)="onShrinkExpandNav($event)"></app-main-nav>
+  <div [ngClass]="isExpandNav ? 'nav-expand_M' : 'nav-shrink_M'">
+    <app-header></app-header>
     <router-outlet></router-outlet>
   </div>
 </div>
