@@ -57,6 +57,7 @@ export class ItemListFilterPanelComponent implements OnInit {
       },
       err => {
         console.log("Error. Can't call GetCategories() HttpGet method");
+        console.log(err);
       }
     );
   }
@@ -69,6 +70,7 @@ export class ItemListFilterPanelComponent implements OnInit {
       },
       err => {
         console.log("Error. Can't call GetBrands() HttpGet method");
+        console.log(err);
       }
     );
   }

@@ -1,0 +1,22 @@
+.right_M{
+    width: 10%;
+}
+.left_M{
+    width: 90%;
+}
+
+img{
+    border: 1px solid rgba(170, 183, 184, 1);
+}
+.right_M img{
+    width: 90%;
+    margin: 0 0 10px 0;
+    cursor: pointer; 
+}
+.right_M img:hover, .selectedImage_M{
+    border: 2px solid rgba(23, 162, 184, 1);
+}
+
+.left_M img{
+    width: 100%;
+}

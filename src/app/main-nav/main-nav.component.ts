@@ -29,7 +29,7 @@ export class MainNavComponent implements OnInit {
     items.subtitles = [
       { routerLink: "/item-list", name: "List of items" },
       { routerLink: "/item-save", name: "Create item" },
-      { routerLink: "/item-list", name: "View item" } // kali
+      { routerLink: "/item-view", name: "View item" }
     ];
     this.navData.push(items);
 

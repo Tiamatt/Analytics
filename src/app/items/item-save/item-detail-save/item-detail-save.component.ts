@@ -45,6 +45,7 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.itemsTvc = res,
       err => {
         console.log("Error. Can't call GetItemsTvc() HttpGet method");
+        console.log(err);
       }
     );
   }
@@ -53,6 +54,7 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.sizes = res,
       err => {
         console.log("Error. Can't call GetSizes() HttpGet method");
+        console.log(err);
       }
     );
   }
@@ -61,6 +63,7 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.colors = res,
       err => {
         console.log("Error. Can't call GetColors() HttpGet method");
+        console.log(err);
       }
     );
   }
@@ -74,6 +77,7 @@ export class ItemDetailSaveComponent implements OnInit {
       },
       err => {
         console.log("Error. Can't call GetItemActions() HttpGet method");
+        console.log(err);
       }
     );
   } 
@@ -82,6 +86,7 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.customers = res,
       err => {
         console.log("Error. Can't call GetCustomers() HttpGet method");
+        console.log(err);
       }
     );
   }

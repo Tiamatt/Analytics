@@ -50,6 +50,7 @@ export class ItemGeneralSaveComponent implements OnInit {
       },
       err => {
         console.log("Error. Can't call GetGenders() HttpGet method");
+        console.log(err);
       }
     );
   }  
@@ -58,6 +59,7 @@ export class ItemGeneralSaveComponent implements OnInit {
       res => this.categories = res,
       err => {
         console.log("Error. Can't call GetCategories() HttpGet method");
+        console.log(err);
       }
     );
   }
@@ -74,6 +76,7 @@ export class ItemGeneralSaveComponent implements OnInit {
       res => this.existingItemNames = res,
       err => {
         console.log("Error. Can't call GetItemNamesLowercase() HttpGet method");
+        console.log(err);
       }
     );
   }

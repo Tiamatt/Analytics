@@ -26,6 +26,8 @@ import { ItemListFilterPanelComponent } from './items/item-list/item-list-filter
 import { ItemListResultPanelComponent } from './items/item-list/item-list-result-panel/item-list-result-panel.component';
 import { UploadMultipleImagesComponent } from './shared/components/custom-components/upload-multiple-images/upload-multiple-images.component';
 import { ItemActivityComponent } from './items/item-view/item-activity/item-activity.component';
+import { CarouselComponent } from './shared/components/custom-components/carousel/carousel.component';
+import { ItemImagesBoxComponent } from './items/item-view/item-images-box/item-images-box.component';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -45,7 +47,7 @@ import { ItemActivityComponent } from './items/item-view/item-activity/item-acti
     ItemListFilterPanelComponent, 
     ItemListResultPanelComponent, 
     UploadMultipleImagesComponent, 
-    ItemActivityComponent
+    ItemActivityComponent, CarouselComponent, ItemImagesBoxComponent
   ],
   imports: [
     AppRoutingModule,

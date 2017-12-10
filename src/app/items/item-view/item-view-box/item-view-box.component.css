@@ -1,0 +1,19 @@
+.col-md{
+    margin: 10px 0;
+}
+.item_M p{
+    padding: 0 0 1px 0;
+}
+a.edit_M {
+    color: rgba(23, 162, 184, 1);
+    font-weight: 700;
+    display: block;
+}
+    a.edit_M:hover{
+        color: rgba(0, 123, 255, 1);
+        cursor: pointer;
+    }
+    a.edit_M span{
+        text-decoration: underline;
+        font-size: 14px;
+    }

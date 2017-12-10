@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 import { ItemViewModel } from '../item-view.model';
 
@@ -7,25 +7,28 @@ import { ItemViewModel } from '../item-view.model';
   templateUrl: './item-view-box.component.html',
   styleUrls: ['./item-view-box.component.css', '../../../shared/styles/general.css']
 })
-export class ItemViewBoxComponent implements OnInit {
-  @Input() input: string; // itemId (guid)
+export class ItemViewBoxComponent implements OnChanges {
+  @Input() itemIdInput: string; // itemId (guid)
   itemView: ItemViewModel;
 
   constructor(private itemApiService: ItemApiService) { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.populateItemView();
   }
 
   /* -------------------  POPULATE ---------------------- */
-  populateItemView(){
-    // this.itemApiService.getItemView(this.input).subsribe(
-    //   res => this.itemView = res,
-    //   err => {
-    //     console.log("Error. Can't call GetItemView() HttpGet method");
-    //     console.log(err);
-    //   }
-    // );
+  private populateItemView(){
+    this.itemApiService.getItemView(this.itemIdInput).subscribe(
+      res => {
+        this.itemView = res;
+        console.log(this.itemView)//kali
+    },
+      err => {
+        console.log("Error. Can't call GetItemView(x) HttpGet method");
+        console.log(err);
+      }
+    )
   }
 
  /* -------------------  EVENTS ---------------------- */

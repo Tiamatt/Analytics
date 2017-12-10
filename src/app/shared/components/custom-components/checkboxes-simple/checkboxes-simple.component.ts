@@ -13,6 +13,7 @@ populatePriceRanges(){
       },
       err => {
         console.log("Error. Can't call GetPriceRanges() HttpGet method");
+        console.log(err);
       }
     );
 }

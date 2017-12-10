@@ -12,6 +12,7 @@ Note: populate data for RadiobuttonsSimpleClass
         },
         err => {
           console.log("Error. Can't call GetBrands() HttpGet method");
+          console.log(err);
         }
       );
   }

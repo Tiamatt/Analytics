@@ -38,8 +38,8 @@ export class ItemApiService{
 
     // Note: TVC means "Text Value Checked"
     getItemsTvc(_isActive: boolean | null):any{
-        this.apiUrl_getItemsTvc += _isActive;
-        return this.http.get<TextValueCheckedModel[]>(this.apiUrl_getItemsTvc, {headers: this.header}); 
+        let apiUrl = this.apiUrl_getItemsTvc + _isActive;
+        return this.http.get<TextValueCheckedModel[]>(apiUrl, {headers: this.header}); 
     }
 
     getItemNamesLowercase():any{
@@ -52,8 +52,8 @@ export class ItemApiService{
     }
 
     getItemView(_itemId: string): any{
-        this.apiUrl_getItemView += _itemId;
-        return this.http.post<ItemViewModel>(this.apiUrl_getItemView, {headers: this.header}); 
+        let apiUrl = this.apiUrl_getItemView + _itemId;
+        return this.http.post<ItemViewModel>(apiUrl, {headers: this.header}); 
     }    
 
     insertItem(_newItem: ItemModel){

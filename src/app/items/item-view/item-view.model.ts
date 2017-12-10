@@ -5,7 +5,7 @@ import { ItemActivityEnum } from "../../shared/enums/item-activity.enum";
 
 export class ItemViewModel{
     item: ItemModel;    
-    itemDetail: ItemDetailModel[];
-    itemImage: ItemImageModel[];
+    itemDetails: ItemDetailModel[];
+    itemImages: ItemImageModel[];
     itemActivities: ItemActivityEnum[];
 }

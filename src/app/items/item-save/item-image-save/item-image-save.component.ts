@@ -32,7 +32,8 @@ export class ItemImageSaveComponent implements OnInit {
     this.itemApiService.getItemsTvc(null).subscribe(
       res => this.itemsTvc = res,
       err => {
-        console.log("Error. Can't call GetItemsTvc() HttpGet method");
+        console.log("Error. Can't call GetItemsTvc(x) HttpGet method");
+        console.log(err);
       }
     );
   }

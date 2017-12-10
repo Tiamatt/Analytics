@@ -1,0 +1,14 @@
+<div *ngIf="input">
+    <div class="row">
+        <div class="right_M">
+            <div *ngFor="let o of input">
+                <img [src]="o.src" alt="img" 
+                [ngClass]="{'selectedImage_M' : o == selectedItemImage}"
+                (click)="onReselectItemImage(o)">
+            </div>
+        </div>
+        <div class="left_M" *ngIf="selectedItemImage">
+            <img [src]="selectedItemImage.src" alt="img">
+        </div>
+      </div>
+</div>
