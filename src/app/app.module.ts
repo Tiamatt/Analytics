@@ -28,6 +28,7 @@ import { UploadMultipleImagesComponent } from './shared/components/custom-compon
 import { ItemActivityComponent } from './items/item-view/item-activity/item-activity.component';
 import { CarouselComponent } from './shared/components/custom-components/carousel/carousel.component';
 import { ItemImagesBoxComponent } from './items/item-view/item-images-box/item-images-box.component';
+import { ColorSizeMatrixBoxComponent } from './items/item-view/color-size-matrix-box/color-size-matrix-box.component';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -47,7 +48,7 @@ import { ItemImagesBoxComponent } from './items/item-view/item-images-box/item-i
     ItemListFilterPanelComponent, 
     ItemListResultPanelComponent, 
     UploadMultipleImagesComponent, 
-    ItemActivityComponent, CarouselComponent, ItemImagesBoxComponent
+    ItemActivityComponent, CarouselComponent, ItemImagesBoxComponent, ColorSizeMatrixBoxComponent
   ],
   imports: [
     AppRoutingModule,

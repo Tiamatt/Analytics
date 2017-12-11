@@ -1,0 +1,20 @@
+.colors_M{
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+}
+.sizes_M{
+    width: auto;
+    height: 30px;
+    padding: 0 6px;
+    text-align: right;
+    font-weight: 700;
+    cursor: pointer;
+}
+.quantities_M{
+    border: 1px dashed  rgba(134, 142, 150, 1);
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}

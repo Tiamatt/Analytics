@@ -23,7 +23,7 @@ export class ItemViewComponent implements OnInit {
       this.itemApiService.getItemsTvc(null).subscribe(
         res => {
           this.itemsTvc = res;
-          this.selectedItemId = this.itemsTvc[1].valueStr;
+          this.selectedItemId = this.itemsTvc[0].valueStr;
         },
         err => {
           console.log("Error. Can't call GetItemsTvc(x) HttpGet method");

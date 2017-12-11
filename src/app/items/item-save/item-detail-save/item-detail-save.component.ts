@@ -131,7 +131,7 @@ export class ItemDetailSaveComponent implements OnInit {
       this.itemDetail.colorId = this.itemDetailForm.value.colors;
       this.itemDetail.quantity = this.itemDetailForm.value.quantity.trim();
       // this.itemDetail.itemActionId has been assigned in onItemActionSelected()
-      this.itemDetail.customerId = this.itemDetailForm.value.customers;
+      this.itemDetail.customerId = (this.itemDetailForm.value.customers != -1) ? this.itemDetailForm.value.customers : null;
 
       // save in db via api
       this.itemApiService.insertItemDetail(this.itemDetail).subscribe(

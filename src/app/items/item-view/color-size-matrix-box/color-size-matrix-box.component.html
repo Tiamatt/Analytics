@@ -1,0 +1,17 @@
+<div *ngIf="input">
+  <table>
+      <tr>
+        <td></td>
+        <td *ngFor="let co of input.colors" 
+        [ngStyle]="{'background': co.hexCode}"
+        class="colors_M"
+        [title]="co.name"></td>
+      </tr>
+      <tr *ngFor="let qArr of input.quantities; let y=index">
+        <td class="sizes_M" [title]="input.sizes[y].usaSizing">{{input.sizes[y].sizing}}</td>
+        <td *ngFor="let q of qArr; let x=index" class="quantities_M">
+          <span [ngClass]="{'text-danger': q<0}">{{q}}</span>          
+        </td>
+      </tr>
+  </table>
+</div>
