@@ -32,7 +32,7 @@
         <td class="td-icon_M">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </td>
-        <td class="td-icon_M">
+        <td class="td-icon_M" (click)="onDeleteItem(d.item.itemId, d.item.name)">
             <i class="fa fa-trash" aria-hidden="true"></i>
         </td>
       </tr>

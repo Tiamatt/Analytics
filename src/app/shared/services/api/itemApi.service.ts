@@ -15,22 +15,28 @@ export class ItemApiService{
     private apiUrl_base: string;
     private apiUrl_getItemsTvc: string;
     private apiUrl_getItemNamesLowercase: string;
+    private apiUrl_getItemModel:string;
     private apiUrl_getItemViews: string;
     private apiUrl_getItemView: string;
     private apiUrl_insertItem: string;
     private apiUrl_insertItemDetail: string;
     private apiUrl_insertItemImage: string;
+    private apiUrl_updateItem: string;
+    private apiUrl_deleteItem: string;
 
     constructor(private http: HttpClient){
         this.apiUrl_base = 'https://localhost:44385/api/analytics/'; //kali
         this.apiUrl_getItemsTvc = this.apiUrl_base + 'items-tvc/';
-        this.apiUrl_getItemNamesLowercase = this.apiUrl_base + 'item-names-lowercase';
+        this.apiUrl_getItemNamesLowercase = this.apiUrl_base + 'item-names-lowercase/';
+        this.apiUrl_getItemModel = this.apiUrl_base + 'item-model/'
         this.apiUrl_getItemViews = this.apiUrl_base + 'item-views';
         this.apiUrl_getItemView = this.apiUrl_base + 'item-view/';
         this.apiUrl_insertItem = this.apiUrl_base + 'insert-item/' + this.employeeId;
         this.apiUrl_insertItemDetail = this.apiUrl_base + 'insert-item-detail/' + this.employeeId;
         this.apiUrl_insertItemImage = this.apiUrl_base + 'insert-item-image/' + this.employeeId;
-        
+        this.apiUrl_updateItem = this.apiUrl_base + 'update-item/' + this.employeeId;
+        this.apiUrl_deleteItem = this.apiUrl_base + 'delete-item/' + this.employeeId;
+
         this.header = new HttpHeaders({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'});
@@ -42,8 +48,14 @@ export class ItemApiService{
         return this.http.get<TextValueCheckedModel[]>(apiUrl, {headers: this.header}); 
     }
 
-    getItemNamesLowercase():any{
-        return this.http.get<string[]>(this.apiUrl_getItemNamesLowercase, {headers: this.header});
+    getItemNamesLowercase(_itemId: string):any{
+        let apiUrl = this.apiUrl_getItemNamesLowercase + _itemId;
+        return this.http.get<string[]>(apiUrl, {headers: this.header});
+    }
+
+    getItemModel(_itemId: string): any{
+        let apiUrl = this.apiUrl_getItemModel + _itemId;
+        return this.http.get<ItemModel>(apiUrl, {headers: this.header}); 
     }
 
     // not all fields are populated!
@@ -68,4 +80,12 @@ export class ItemApiService{
         return this.http.post(this.apiUrl_insertItemImage, _itemImages, {headers: this.header});
     }
 
+    updateItem(_newItem: ItemModel){
+        return this.http.post(this.apiUrl_updateItem, _newItem, {headers: this.header});
+    }
+
+    deleteItem(_itemId: string){
+        let apiUrl = this.apiUrl_deleteItem + '/' + _itemId;
+        return this.http.delete(apiUrl, {headers: this.header});
+    }
 }

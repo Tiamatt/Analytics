@@ -20,10 +20,7 @@ export class ItemViewBoxComponent implements OnChanges {
   /* -------------------  POPULATE ---------------------- */
   private populateItemView(){
     this.itemApiService.getItemView(this.itemIdInput).subscribe(
-      res => {
-        this.itemView = res;
-        console.log(this.itemView)//kali
-    },
+      res => this.itemView = res,
       err => {
         console.log("Error. Can't call GetItemView(x) HttpGet method");
         console.log(err);

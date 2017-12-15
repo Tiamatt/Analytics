@@ -39,7 +39,7 @@ export class ItemDetailSaveComponent implements OnInit {
     this.generateItemDetailForm();
   }
 
-  /* -------------------  POPULATE ---------------------- */
+  /* -------------------  PRIVATE METHODS ---------------------- */
   private populateItemsTvc(){
     this.itemApiService.getItemsTvc(null).subscribe(
       res => this.itemsTvc = res,
@@ -90,9 +90,6 @@ export class ItemDetailSaveComponent implements OnInit {
       }
     );
   }
-
-  /* -------------------  EVENTS ---------------------- */
-  // generate html form
   private generateItemDetailForm(){ 
     this.itemDetailForm = new FormGroup({
       'itemsTvs': new FormControl(-1, Validators.min(1)),
@@ -103,14 +100,13 @@ export class ItemDetailSaveComponent implements OnInit {
     });
   }
   
+  /* -------------------  EVENTS ---------------------- */
   // get selected ItemAction from Custom RadiobuttonsSimple
-  onItemActionSelected(_selectedItemActionId: number){
-    this.itemDetail.itemActionId = _selectedItemActionId;
+  onItemActionSelected(_selectedItemActionId: number){    this.itemDetail.itemActionId = _selectedItemActionId;
     this.isItemActionValid = true;
     // if Sold (2) or Returned (3) then add CustomerId
     this.isShowCustomersDdl = (_selectedItemActionId == 2 || _selectedItemActionId == 3) ? true : false;
   }
-
   // "Save" button
   onSave(){
     if(!this.itemDetailForm.valid)      

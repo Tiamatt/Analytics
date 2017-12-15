@@ -7,13 +7,8 @@ export class ItemModel{
 	categoryId: number; // NOT NULL [int]
 	categoryName: string;
 	brandId: number; // NOT NULL [int]	
-	brandName: string;
-	
+	brandName: string;	
     price: number; // NOT NULL [decimal](10, 2)
-	createdByFullName: string; // NULL string (FirstName + ' ' + MiddleName + ' ' + LastName)
-	createdDate: Date; // NULL Date
-	lastUpdatedByFullName: string; // NULL string (FirstName + ' ' + MiddleName + ' ' + LastName)
-	lastUpdatedDate: Date; // NULL Date
 	isActive: boolean; // NULL
 }
 

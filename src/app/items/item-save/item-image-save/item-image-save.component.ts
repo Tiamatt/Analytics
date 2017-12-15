@@ -17,10 +17,7 @@ export class ItemImageSaveComponent implements OnInit {
   images: UploadMultipleImagesModel[] = [];
   isShowAllValidations: boolean = false;
 
-  constructor(
-    private itemApiService: ItemApiService
-    //private fileUploadApiService: FileUploadApiService
-  ) { }
+  constructor(private itemApiService: ItemApiService) { }
 
   ngOnInit() {
     this.populateItemsTvc();
@@ -50,8 +47,6 @@ export class ItemImageSaveComponent implements OnInit {
 
   // "Save" button
   onSave(){
-
-
     if(!this.itemImageForm.valid)      
       this.isShowAllValidations = true;
     else{

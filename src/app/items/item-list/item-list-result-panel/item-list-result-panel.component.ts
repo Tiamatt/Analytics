@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ItemViewModel } from '../../item-view/item-view.model';
+import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ItemListResultPanelComponent implements OnChanges {
   currentSortedTableHeaderName: string = "name";
   readonly maxRowsPerPage:number = 5;
 
-  constructor() { }
+  constructor(private itemApiService: ItemApiService) { }
 
   ngOnChanges(_changes: SimpleChanges){
     this.input = _changes.input.currentValue;
@@ -59,6 +60,15 @@ export class ItemListResultPanelComponent implements OnChanges {
   }
   onShowItemActivities(_selectedRow: ItemViewModel){
     this.dataForItemActivities =(!_selectedRow.item.isActive) ? _selectedRow : null;
+  }
+  onDeleteItem(_itemId: string, _itemName: string){
+    if(confirm('Are you sure to delete "' + _itemName + '"?'))
+    {
+      this.itemApiService.deleteItem(_itemId).subscribe(
+        res => alert('Item ' + _itemName + ' deleted successfully'), // kali
+        err => alert('Failed to delete ' + _itemName + ' item.')  // kali
+      );
+    }
   }
 
 

@@ -10,7 +10,7 @@ import { ItemViewComponent } from './items/item-view/item-view.component';
 import { ItemViewBoxComponent } from './items/item-view/item-view-box/item-view-box.component';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/item-view', pathMatch: 'full' },
+    { path: '', redirectTo: '/item-list', pathMatch: 'full' },
     { path: 'item-save', component: ItemSaveComponent, children:[
         { path: '', redirectTo: 'item-general-save', pathMatch: 'full' },
         { path: 'item-general-save', component: ItemGeneralSaveComponent },

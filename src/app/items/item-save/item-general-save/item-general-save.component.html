@@ -1,8 +1,18 @@
-<form [formGroup]="itemForm" (ngSubmit)="onSave()">
+<form *ngIf="itemForm" [formGroup]="itemForm" (ngSubmit)="onSave()">
   <div class="form-group form-group_M">
 
     <h4 class="page-title_M">{{title}}</h4>
     
+
+    <!-- Item (single selection, dropdowns)-->
+    <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
+    <select id="itemsTvs" class="form-control" (change)="onItemsTvsSelected($event)">
+      <option value="-1">Select item to update...</option>
+      <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
+    </select>
+    <br>
+
+
     <!-- Item name  (enter) -->
     <label class="control-title_M" for="itemName">{{'name' | uppercase}}</label>
     <input type="text" id="itemName" class="form-control" placeholder="Enter item name" aria-describedby="itemNameNote" formControlName="itemName">
@@ -33,24 +43,24 @@
 
     <!-- Category (single selection, dropdowns)-->
     <label class="control-title_M" for="category">{{'category' | uppercase}}</label>
-    <select id="category" formControlName="category" class="form-control">
+    <select id="category" formControlName="categoryId" class="form-control">
       <option value="-1" selected="selected">Select category...</option>
       <option *ngFor="let option of categories" [value]="option.valueNum">{{ option.text }}</option>
     </select>
-    <div *ngIf="isShowAllValidations && !itemForm.get('category').valid">
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('category').errors['min']"> * Category must be selected</p>
+    <div *ngIf="isShowAllValidations && !itemForm.get('categoryId').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('categoryId').errors['min']"> * Category must be selected</p>
     </div>
     <br>
 
 
     <!-- Brand (single selection)-->
     <label class="control-title_M" for="brand">{{'brand' | uppercase}}</label>
-    <select id="brand" formControlName="brand" class="form-control">
+    <select id="brand" formControlName="brandId" class="form-control">
       <option value="-1" selected="selected">Select brand...</option>
       <option *ngFor="let option of brands" [value]="option.valueNum">{{ option.text }}</option>
     </select>
-    <div *ngIf="isShowAllValidations && !itemForm.get('brand').valid">
-        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('brand').errors['min']"> * Brand must be selected</p>
+    <div *ngIf="isShowAllValidations && !itemForm.get('brandId').valid">
+        <p class="alert alert-danger validation_M" *ngIf="itemForm.get('brandId').errors['min']"> * Brand must be selected</p>
     </div>
     <br>
 
@@ -69,8 +79,7 @@
     <br>
 
     <!-- Buttons - Save and Next -->
-    <button type="submit" class="btn btn-success btn_M">Save</button>
-    <input type="button" value="Next" class="btn btn-info btn_M" (click)="onNextClick()">
+    <button type="submit" class="btn btn-success btn_M">{{saveButtonName}}</button>
     <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onResetClick()">
     <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
 
