@@ -20,6 +20,7 @@ export class ItemListResultPanelComponent implements OnChanges {
   currentPage: number = 1;
   currentSortedTableHeaderName: string = "name";
   readonly maxRowsPerPage:number = 5;
+  selectedEditItemId: string;
 
   constructor(private itemApiService: ItemApiService) { }
 
@@ -31,8 +32,8 @@ export class ItemListResultPanelComponent implements OnChanges {
   } 
 
 
-  /* -------------------  POPULATE ---------------------- */
-  populatePages(){
+  /* -------------------  PRIVATE METHODS ---------------------- */
+  private populatePages(){
     // get total numbers of pages if need more than 1 page
     if(this.input.length > this.maxRowsPerPage)
     {
@@ -45,33 +46,6 @@ export class ItemListResultPanelComponent implements OnChanges {
     else 
       this.pages = [1];
   }
-
-
-  /* -------------------  EVENTS ---------------------- */
-  onSort(_tableHeaderName: string){
-    this.currentSortedTableHeaderName = _tableHeaderName;    
-    this.isSortAsc = !this.isSortAsc;  // change sort direction to opposite
-    this.currentPage = 1;   // make first page as current page
-    this.sortingAndPagingTable(_tableHeaderName);
-  }
-  onPageChange(_currentPage: number){
-    this.currentPage = _currentPage;    
-    this.sortingAndPagingTable(this.currentSortedTableHeaderName);
-  }
-  onShowItemActivities(_selectedRow: ItemViewModel){
-    this.dataForItemActivities =(!_selectedRow.item.isActive) ? _selectedRow : null;
-  }
-  onDeleteItem(_itemId: string, _itemName: string){
-    if(confirm('Are you sure to delete "' + _itemName + '"?'))
-    {
-      this.itemApiService.deleteItem(_itemId).subscribe(
-        res => alert('Item ' + _itemName + ' deleted successfully'), // kali
-        err => alert('Failed to delete ' + _itemName + ' item.')  // kali
-      );
-    }
-  }
-
-
   /* -------------------- PRIVATE METHODS -------------------------- */
   private sortingAndPagingTable(_tableHeaderName: string){
     // sort asc
@@ -92,5 +66,33 @@ export class ItemListResultPanelComponent implements OnChanges {
     this.tableData = this.tableData.slice(fromRow, toRow);
   }
 
+
+  /* -------------------  EVENTS ---------------------- */
+  onSort(_tableHeaderName: string){
+    this.currentSortedTableHeaderName = _tableHeaderName;    
+    this.isSortAsc = !this.isSortAsc;  // change sort direction to opposite
+    this.currentPage = 1;   // make first page as current page
+    this.sortingAndPagingTable(_tableHeaderName);
+  }
+  onPageChange(_currentPage: number){
+    this.currentPage = _currentPage;    
+    this.sortingAndPagingTable(this.currentSortedTableHeaderName);
+  }
+  onShowItemActivities(_selectedRow: ItemViewModel){
+    this.dataForItemActivities =(!_selectedRow.item.isActive) ? _selectedRow : null;
+  }
+  onEditItem(_itemId: string){
+    document.getElementById("openModalAlert").click();
+    this.selectedEditItemId = _itemId;
+  }
+  onDeleteItem(_itemId: string, _itemName: string){
+    if(confirm('Are you sure to delete "' + _itemName + '"?'))
+    {
+      this.itemApiService.deleteItem(_itemId).subscribe(
+        res => alert('Item ' + _itemName + ' deleted successfully'), // kali
+        err => alert('Failed to delete ' + _itemName + ' item.')  // kali
+      );
+    }
+  }
 
 }

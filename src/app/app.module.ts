@@ -29,6 +29,7 @@ import { ItemActivityComponent } from './items/item-view/item-activity/item-acti
 import { CarouselComponent } from './shared/components/custom-components/carousel/carousel.component';
 import { ItemImagesBoxComponent } from './items/item-view/item-images-box/item-images-box.component';
 import { ColorSizeMatrixBoxComponent } from './items/item-view/color-size-matrix-box/color-size-matrix-box.component';
+import { ModalDialogComponent } from './shared/components/custom-components/modal-dialog/modal-dialog.component';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -48,7 +49,7 @@ import { ColorSizeMatrixBoxComponent } from './items/item-view/color-size-matrix
     ItemListFilterPanelComponent, 
     ItemListResultPanelComponent, 
     UploadMultipleImagesComponent, 
-    ItemActivityComponent, CarouselComponent, ItemImagesBoxComponent, ColorSizeMatrixBoxComponent
+    ItemActivityComponent, CarouselComponent, ItemImagesBoxComponent, ColorSizeMatrixBoxComponent, ModalDialogComponent
   ],
   imports: [
     AppRoutingModule,

@@ -5,13 +5,14 @@
     
 
     <!-- Item (single selection, dropdowns)-->
-    <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
-    <select id="itemsTvs" class="form-control" (change)="onItemsTvsSelected($event)">
-      <option value="-1">Select item to update...</option>
-      <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
-    </select>
-    <br>
-
+    <div *ngIf="!itemIdInput">
+      <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
+      <select id="itemsTvs" class="form-control" (change)="onItemsTvsSelected($event)">
+        <option value="-1">Select item to update...</option>
+        <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
+      </select>
+      <br>
+    </div>
 
     <!-- Item name  (enter) -->
     <label class="control-title_M" for="itemName">{{'name' | uppercase}}</label>
@@ -82,10 +83,6 @@
     <button type="submit" class="btn btn-success btn_M">{{saveButtonName}}</button>
     <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onResetClick()">
     <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
-
-    <br>
-    <br>
-    <br>
 
   </div>
 </form>

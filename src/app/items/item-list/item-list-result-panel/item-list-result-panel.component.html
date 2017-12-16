@@ -29,7 +29,7 @@
         <td class="td-icon_M">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
         </td>
-        <td class="td-icon_M">
+        <td class="td-icon_M" (click)="onEditItem(d.item.itemId)">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </td>
         <td class="td-icon_M" (click)="onDeleteItem(d.item.itemId, d.item.name)">
@@ -70,3 +70,12 @@
 <ng-template #elseMajorBlock>
   <div class="alert alert-danger maxWidth_M">Sorry, no results found</div>
 </ng-template>
+
+<!-- Modal dialogs -->
+
+<app-modal-dialog [uniqueId]="0">
+  <div #modalDialogBody>
+    <app-item-general-save [itemIdInput]="selectedEditItemId"></app-item-general-save>
+  </div>
+</app-modal-dialog>
+<button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>

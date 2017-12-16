@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { FilterApiService } from '../../../shared/services/api/filterApi.service';
 import { ItemModel } from '../../../shared/models/item.model';
@@ -14,7 +14,7 @@ import { TextValueCheckedModel } from '../../../shared/models/text-value-checked
   styleUrls: ['./item-general-save.component.css', '../../../shared/styles/general.css']
 })
 
-export class ItemGeneralSaveComponent implements OnInit {
+export class ItemGeneralSaveComponent implements OnInit, OnChanges {
   @Input() itemIdInput:string; // guid
   title: string; // "Create new item"/"Update selected item" title names
   saveButtonName: string; // "Update"/"Create" button names
@@ -40,6 +40,13 @@ export class ItemGeneralSaveComponent implements OnInit {
     this.populateCategories();
     this.populateBrands();
     this.reinitializeData(this.itemIdInput);
+  }
+  ngOnChanges(_changes: SimpleChanges){
+    if(_changes.itemIdInput != undefined)
+    {
+      this.itemIdInput = _changes.itemIdInput.currentValue;
+      this.reinitializeData(this.itemIdInput);
+    }
   }
 
   /* -------------------  PRIVATE METHODS ---------------------- */

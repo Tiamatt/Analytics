@@ -1,0 +1,8 @@
+.modal-header{
+    background-color: rgba(23, 162, 184, 1);
+
+}
+.modal-header h4{
+    color:  rgba(26, 26, 26, 1);
+    font-family: 'Lobster', cursive;
+}
