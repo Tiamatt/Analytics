@@ -1,8 +1,6 @@
 .col-sm-4_M{
+    max-width: 240px;
     padding: 0 15px 15px 0;
-}
-.card-img-top {
-    height: 230px;
 }
     .card-body i{
         float: right;

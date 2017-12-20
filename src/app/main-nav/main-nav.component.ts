@@ -27,9 +27,10 @@ export class MainNavComponent implements OnInit {
     items.titleFaCaret = "fa fa-caret-right caret_M";
     items.isShowSubtitles = true;
     items.subtitles = [
+      { routerLink: "/item-save", name: "Create item" },
       { routerLink: "/item-list", name: "View list of items" },
-      { routerLink: "/item-save", name: "Create and Update item" },
-      { routerLink: "/item-view", name: "View item" }
+      { routerLink: "/item-view", name: "View item" },
+      { routerLink: "/item-details-view", name: "View item details" }
     ];
     this.navData.push(items);
 

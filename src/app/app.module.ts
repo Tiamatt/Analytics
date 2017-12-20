@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 // services (alphabetically)
 import { FilterApiService } from './shared/services/api/filterApi.service';
 import { ItemApiService } from './shared/services/api/itemApi.service';
+import { CalculationService } from './shared/services/helpers/calculation.service';
 // components (alphabetically)
 import { AppComponent } from './app.component';
 import { BreadcrumbNavComponent } from './shared/components/custom-components/breadcrumb-nav/breadcrumb-nav.component';
@@ -24,12 +25,14 @@ import { ItemImageSaveComponent } from './items/item-save/item-image-save/item-i
 import { ItemViewBoxComponent } from './items/item-view/item-view-box/item-view-box.component';
 import { ItemListFilterPanelComponent } from './items/item-list/item-list-filter-panel/item-list-filter-panel.component';
 import { ItemListResultPanelComponent } from './items/item-list/item-list-result-panel/item-list-result-panel.component';
-import { UploadMultipleImagesComponent } from './shared/components/custom-components/upload-multiple-images/upload-multiple-images.component';
-import { ItemActivityComponent } from './items/item-view/item-activity/item-activity.component';
+import { UploadMultipleImagesComponent } from './items/item-save/item-image-save/upload-multiple-images/upload-multiple-images.component';
 import { CarouselComponent } from './shared/components/custom-components/carousel/carousel.component';
 import { ItemImagesBoxComponent } from './items/item-view/item-images-box/item-images-box.component';
 import { ColorSizeMatrixBoxComponent } from './items/item-view/color-size-matrix-box/color-size-matrix-box.component';
 import { ModalDialogComponent } from './shared/components/custom-components/modal-dialog/modal-dialog.component';
+import { ItemDetailsViewComponent } from './items/item-details-view/item-details-view.component';
+import { ItemActivateComponent } from './items/item-save/item-activate/item-activate.component';
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -48,8 +51,11 @@ import { ModalDialogComponent } from './shared/components/custom-components/moda
     RadiobuttonsSimpleComponent, 
     ItemListFilterPanelComponent, 
     ItemListResultPanelComponent, 
-    UploadMultipleImagesComponent, 
-    ItemActivityComponent, CarouselComponent, ItemImagesBoxComponent, ColorSizeMatrixBoxComponent, ModalDialogComponent
+    UploadMultipleImagesComponent,
+    CarouselComponent, 
+    ItemImagesBoxComponent, 
+    ColorSizeMatrixBoxComponent, 
+    ModalDialogComponent, ItemDetailsViewComponent, ItemActivateComponent
   ],
   imports: [
     AppRoutingModule,
@@ -60,7 +66,8 @@ import { ModalDialogComponent } from './shared/components/custom-components/moda
   ],
   providers: [
     FilterApiService,
-    ItemApiService
+    ItemApiService,
+    CalculationService
   ],
   bootstrap: [AppComponent]
 })

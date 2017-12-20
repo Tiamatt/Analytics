@@ -1,12 +1,9 @@
 /*
 Call from parent component like that:
-
-<app-modal-dialog [uniqueId]="0">
-  <div #modalDialogBody>
-    <p>Test1</p>
-  </div>
-</app-modal-dialog>
-<button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>
+  <app-modal-dialog [uniqueId]="0">
+    <div #modalDialogBody>Test</div>
+  </app-modal-dialog>
+  <button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>
 */
 
 

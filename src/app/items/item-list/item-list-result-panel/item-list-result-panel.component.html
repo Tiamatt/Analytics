@@ -9,8 +9,9 @@
         <th scope="col" class="sortable-th_M" (click)="onSort('genderName')">Gender</th>
         <th scope="col" class="sortable-th_M" (click)="onSort('categoryName')">Category</th>
         <th scope="col" class="sortable-th_M" (click)="onSort('brandName')">Brand</th>
+        <th scope="col" class="sortable-th_M" (click)="onSort('price')">Price</th>
         <th scope="col">Active</th>
-        <th scope="col">Details</th>
+        <th scope="col">More</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
@@ -22,11 +23,12 @@
         <td>{{d.item.genderName}}</td>
         <td>{{d.item.categoryName}}</td>
         <td>{{d.item.brandName}}</td>
+        <td>{{d.item.price | currency}}</td>
         <td class="td-icon_M" (click)="onShowItemActivities(d)">
             <i *ngIf="!d.item.isActive" class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
             <i *ngIf="d.item.isActive"  class="fa fa-check-circle text-success" aria-hidden="true"></i>
         </td>
-        <td class="td-icon_M">
+        <td class="td-icon_M" (click)="onRedirectToViewItem(d.item.itemId)">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
         </td>
         <td class="td-icon_M" (click)="onEditItem(d.item.itemId)">
@@ -72,7 +74,7 @@
 </ng-template>
 
 <!-- Modal dialogs -->
-
+<!-- on Edit icon click -->
 <app-modal-dialog [uniqueId]="0">
   <div #modalDialogBody>
     <app-item-general-save [itemIdInput]="selectedEditItemId"></app-item-general-save>

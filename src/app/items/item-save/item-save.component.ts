@@ -25,16 +25,16 @@ export class ItemSaveComponent implements OnInit {
   }
 
   populateBreadcrumbNav(){
-    let step1 = new BreadcrumbNavClass('1. Create item','/item-save/item-general-save',LinkStatusEnum.Visited);
+    let step1 = new BreadcrumbNavClass('1. Create item','/item-save/item-general-save',LinkStatusEnum.Active);
     this.breadcrumbNav.push(step1);
 
-    let step2 = new BreadcrumbNavClass('2. Add details','/item-save/item-detail-save',LinkStatusEnum.Active);
+    let step2 = new BreadcrumbNavClass('2. Add details','/item-save/item-detail-save',LinkStatusEnum.NotVisited);
     this.breadcrumbNav.push(step2);
 
     let step3 = new BreadcrumbNavClass('3. Add images','/item-save/item-image-save',LinkStatusEnum.NotVisited);
     this.breadcrumbNav.push(step3);
 
-    let step4 = new BreadcrumbNavClass('4. View item','/item-save/item-view-box',LinkStatusEnum.NotVisited);
+    let step4 = new BreadcrumbNavClass('4. Activate item','/item-save/item-activate',LinkStatusEnum.NotVisited);
     this.breadcrumbNav.push(step4);
   }
 

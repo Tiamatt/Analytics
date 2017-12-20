@@ -16,6 +16,7 @@ export class ItemApiService{
     private apiUrl_getItemsTvc: string;
     private apiUrl_getItemNamesLowercase: string;
     private apiUrl_getItemModel:string;
+    private apiUrl_getItemImageModel:string;
     private apiUrl_getItemViews: string;
     private apiUrl_getItemView: string;
     private apiUrl_insertItem: string;
@@ -29,6 +30,7 @@ export class ItemApiService{
         this.apiUrl_getItemsTvc = this.apiUrl_base + 'items-tvc/';
         this.apiUrl_getItemNamesLowercase = this.apiUrl_base + 'item-names-lowercase/';
         this.apiUrl_getItemModel = this.apiUrl_base + 'item-model/'
+        this.apiUrl_getItemImageModel = this.apiUrl_base + 'item-image-model/'
         this.apiUrl_getItemViews = this.apiUrl_base + 'item-views';
         this.apiUrl_getItemView = this.apiUrl_base + 'item-view/';
         this.apiUrl_insertItem = this.apiUrl_base + 'insert-item/' + this.employeeId;
@@ -56,6 +58,11 @@ export class ItemApiService{
     getItemModel(_itemId: string): any{
         let apiUrl = this.apiUrl_getItemModel + _itemId;
         return this.http.get<ItemModel>(apiUrl, {headers: this.header}); 
+    }
+
+    getItemImageModel(_itemId: string): any{
+        let apiUrl = this.apiUrl_getItemImageModel + _itemId;
+        return this.http.get<ItemImageModel>(apiUrl, {headers: this.header}); 
     }
 
     // not all fields are populated!

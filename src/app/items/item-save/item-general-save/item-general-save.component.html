@@ -81,8 +81,11 @@
 
     <!-- Buttons - Save and Next -->
     <button type="submit" class="btn btn-success btn_M">{{saveButtonName}}</button>
-    <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onResetClick()">
+    <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onReset()">
     <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
 
+    <div *ngIf="resultNotification">
+      <p class="alert alert-success validation_M">{{resultNotification}}</p>
+    </div>
   </div>
 </form>

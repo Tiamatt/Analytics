@@ -34,3 +34,7 @@ tbody{
     color: rgba(220, 53, 69, 1);
     padding-right: 5px;
 }
+
+.pagination li{
+    cursor: pointer;
+}

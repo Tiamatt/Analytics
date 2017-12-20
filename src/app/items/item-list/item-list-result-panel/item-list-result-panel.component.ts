@@ -1,6 +1,29 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+/*
+Note: call from other components:
+  <app-item-list-result-panel *ngIf="itemViewsTableData" [input]="itemViewsTableData" (onRepopulateDataOutput)="onRepopulateData()"></app-item-list-result-panel>
+
+Note: populate input
+  itemViewsTableData: ItemViewModel[];
+  populateItemViews(){
+    this.itemApiService.getItemViews(this.itemListFilterPanel).subscribe(
+      res => { 
+        this.itemViewsTableData = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+Note: get output event
+ onRepopulateData(){
+    this.populateItemViews();
+  }
+*/
+
+
+import { Component, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { ItemViewModel } from '../../item-view/item-view.model';
 import { ItemApiService } from '../../../shared/services/api/itemApi.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,9 +33,9 @@ import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 })
 
 export class ItemListResultPanelComponent implements OnChanges {
-  // inputs, outputs
-  @Input() input: ItemViewModel[];
-  // fields
+  @Input() input: ItemViewModel[]; //data for table
+  @Output() onRepopulateDataOutput = new EventEmitter<void>(); //refresh input and resend here
+
   tableData: ItemViewModel[];
   dataForItemActivities: ItemViewModel;
   isSortAsc: boolean = true;
@@ -22,7 +45,9 @@ export class ItemListResultPanelComponent implements OnChanges {
   readonly maxRowsPerPage:number = 5;
   selectedEditItemId: string;
 
-  constructor(private itemApiService: ItemApiService) { }
+  constructor(
+    private itemApiService: ItemApiService,
+    private router: Router) { }
 
   ngOnChanges(_changes: SimpleChanges){
     this.input = _changes.input.currentValue;
@@ -46,7 +71,6 @@ export class ItemListResultPanelComponent implements OnChanges {
     else 
       this.pages = [1];
   }
-  /* -------------------- PRIVATE METHODS -------------------------- */
   private sortingAndPagingTable(_tableHeaderName: string){
     // sort asc
     if(this.isSortAsc == true){
@@ -89,10 +113,18 @@ export class ItemListResultPanelComponent implements OnChanges {
     if(confirm('Are you sure to delete "' + _itemName + '"?'))
     {
       this.itemApiService.deleteItem(_itemId).subscribe(
-        res => alert('Item ' + _itemName + ' deleted successfully'), // kali
+        res => {
+          alert('Item ' + _itemName + ' deleted successfully');
+          this.onRepopulateDataOutput.emit();
+        },
         err => alert('Failed to delete ' + _itemName + ' item.')  // kali
       );
     }
   }
+  onRedirectToViewItem(_itemId: string){
+    this.router.navigate(['./item-view']);
+  }
+
+
 
 }

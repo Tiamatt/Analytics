@@ -47,7 +47,9 @@ export class ItemListComponent implements OnInit {
     this.itemListFilterPanel = _filters;
     this.populateItemViews();
   }
-
+  onRepopulateData(){
+    this.populateItemViews();
+  }
   
   
 

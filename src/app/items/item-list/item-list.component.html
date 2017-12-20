@@ -1,5 +1,5 @@
 <div class="wrapper_M">
-    <br>
+
     <h4 class="page-title_M">List of items</h4>
 
     <!-- filter panel -->
@@ -8,5 +8,6 @@
     <div class="clearfix"></div>
 
     <!-- main table-->
-    <app-item-list-result-panel *ngIf="itemViewsTableData" [input]="itemViewsTableData"></app-item-list-result-panel>
+    <app-item-list-result-panel *ngIf="itemViewsTableData" [input]="itemViewsTableData" (onRepopulateDataOutput)="onRepopulateData()"></app-item-list-result-panel>
+
 </div>

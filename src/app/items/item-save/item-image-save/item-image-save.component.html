@@ -5,27 +5,24 @@
     
     <!-- Item (single selection, dropdowns)-->
     <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
-    <select id="itemsTvs" formControlName="itemsTvs" class="form-control">
+    <select id="itemsTvs" formControlName="itemsTvs" class="form-control" (change)="onItemSelected($event)">
       <option value="-1" selected="selected">Select item...</option>
       <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
     </select>
-    <div *ngIf="isShowAllValidations && !itemImageForm.get('itemsTvs').valid">
+    <div *ngIf="errorMessage && !itemImageForm.get('itemsTvs').valid">
         <p class="alert alert-danger validation_M" *ngIf="itemImageForm.get('itemsTvs').errors['min']"> * Item must be selected</p>
     </div>
     <br>
 
-    <app-upload-multiple-images (onChangeOutput)="onUploadImages($event)"></app-upload-multiple-images>
+    <app-upload-multiple-images [imagesInput]="images" (onChangeOutput)="onUploadImages($event)"></app-upload-multiple-images>
+    <p *ngIf="validationMessage" class="alert alert-danger validation_M">{{validationMessage}}</p>
     <br>
 
     <!-- Buttons - Save and Next -->
     <button type="submit" class="btn btn-success btn_M">Save</button>
-    <input type="button" value="Next" class="btn btn-info btn_M" (click)="onNextClick()">
     <input type="button" value="Reset" class="btn btn-danger btn_M" (click)="onResetClick()">
-    <p class="alert alert-danger validation_M" *ngIf="isShowAllValidations"> * Can't save. Please, read notifications above.</p>
-
-    <br>
-    <br>
-    <br>
+    <p *ngIf="errorMessage" class="alert alert-danger validation_M" >{{errorMessage}}</p>
+    <p *ngIf="successMessage" class="alert alert-success validation_M">{{successMessage}}</p>
 
   </div>
 </form>

@@ -8,6 +8,9 @@ import { ItemListComponent } from './items/item-list/item-list.component';
 import { ItemSaveComponent } from './items/item-save/item-save.component';
 import { ItemViewComponent } from './items/item-view/item-view.component';
 import { ItemViewBoxComponent } from './items/item-view/item-view-box/item-view-box.component';
+import { ItemDetailsViewComponent } from './items/item-details-view/item-details-view.component';
+import { ItemActivateComponent } from './items/item-save/item-activate/item-activate.component';
+
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/item-list', pathMatch: 'full' },
@@ -16,9 +19,10 @@ const appRoutes: Routes = [
         { path: 'item-general-save', component: ItemGeneralSaveComponent },
         { path: 'item-detail-save', component: ItemDetailSaveComponent },
         { path: 'item-image-save', component: ItemImageSaveComponent },
-        { path: 'item-view-box', component: ItemViewBoxComponent }
+        { path: 'item-activate', component: ItemActivateComponent }
     ]},
     { path: 'item-view', component: ItemViewComponent },
+    { path: 'item-details-view', component: ItemDetailsViewComponent },
     { path: 'item-list', component: ItemListComponent },
     { path: '**', redirectTo:  'item-view' }
 ];

@@ -24,6 +24,7 @@ export class ItemGeneralSaveComponent implements OnInit, OnChanges {
   genders: RadiobuttonsSimpleClass; // for radiobuttons
   categories: TextValueCheckedModel; // for ddl
   brands: TextValueCheckedModel; // for ddl
+  resultNotification: string;
   // following are for validations:
   existingItemNames: string[] = []; // to check if item name is unique
   isShowAllValidations: boolean = false;
@@ -157,6 +158,7 @@ export class ItemGeneralSaveComponent implements OnInit, OnChanges {
   onItemsTvsSelected(_event:any){
     let selectedItemId: string = _event.target.value;
     this.reinitializeData(selectedItemId);
+    this.resultNotification = "";
   }
   // get selected Gender from Custom RadiobuttonsSimple
   onGenderSelected(_selectedGenderId: number){
@@ -189,7 +191,7 @@ export class ItemGeneralSaveComponent implements OnInit, OnChanges {
         this.itemApiService.updateItem(this.item).subscribe(
           res => {
             this.reinitializeData(this.itemIdInput);
-            alert("Item updated successfully");
+            this.resultNotification = "Item updated successfully";
           },
           err => console.log(err.error)
         );
@@ -198,7 +200,7 @@ export class ItemGeneralSaveComponent implements OnInit, OnChanges {
         this.itemApiService.insertItem(this.item).subscribe(
           res => {
             this.reinitializeData(this.itemIdInput);
-            alert("Item created successfully");
+            this.resultNotification ="Item created successfully";
           },
           err => console.log(err.error)
         );
@@ -206,8 +208,9 @@ export class ItemGeneralSaveComponent implements OnInit, OnChanges {
     }
   }
   // "Reset" button
-  onResetClick(){
+  onReset(){
     this.reinitializeData(this.itemIdInput);
+    this.resultNotification = "";
   }
 
 }

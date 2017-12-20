@@ -2,6 +2,10 @@
   <app-main-nav (onShrinkExpandNavOutput)="onShrinkExpandNav($event)"></app-main-nav>
   <div [ngClass]="isExpandNav ? 'nav-expand_M' : 'nav-shrink_M'">
     <app-header></app-header>
+    <br>
     <router-outlet></router-outlet>
+    <br>
+    <br>
+    <br>
   </div>
 </div>
