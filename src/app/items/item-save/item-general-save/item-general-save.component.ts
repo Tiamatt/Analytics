@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { FilterApiService } from '../../../shared/services/api/filterApi.service';
 import { ItemModel } from '../../../shared/models/item.model';
@@ -16,6 +16,8 @@ import { TextValueCheckedModel } from '../../../shared/models/text-value-checked
 
 export class ItemGeneralSaveComponent implements OnInit, OnChanges {
   @Input() itemIdInput:string; // guid
+  @Output() onSavedOutput  = new EventEmitter<boolean>();
+
   title: string; // "Create new item"/"Update selected item" title names
   saveButtonName: string; // "Update"/"Create" button names
   itemsTvc: TextValueCheckedModel; // for ddl
@@ -192,8 +194,12 @@ export class ItemGeneralSaveComponent implements OnInit, OnChanges {
           res => {
             this.reinitializeData(this.itemIdInput);
             this.resultNotification = "Item updated successfully";
+            this.onSavedOutput.emit(true);
           },
-          err => console.log(err.error)
+          err => {
+            console.log(err.error);
+            this.onSavedOutput.emit(false);
+          }
         );
       }
       else{
@@ -201,8 +207,12 @@ export class ItemGeneralSaveComponent implements OnInit, OnChanges {
           res => {
             this.reinitializeData(this.itemIdInput);
             this.resultNotification ="Item created successfully";
+            this.onSavedOutput.emit(true);
           },
-          err => console.log(err.error)
+          err => {
+            console.log(err.error);
+            this.onSavedOutput.emit(false);
+          }
         );
       }
     }

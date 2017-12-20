@@ -30,8 +30,7 @@ import { ItemListFilterPanelModel } from './item-list-filter-panel.model';
   templateUrl: './item-list-filter-panel.component.html',
   styleUrls: ['./item-list-filter-panel.component.css', '../../../shared/styles/general.css']
 })
-export class ItemListFilterPanelComponent implements OnInit {
-  
+export class ItemListFilterPanelComponent implements OnInit {  
   @Input() input: ItemListFilterPanelModel;
   @Output() onSearchOutput = new EventEmitter<ItemListFilterPanelModel>();
   

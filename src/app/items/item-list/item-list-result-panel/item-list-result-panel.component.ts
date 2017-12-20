@@ -39,7 +39,7 @@ export class ItemListResultPanelComponent implements OnChanges {
   tableData: ItemViewModel[];
   dataForItemActivities: ItemViewModel;
   isSortAsc: boolean = true;
-  pages: number[] = [1];
+  pages: number[];
   currentPage: number = 1;
   currentSortedTableHeaderName: string = "name";
   readonly maxRowsPerPage:number = 5;
@@ -59,6 +59,7 @@ export class ItemListResultPanelComponent implements OnChanges {
 
   /* -------------------  PRIVATE METHODS ---------------------- */
   private populatePages(){
+    this.pages = [1];
     // get total numbers of pages if need more than 1 page
     if(this.input.length > this.maxRowsPerPage)
     {
@@ -109,12 +110,17 @@ export class ItemListResultPanelComponent implements OnChanges {
     document.getElementById("openModalAlert").click();
     this.selectedEditItemId = _itemId;
   }
+  onEditItemFromChild(_isSucceded){
+    if(_isSucceded)
+      this.onRepopulateDataOutput.emit();
+  }
   onDeleteItem(_itemId: string, _itemName: string){
     if(confirm('Are you sure to delete "' + _itemName + '"?'))
     {
       this.itemApiService.deleteItem(_itemId).subscribe(
         res => {
           alert('Item ' + _itemName + ' deleted successfully');
+          this.currentPage = 1;
           this.onRepopulateDataOutput.emit();
         },
         err => alert('Failed to delete ' + _itemName + ' item.')  // kali

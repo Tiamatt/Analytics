@@ -25,7 +25,9 @@ export class ItemViewComponent implements OnInit {
     private getPreselectedItemId(){
       this.activatedRoute.params.subscribe(
         (params: Params) => {
-          this.selectedItemId = (params['itemId']).toUpperCase();
+          let itemId = params['itemId'];
+          if(itemId)
+            this.selectedItemId = itemId.toUpperCase();
           this.populateItemsTvc();
         }
       );
