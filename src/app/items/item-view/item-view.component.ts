@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ItemApiService } from '../../shared/services/api/itemApi.service';
 import { TextValueCheckedModel } from '../../shared/models/text-value-checked.model';
 import { ItemViewModel } from './item-view.model';
@@ -12,18 +13,29 @@ export class ItemViewComponent implements OnInit {
   itemsTvc: TextValueCheckedModel[]= [];
   selectedItemId: string;
 
-  constructor(private itemApiService: ItemApiService) { }
+  constructor(
+    private itemApiService: ItemApiService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.populateItemsTvc();    
+    this.getPreselectedItemId();
   }
 
     /* -------------------  POPULATE ---------------------- */
+    private getPreselectedItemId(){
+      this.activatedRoute.params.subscribe(
+        (params: Params) => {
+          this.selectedItemId = (params['itemId']).toUpperCase();
+          this.populateItemsTvc();
+        }
+      );
+    }
     private populateItemsTvc(){
       this.itemApiService.getItemsTvc(null).subscribe(
         res => {
           this.itemsTvc = res;
-          this.selectedItemId = this.itemsTvc[0].valueStr;
+          if(!this.selectedItemId) // in undefined then first option
+            this.selectedItemId = this.itemsTvc[0].valueStr;
         },
         err => {
           console.log("Error. Can't call GetItemsTvc(x) HttpGet method");

@@ -22,6 +22,7 @@ const appRoutes: Routes = [
         { path: 'item-activate', component: ItemActivateComponent }
     ]},
     { path: 'item-view', component: ItemViewComponent },
+    { path: 'item-view/:itemId', component: ItemViewComponent },
     { path: 'item-details-view', component: ItemDetailsViewComponent },
     { path: 'item-list', component: ItemListComponent },
     { path: '**', redirectTo:  'item-view' }

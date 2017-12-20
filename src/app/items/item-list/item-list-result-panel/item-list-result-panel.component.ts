@@ -122,7 +122,7 @@ export class ItemListResultPanelComponent implements OnChanges {
     }
   }
   onRedirectToViewItem(_itemId: string){
-    this.router.navigate(['./item-view']);
+    this.router.navigate(['./item-view', _itemId]);
   }
 
 
