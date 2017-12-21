@@ -1,0 +1,21 @@
+.item-active-box_M{
+    margin: 30px 0;
+}
+.item-active-box_M p{
+    padding-bottom: 5px;
+}
+.item-active-box_M .fa{
+    color: rgba(220, 53, 69, 1);
+    padding-right: 5px;
+}
+.reason-box_M span{
+    font-weight: 700;
+}
+.reason-box_M a{
+    color: #212529;
+    text-decoration: underline;
+    margin-left: 6px;
+}
+.reason-box_M a:hover{
+    text-decoration: none;
+} 

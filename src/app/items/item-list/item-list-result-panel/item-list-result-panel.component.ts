@@ -24,6 +24,7 @@ import { Component, Input, OnChanges, SimpleChanges, EventEmitter, Output } from
 import { ItemViewModel } from '../../item-view/item-view.model';
 import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 import { Router } from '@angular/router';
+import { ItemActivateModel } from '../../item-save/item-activate/item-activate.model';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class ItemListResultPanelComponent implements OnChanges {
   @Output() onRepopulateDataOutput = new EventEmitter<void>(); //refresh input and resend here
 
   tableData: ItemViewModel[];
-  dataForItemActivities: ItemViewModel;
+  dataForItemActivate: ItemActivateModel;
   isSortAsc: boolean = true;
   pages: number[];
   currentPage: number = 1;
@@ -104,7 +105,11 @@ export class ItemListResultPanelComponent implements OnChanges {
     this.sortingAndPagingTable(this.currentSortedTableHeaderName);
   }
   onShowItemActivities(_selectedRow: ItemViewModel){
-    this.dataForItemActivities =(!_selectedRow.item.isActive) ? _selectedRow : null;
+      this.dataForItemActivate = new ItemActivateModel();
+      this.dataForItemActivate.itemId = _selectedRow.item.itemId;
+      this.dataForItemActivate.itemName = _selectedRow.item.name;
+      this.dataForItemActivate.isItemActive = _selectedRow.item.isActive;
+      this.dataForItemActivate.itemActivities = _selectedRow.itemActivities;
   }
   onEditItem(_itemId: string){
     document.getElementById("openModalAlert").click();

@@ -1,6 +1,6 @@
 import { LinkStatusEnum } from "../../../enums/link-status.enum";
 
-export class BreadcrumbNavClass{
+export class BreadcrumbNavModel{
     stepName: string;
     routerLink: string;
     linkStatus: LinkStatusEnum;

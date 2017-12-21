@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { LinkStatusEnum } from '../../../enums/link-status.enum';
-import { BreadcrumbNavClass } from './breadcrumb-nav.model';
+import { BreadcrumbNavModel } from './breadcrumb-nav.model';
 
 @Component({
   selector: 'app-breadcrumb-nav',
@@ -9,7 +9,7 @@ import { BreadcrumbNavClass } from './breadcrumb-nav.model';
 })
 export class BreadcrumbNavComponent implements OnInit {
 
-  @Input() input: BreadcrumbNavClass[] = [];
+  @Input() input: BreadcrumbNavModel[] = [];
   @Output() onLinkClickOutput = new EventEmitter<number>();
 
   constructor() { }

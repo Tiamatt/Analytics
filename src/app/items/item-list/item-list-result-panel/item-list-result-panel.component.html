@@ -49,32 +49,22 @@
   </nav>
 
 </div>
-
-<div *ngIf="dataForItemActivities" class="item-active-box_M">
-  <label class="control-title_M">{{'Information for "' + dataForItemActivities.item.name + '" item' | uppercase}}</label>
-  <div *ngIf="dataForItemActivities.itemActivities; else elseItemActiveBlock">
-    <p>This item is inactive for the following reasons:</p>
-    <p *ngFor="let msg of dataForItemActivities.itemActivities">
-        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{msg}}
-    </p>
-  </div>
-  <ng-template #elseItemActiveBlock>
-    <p>This item can be activated. Click button to activate.</p>
-    <!-- <button type="button" class="btn btn-info">Activate</button> -->
-  </ng-template>
-  
-</div>
-
 <ng-template #elseMajorBlock>
   <div class="alert alert-danger maxWidth_M">Sorry, no results found</div>
 </ng-template>
 
-<!-- Modal dialogs -->
-<!-- on Edit icon click -->
 
+<!-- item activate -->
+<app-item-activate *ngIf="dataForItemActivate" [input]="dataForItemActivate"></app-item-activate>
+
+
+<!-- Modal dialogs: Edit, etc. -->
 <app-modal-dialog [uniqueId]="0">
   <div #modalDialogBody>
     <app-item-general-save [itemIdInput]="selectedEditItemId" (onSavedOutput)="onEditItemFromChild($event)"></app-item-general-save>
   </div>
 </app-modal-dialog>
 <button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>
+
+
+<!-- End -->
