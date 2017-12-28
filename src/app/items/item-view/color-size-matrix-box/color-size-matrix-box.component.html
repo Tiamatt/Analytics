@@ -1,17 +1,34 @@
-<div *ngIf="input">
+<p><b>Color, size and quantity</b></p>
+<div *ngIf="matrixData != null;else elseMatrixDataBlock">
+   
+  
   <table>
-      <tr>
-        <td></td>
-        <td *ngFor="let co of input.colors" 
-        [ngStyle]="{'background': co.hexCode}"
-        class="colors_M"
-        [title]="co.name"></td>
-      </tr>
-      <tr *ngFor="let qArr of input.quantities; let y=index">
-        <td class="sizes_M" [title]="input.sizes[y].usaSizing">{{input.sizes[y].sizing}}</td>
-        <td *ngFor="let q of qArr; let x=index" class="quantities_M">
-          <span [ngClass]="{'text-danger': q<0}">{{q}}</span>          
-        </td>
-      </tr>
+    <tr>
+      <td></td>
+      <td *ngFor="let co of matrixData.colors" 
+      [ngStyle]="{'background': co.hexCode}"
+      class="colors_M"
+      [title]="co.name"></td>
+    </tr>
+    <tr *ngFor="let qArr of matrixData.quantities; let y=index">
+      <td class="sizes_M" [title]="matrixData.sizes[y].usaSizing">{{matrixData.sizes[y].sizing}}</td>
+      <td *ngFor="let q of qArr; let x=index" class="quantities_M">
+        <span [ngClass]="{'text-danger': q<0}">{{q}}</span>          
+      </td>
+    </tr>
   </table>
+
+
+  <a *ngIf="isShowViewDetails" class="link_M">
+      <i class="fa fa-eye" aria-hidden="true"></i>
+      <span>View details</span>
+  </a>
+
 </div>
+<ng-template #elseMatrixDataBlock>
+    <span>None. Please add details.</span>
+    <a class="link_M">
+        <i class="fa fa-plus-square" aria-hidden="true"></i>
+        <span>Add details</span>
+    </a>
+</ng-template>

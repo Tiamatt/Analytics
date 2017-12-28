@@ -10,6 +10,10 @@ export class ItemListFilterPanelModel{
     category: number[];
     isShowBrand_chb: boolean;
     brand: number[];
+    isShowSize_chb: boolean;
+    size: number[];
+    isShowColor_chb: boolean;
+    color: number[];
 
     // need to pass to server an object with full info
     static initializeObject():ItemListFilterPanelModel{
@@ -25,6 +29,10 @@ export class ItemListFilterPanelModel{
         result.category = [];
         result.isShowBrand_chb = false;
         result.brand = [];
+        result.isShowSize_chb = false;
+        result.size = [];
+        result.isShowColor_chb = false;
+        result.color = [];
 
         return result;
     }

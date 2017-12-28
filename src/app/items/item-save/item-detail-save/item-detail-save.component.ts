@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ItemDetailModel } from '../../../shared/models/item-detail.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TextValueCheckedModel } from '../../../shared/models/text-value-checked.model';
@@ -13,17 +13,26 @@ import { RequiredWithTrimValidator } from '../../../shared/custom-directives/val
   styleUrls: ['./item-detail-save.component.css', '../../../shared/styles/general.css']
 })
 
-export class ItemDetailSaveComponent implements OnInit {
+export class ItemDetailSaveComponent implements OnInit, OnChanges {
+  @Input() itemDetailIdInput:string; // guid
+  @Output() onSavedOutput = new EventEmitter<boolean>();
+
   itemDetail: ItemDetailModel = new ItemDetailModel();
   itemDetailForm: FormGroup;
+  title: string = "Add item detail"; // if input is not null, then "Update item detail"
+  saveButtonName: string = "Add";  // if input is not null, then "Update"
+  // ddls + radiobuttons
   itemsTvc: TextValueCheckedModel;
   sizes: TextValueCheckedModel;
   colors: TextValueCheckedModel;
   itemActions: RadiobuttonsSimpleClass;
   customers: TextValueCheckedModel;
+  // validations
   isShowCustomersDdl: boolean = false;
   isShowAllValidations: boolean = false;
   isItemActionValid: boolean = false;
+  // notifications
+  resultNotification: string;
 
   constructor(
     private filterApiService: FilterApiService,
@@ -34,9 +43,16 @@ export class ItemDetailSaveComponent implements OnInit {
     this.populateItemsTvc();
     this.populateSizes();
     this.populateColors();
-    this.populateItemActions();
+    this.populateItemActions(null);
     this.populateCustomers();
     this.generateItemDetailForm();
+  }
+  ngOnChanges(_changes: SimpleChanges){
+    if(_changes.itemDetailIdInput != undefined)
+    {
+      this.itemDetailIdInput = _changes.itemDetailIdInput.currentValue;
+      this.prepopulateItemDetailModel(this.itemDetailIdInput);
+    }
   }
 
   /* -------------------  PRIVATE METHODS ---------------------- */
@@ -45,7 +61,6 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.itemsTvc = res,
       err => {
         console.log("Error. Can't call GetItemsTvc() HttpGet method");
-        console.log(err);
       }
     );
   }
@@ -54,7 +69,6 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.sizes = res,
       err => {
         console.log("Error. Can't call GetSizes() HttpGet method");
-        console.log(err);
       }
     );
   }
@@ -63,21 +77,20 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.colors = res,
       err => {
         console.log("Error. Can't call GetColors() HttpGet method");
-        console.log(err);
       }
     );
   }
-  private populateItemActions(){
+  private populateItemActions(_itemActionId: number){
     this.filterApiService.getItemActions().subscribe(
       res => {
         this.itemActions = new RadiobuttonsSimpleClass("itemActions_1", res);
         this.itemActions.isStyleBorder = true;
         this.itemActions.title = "Action";
-        //this.itemActions.selectedId = this.itemActions.options[0].id;
+        if(_itemActionId)
+          this.itemActions.selectedId = _itemActionId;
       },
       err => {
         console.log("Error. Can't call GetItemActions() HttpGet method");
-        console.log(err);
       }
     );
   } 
@@ -86,17 +99,29 @@ export class ItemDetailSaveComponent implements OnInit {
       res => this.customers = res,
       err => {
         console.log("Error. Can't call GetCustomers() HttpGet method");
-        console.log(err);
       }
+    );
+  }
+  private prepopulateItemDetailModel(_itemDetailId: string){
+    this.itemApiService.getItemDetail(_itemDetailId).subscribe(
+      res => {
+        this.itemDetail = (res)? res : new ItemDetailModel();
+        this.generateItemDetailForm();
+        this.populateItemActions(this.itemDetail.itemActionId);
+        this.onItemActionSelected(this.itemDetail.itemActionId);
+        this.title = "Update item detail";
+        this.saveButtonName = "Update";
+      },
+      err => console.log("Error. Can't call GetItemDetail(X) HttpGet method")
     );
   }
   private generateItemDetailForm(){ 
     this.itemDetailForm = new FormGroup({
-      'itemsTvs': new FormControl(-1, Validators.min(1)),
-      'sizes': new FormControl(-1, Validators.min(1)),
-      'colors': new FormControl(-1, Validators.min(1)),      
-      'quantity':new FormControl(null, [RequiredWithTrimValidator, Validators.pattern('^[0-9]*$'), Validators.min(0), Validators.max(1000000000)]),
-      'customers': new FormControl(-1)    
+      'itemsTvs': new FormControl((this.itemDetail.itemId) ? this.itemDetail.itemId.toUpperCase() : -1, Validators.min(1)),
+      'sizes': new FormControl((this.itemDetail.sizeId) ? this.itemDetail.sizeId : -1, Validators.min(1)),
+      'colors': new FormControl((this.itemDetail.colorId) ? this.itemDetail.colorId : -1, Validators.min(1)),      
+      'quantity':new FormControl((this.itemDetail.quantity) ? Math.abs(this.itemDetail.quantity).toString() : null, [RequiredWithTrimValidator, Validators.pattern('^[0-9]*$'), Validators.min(0), Validators.max(1000000000)]),
+      'customers': new FormControl((this.itemDetail.customerId) ? this.itemDetail.customerId.toUpperCase() : -1)    
     });
   }
   
@@ -129,22 +154,44 @@ export class ItemDetailSaveComponent implements OnInit {
       // this.itemDetail.itemActionId has been assigned in onItemActionSelected()
       this.itemDetail.customerId = (this.itemDetailForm.value.customers != -1) ? this.itemDetailForm.value.customers : null;
 
-      // save in db via api
-      this.itemApiService.insertItemDetail(this.itemDetail).subscribe(
-        res => console.log(res),
-        err => console.log(err)
-      );
+      // create new itemDetail
+      if(this.itemDetailIdInput)
+      {
+        this.itemApiService.updateItemDetail(this.itemDetail).subscribe(
+          res => { 
+            this.resultNotification = "Item Detail updated successfully"; 
+            this.onSavedOutput.emit(true);
+          },
+          err => { 
+            this.resultNotification = "Failed to updated Item Detail";
+            this.onSavedOutput.emit(false); 
+            console.log(err);
+          }
+        );
+      }
+      else{
+        this.itemApiService.insertItemDetail(this.itemDetail).subscribe(
+          res => { 
+            this.resultNotification = "Item Detail created successfully";
+            this.onSavedOutput.emit(true); 
+          },
+          err => { 
+            this.resultNotification = "Failed to create Item Detail";
+            this.onSavedOutput.emit(false);  
+            console.log(err);
+          }
+        );
+      }
     }
   }
-
-  // "Next" button
-  onNextClick(){ // kali
-    // redirect
-  }
-
   // "Reset" button
   onResetClick(){ // kali
-    
+    if(this.itemDetailIdInput)
+      this.prepopulateItemDetailModel(this.itemDetailIdInput);
+    else{
+      this.itemDetail = new ItemDetailModel();
+      this.generateItemDetailForm();
+    }
   }
 
 }

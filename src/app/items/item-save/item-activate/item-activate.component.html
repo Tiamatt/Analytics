@@ -15,12 +15,12 @@
   <!-- Otherwise allow to activate/deactivate -->
   <ng-template #elseItemActiveBlock>
     <div *ngIf="input.isItemActive">
-        <p>This item can be deactivated. Click button to deactivate.</p>
-        <button type="button" class="btn btn-danger">Deactivate</button>
+        <p>This item can be deactivated.</p>
+        <button type="button" class="btn btn-danger btn-sm" (click)="onDeactivateItem()">Deactivate</button>
     </div>
     <div *ngIf="!input.isItemActive">
-        <p>This item can be activated. Click button to activate.</p>
-        <button type="button" class="btn btn-info">Activate</button>
+        <p>This item can be activated.</p>
+        <button type="button" class="btn btn-success btn-sm" (click)="onActivateItem()">Activate</button>
     </div>
   </ng-template>
   

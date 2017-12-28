@@ -36,7 +36,9 @@ export class ItemListFilterPanelComponent implements OnInit {
   
   categories: CheckboxesSimpleClass;
   brands: CheckboxesSimpleClass;
-  
+  sizes: CheckboxesSimpleClass;
+  colors: CheckboxesSimpleClass;
+
   constructor(private filterApiService: FilterApiService) { }
 
   ngOnInit() {
@@ -44,9 +46,13 @@ export class ItemListFilterPanelComponent implements OnInit {
       this.populateCategories();
     if(this.input.isShowBrand_chb)  
       this.populateBrands();
+    if(this.input.isShowSize_chb)  
+      this.populateSizes();
+    if(this.input.isShowColor_chb)  
+      this.populateColors();
   }
 
-  /* -------------------  POPULATE ---------------------- */
+   /* -------------------  PRIVATE METHODS ---------------------- */
   populateCategories(){
     this.filterApiService.getCategories().subscribe(
       res => {
@@ -56,7 +62,6 @@ export class ItemListFilterPanelComponent implements OnInit {
       },
       err => {
         console.log("Error. Can't call GetCategories() HttpGet method");
-        console.log(err);
       }
     );
   }
@@ -69,20 +74,52 @@ export class ItemListFilterPanelComponent implements OnInit {
       },
       err => {
         console.log("Error. Can't call GetBrands() HttpGet method");
-        console.log(err);
       }
     );
   }
-
+  populateSizes(){
+    this.filterApiService.getSizes().subscribe(
+      res => {
+        this.sizes = new CheckboxesSimpleClass("sizes_1", res);
+        this.sizes.isStyleBorder = true;
+        this.sizes.title = "Size";
+      },
+      err => {
+        console.log("Error. Can't call GetSizes() HttpGet method");
+      }
+    );
+  }
+  populateColors(){
+    this.filterApiService.getColors().subscribe(
+      res => {
+        this.colors = new CheckboxesSimpleClass("colors_1", res);
+        this.colors.isStyleBorder = true;
+        this.colors.title = "Color";
+      },
+      err => {
+        console.log("Error. Can't call GetColors() HttpGet method");
+      }
+    );
+  }
 
   /* -------------------  EVENTS ---------------------- */
   onCategoryChecked(_checkedCategories: TextValueCheckedModel[]){
   }
   onBrandChecked(_checkedBrands: TextValueCheckedModel[]){
   }
+  onColorChecked(_checkedBrands: TextValueCheckedModel[]){
+  }
+  onSizeChecked(_checkedBrands: TextValueCheckedModel[]){
+  }
   onSearch(){
-    this.input.category = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.categories.options);
-    this.input.brand = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.brands.options);
+    if(this.categories)
+      this.input.category = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.categories.options);
+    if(this.brands)
+      this.input.brand = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.brands.options);
+    if(this.sizes)
+      this.input.size = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.sizes.options);
+    if(this.colors)
+      this.input.color = TextValueCheckedModel.getArrayOfSelectedValuesNum(this.colors.options);
     // output
     this.onSearchOutput.emit(this.input);
   }

@@ -1,0 +1,52 @@
+<app-color-size-matrix-box [itemIdInput]="itemIdInput"></app-color-size-matrix-box>
+<br>
+
+<div *ngIf="tableData && tableData.length > 0; else elseMajorBlock">
+  
+  <!-- main table -->
+  <table class="table table-responsive">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" class="sortable-th_M" (click)="onSort('sizeName')">Size</th>
+        <th scope="col" class="sortable-th_M" (click)="onSort('colorName')">Color</th>
+        <th scope="col" class="sortable-th_M" (click)="onSort('itemActionName')">Action</th>
+        <th scope="col" class="sortable-th_M" (click)="onSort('customerEmail')">Customer</th>
+        <th scope="col" class="sortable-th_M" (click)="onSort('quantity')">Quantity</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of tableDataSliced; let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{d.sizeName}}</td>
+        <td>{{d.colorName}}</td>
+        <td>{{d.itemActionName}}</td>
+        <td>{{d.customerEmail}}</td>
+        <td>{{d.quantity}}</td>
+        <td class="td-icon_M" (click)="onEditItemDetail(d.itemDetailId)">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </td>
+        <td class="td-icon_M" (click)="onDeleteItemDetail(d.itemDetailId)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    
+  <!-- pagination -->
+  <app-paging-simple [input]="pageData" (onPageChangeOutput)="onPageChange($event)"></app-paging-simple>
+
+  <!-- Modal dialogs: Edit, etc. -->
+  <app-modal-dialog [uniqueId]="0">
+    <div #modalDialogBody>
+      <app-item-detail-save [itemDetailIdInput]="selectedEditItemDetailId" (onSavedOutput)="onEditItemDetailFromChild($event)"></app-item-detail-save>
+    </div>
+  </app-modal-dialog>
+  <button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>
+  
+</div>
+<ng-template #elseMajorBlock>
+  <div class="alert alert-danger maxWidth_M">Sorry, no results found</div>
+</ng-template>

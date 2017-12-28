@@ -18,3 +18,21 @@
     text-align: center;
     font-family: 'Lobster', cursive;
 }
+
+
+p{
+    margin: 2px 0;
+}
+a.link_M {
+    color: rgba(23, 162, 184, 1);
+    font-weight: 700;
+    display: block;
+}
+    a.link_M:hover{
+        color: rgba(0, 123, 255, 1);
+        cursor: pointer;
+    }
+    a.link_M span{
+        text-decoration: underline;
+        font-size: 14px;
+    }

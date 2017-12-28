@@ -30,8 +30,10 @@ import { CarouselComponent } from './shared/components/custom-components/carouse
 import { ItemImagesBoxComponent } from './items/item-view/item-images-box/item-images-box.component';
 import { ColorSizeMatrixBoxComponent } from './items/item-view/color-size-matrix-box/color-size-matrix-box.component';
 import { ModalDialogComponent } from './shared/components/custom-components/modal-dialog/modal-dialog.component';
-import { ItemDetailsViewComponent } from './items/item-details-view/item-details-view.component';
 import { ItemActivateComponent } from './items/item-save/item-activate/item-activate.component';
+import { ItemDetailsViewComponent } from './items/item-details-view/item-details-view.component';
+import { ItemDetailsViewBoxComponent } from './items/item-details-view/item-details-view-box/item-details-view-box.component';
+import { PagingSimpleComponent } from './shared/components/custom-components/paging-simple/paging-simple.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,11 @@ import { ItemActivateComponent } from './items/item-save/item-activate/item-acti
     CarouselComponent, 
     ItemImagesBoxComponent, 
     ColorSizeMatrixBoxComponent, 
-    ModalDialogComponent, ItemDetailsViewComponent, ItemActivateComponent
+    ModalDialogComponent, 
+    ItemActivateComponent, 
+    ItemDetailsViewComponent, 
+    ItemDetailsViewBoxComponent, 
+    PagingSimpleComponent
   ],
   imports: [
     AppRoutingModule,

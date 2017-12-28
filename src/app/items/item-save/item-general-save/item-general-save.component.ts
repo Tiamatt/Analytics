@@ -16,7 +16,7 @@ import { TextValueCheckedModel } from '../../../shared/models/text-value-checked
 
 export class ItemGeneralSaveComponent implements OnInit, OnChanges {
   @Input() itemIdInput:string; // guid
-  @Output() onSavedOutput  = new EventEmitter<boolean>();
+  @Output() onSavedOutput = new EventEmitter<boolean>();
 
   title: string; // "Create new item"/"Update selected item" title names
   saveButtonName: string; // "Update"/"Create" button names

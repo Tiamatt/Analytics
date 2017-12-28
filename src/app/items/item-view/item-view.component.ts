@@ -13,42 +13,40 @@ export class ItemViewComponent implements OnInit {
   itemsTvc: TextValueCheckedModel[]= [];
   selectedItemId: string;
 
-  constructor(
-    private itemApiService: ItemApiService,
-    private activatedRoute: ActivatedRoute) { }
-
+  constructor(private itemApiService: ItemApiService, private activatedRoute: ActivatedRoute) { }
+  
   ngOnInit() {
     this.getPreselectedItemId();
   }
 
-    /* -------------------  POPULATE ---------------------- */
-    private getPreselectedItemId(){
-      this.activatedRoute.params.subscribe(
-        (params: Params) => {
-          let itemId = params['itemId'];
-          if(itemId)
-            this.selectedItemId = itemId.toUpperCase();
-          this.populateItemsTvc();
-        }
-      );
-    }
-    private populateItemsTvc(){
-      this.itemApiService.getItemsTvc(null).subscribe(
-        res => {
-          this.itemsTvc = res;
-          if(!this.selectedItemId) // in undefined then first option
-            this.selectedItemId = this.itemsTvc[0].valueStr;
-        },
-        err => {
-          console.log("Error. Can't call GetItemsTvc(x) HttpGet method");
-          console.log(err);
-        }
-      );
-    }
-  
-  
-    /* -------------------  EVENTS ---------------------- */
-    onReselectItemTvc(_selectedItemId: string){
-      this.selectedItemId =  _selectedItemId;
-    }
+  /* -------------------  PRIVATE METHODS ---------------------- */
+  private getPreselectedItemId(){
+    this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        let itemId = params['itemId'];
+        if(itemId)
+          this.selectedItemId = itemId.toUpperCase();
+        this.populateItemsTvc();
+      }
+    );
+  }
+  private populateItemsTvc(){
+    this.itemApiService.getItemsTvc(null).subscribe(
+      res => {
+        this.itemsTvc = res;
+        if(!this.selectedItemId) // in undefined then first option
+          this.selectedItemId = this.itemsTvc[0].valueStr;
+      },
+      err => {
+        console.log("Error. Can't call GetItemsTvc(x) HttpGet method");
+        console.log(err);
+      }
+    );
+  }
+
+
+  /* -------------------  EVENTS ---------------------- */
+  onReselectItemTvc(_selectedItemId: string){
+    this.selectedItemId =  _selectedItemId;
+  }
 }

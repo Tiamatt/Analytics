@@ -38,15 +38,7 @@
   </table>
     
   <!-- pagination -->
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item" *ngFor="let page of pages" (click)="onPageChange(page)">
-        <a class="page-link page-link_M"  [ngClass]="{'page-current_M': currentPage == page}">
-          {{page}}
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <app-paging-simple [input]="pageData" (onPageChangeOutput)="onPageChange($event)"></app-paging-simple>
 
 </div>
 <ng-template #elseMajorBlock>
@@ -55,7 +47,7 @@
 
 
 <!-- item activate -->
-<app-item-activate *ngIf="dataForItemActivate" [input]="dataForItemActivate"></app-item-activate>
+<app-item-activate *ngIf="dataForItemActivate" [input]="dataForItemActivate" (onChangeActivityOutput)="onChangeItemActivity($event)"></app-item-activate>
 
 
 <!-- Modal dialogs: Edit, etc. -->

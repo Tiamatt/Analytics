@@ -6,6 +6,7 @@ import { ItemViewModel } from "../../../items/item-view/item-view.model";
 import { TextValueCheckedModel } from "../../models/text-value-checked.model";
 import { ItemDetailModel } from "../../models/item-detail.model";
 import { ItemImageModel } from "../../models/item-image.model";
+import { ColorSizeMatrixModel } from "../../../items/item-view/color-size-matrix-box/color-size-matrix.model";
 
 @Injectable()
 
@@ -19,11 +20,17 @@ export class ItemApiService{
     private apiUrl_getItemImageModel:string;
     private apiUrl_getItemViews: string;
     private apiUrl_getItemView: string;
+    private apiUrl_getItemDetails: string;
+    private apiUrl_getColorSizeMatrix: string;
+    private apiUrl_getItemDetail: string;
     private apiUrl_insertItem: string;
     private apiUrl_insertItemDetail: string;
     private apiUrl_insertItemImage: string;
     private apiUrl_updateItem: string;
+    private apiUrl_updateItemDetail: string;
+    private apiUrl_updateItemActivity: string;
     private apiUrl_deleteItem: string;
+    private apiUrl_deleteItemDetail: string;
 
     constructor(private http: HttpClient){
         this.apiUrl_base = 'https://localhost:44385/api/analytics/'; //kali
@@ -33,11 +40,17 @@ export class ItemApiService{
         this.apiUrl_getItemImageModel = this.apiUrl_base + 'item-image-model/'
         this.apiUrl_getItemViews = this.apiUrl_base + 'item-views';
         this.apiUrl_getItemView = this.apiUrl_base + 'item-view/';
+        this.apiUrl_getItemDetails = this.apiUrl_base + 'item-details/';
+        this.apiUrl_getColorSizeMatrix = this.apiUrl_base + 'color-size-matrix/';
+        this.apiUrl_getItemDetail = this.apiUrl_base + 'item-detail/';
         this.apiUrl_insertItem = this.apiUrl_base + 'insert-item/' + this.employeeId;
         this.apiUrl_insertItemDetail = this.apiUrl_base + 'insert-item-detail/' + this.employeeId;
         this.apiUrl_insertItemImage = this.apiUrl_base + 'insert-item-image/' + this.employeeId;
         this.apiUrl_updateItem = this.apiUrl_base + 'update-item/' + this.employeeId;
+        this.apiUrl_updateItemDetail = this.apiUrl_base + 'update-item-detail/' + this.employeeId;
+        this.apiUrl_updateItemActivity = this.apiUrl_base + 'update-item-activity/' + this.employeeId;
         this.apiUrl_deleteItem = this.apiUrl_base + 'delete-item/' + this.employeeId;
+        this.apiUrl_deleteItemDetail = this.apiUrl_base + 'delete-item-detail/' + this.employeeId;
 
         this.header = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -73,7 +86,22 @@ export class ItemApiService{
     getItemView(_itemId: string): any{
         let apiUrl = this.apiUrl_getItemView + _itemId;
         return this.http.post<ItemViewModel>(apiUrl, {headers: this.header}); 
-    }    
+    }
+    
+    getItemDetails(_itemId: string): any{
+        let apiUrl = this.apiUrl_getItemDetails + _itemId;
+        return this.http.get<ItemDetailModel>(apiUrl, {headers: this.header}); 
+    }
+    
+    getColorSizeMatrix(_itemId: string): any{
+        let apiUrl = this.apiUrl_getColorSizeMatrix + _itemId;
+        return this.http.post<ColorSizeMatrixModel>(apiUrl, {headers: this.header}); 
+    }
+
+    getItemDetail(_itemDetailId: string): any{
+        let apiUrl = this.apiUrl_getItemDetail + _itemDetailId;
+        return this.http.post<ItemDetailModel>(apiUrl, {headers: this.header}); 
+    }
 
     insertItem(_newItem: ItemModel){
         return this.http.post(this.apiUrl_insertItem, _newItem, {headers: this.header});
@@ -87,12 +115,26 @@ export class ItemApiService{
         return this.http.post(this.apiUrl_insertItemImage, _itemImages, {headers: this.header});
     }
 
-    updateItem(_newItem: ItemModel){
-        return this.http.post(this.apiUrl_updateItem, _newItem, {headers: this.header});
+    updateItem(_item: ItemModel){
+        return this.http.post(this.apiUrl_updateItem, _item, {headers: this.header});
+    }
+
+    updateItemDetail(_itemDetail: ItemDetailModel){
+        return this.http.post(this.apiUrl_updateItemDetail, _itemDetail, {headers: this.header});
+    }
+
+    updateItemActivity(_itemId: string, _isActive: boolean){
+        let apiUrl = this.apiUrl_updateItemActivity + '/' + _itemId + '/' + _isActive;
+        return this.http.post(apiUrl, {headers: this.header}); 
     }
 
     deleteItem(_itemId: string){
         let apiUrl = this.apiUrl_deleteItem + '/' + _itemId;
+        return this.http.delete(apiUrl, {headers: this.header});
+    }
+
+    deleteItemDetail(_itemDetailId: string){
+        let apiUrl = this.apiUrl_deleteItemDetail + '/' + _itemDetailId;
         return this.http.delete(apiUrl, {headers: this.header});
     }
 }

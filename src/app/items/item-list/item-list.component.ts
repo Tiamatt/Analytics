@@ -24,7 +24,7 @@ export class ItemListComponent implements OnInit {
   }  
 
 
-  /* -------------------  POPULATE ---------------------- */
+  /* -------------------  PRIVATE METHODS ---------------------- */
   populateItemListFilterPanel(){
     this.itemListFilterPanel = ItemListFilterPanelModel.initializeObject();
     this.itemListFilterPanel.isShowPartialName_txt = true;

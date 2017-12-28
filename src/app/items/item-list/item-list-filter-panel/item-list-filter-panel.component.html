@@ -51,6 +51,20 @@
         </div>
 
       </div>
+
+      <div class="row filter-panel-row_M">
+        
+        <!-- Size -->
+        <div *ngIf="input.isShowSize_chb" class="col-sm">
+          <app-checkboxes-simple [input]='sizes' (onChangeOutput)="onSizeChecked($event)"></app-checkboxes-simple>
+        </div>
+
+        <!-- Color -->
+        <div *ngIf="input.isShowColor_chb" class="col-sm">
+          <app-checkboxes-simple [input]='colors' (onChangeOutput)="onColorChecked($event)"></app-checkboxes-simple>
+        </div>
+
+      </div>
   
   
       <div class="row filter-panel-row_M">

@@ -7,6 +7,5 @@ import { ColorSizeMatrixModel } from "./color-size-matrix-box/color-size-matrix.
 export class ItemViewModel{
     item: ItemModel;
     itemImages: ItemImageModel[];
-    colorSizeMatrix: ColorSizeMatrixModel;
     itemActivities: ItemActivityEnum[];
 }
