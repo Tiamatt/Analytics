@@ -1,4 +1,4 @@
-import { ItemActivityEnum } from "../../../shared/enums/item-activity.enum";
+import { ItemActivityEnum } from "../../../../shared/enums/item-activity.enum";
 
 export class ItemActivateModel{
     itemId: string;

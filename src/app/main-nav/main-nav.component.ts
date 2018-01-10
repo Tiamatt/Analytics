@@ -41,11 +41,11 @@ export class MainNavComponent implements OnInit {
     sales.titleFaCaret = "fa fa-caret-right caret_M";
     sales.isShowSubtitles = true;
     sales.subtitles = [
-      { routerLink: "/item-list", name: "Total Sales" }, // kali
-      { routerLink: "/item-save", name: "Total inventory" }, // kali
-      { routerLink: "/item-list", name: "Total Returns" }, // kali
-      { routerLink: "/item-save", name: "Inventory to Sales Ratio" }, // kali
-      { routerLink: "/item-save", name: "Days of Supply" } // kali
+      { routerLink: "/under-construction", name: "Total Sales" }, // kali
+      { routerLink: "/under-construction", name: "Total inventory" }, // kali
+      { routerLink: "/under-construction", name: "Total Returns" }, // kali
+      { routerLink: "/under-construction", name: "Inventory to Sales Ratio" }, // kali
+      { routerLink: "/under-construction", name: "Days of Supply" } // kali
     ];
     this.navData.push(sales);
 
@@ -56,7 +56,7 @@ export class MainNavComponent implements OnInit {
     employees.titleFaCaret = "fa fa-caret-right caret_M";
     employees.isShowSubtitles = true;
     employees.subtitles = [
-      { routerLink: "/item-list", name: "List of employees" }// kali
+      { routerLink: "/under-construction", name: "List of employees" }// kali
     ];
     this.navData.push(employees);
   }

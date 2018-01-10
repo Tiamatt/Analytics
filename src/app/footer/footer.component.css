@@ -1,0 +1,11 @@
+footer{
+    height: 50px;
+    line-height: 50px;
+    background-color: rgba(23, 162, 184, 1);
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    color:  #fff;
+}
+a{
+    color:  #fff;
+}

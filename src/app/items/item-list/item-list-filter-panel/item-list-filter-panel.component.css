@@ -2,6 +2,7 @@
     float: left;
     padding-left: 0;
     margin-bottom: 30px;
+    max-width: 600px;
 }
 .filter-panel-row_M{
     padding-top: 10px;

@@ -5,6 +5,7 @@ import { TextValueCheckedModel } from '../../../shared/models/text-value-checked
 import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 import { UploadMultipleImagesModel } from './upload-multiple-images/upload-multiple-images.model';
 import { CalculationService } from '../../../shared/services/helpers/calculation.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-item-image-save',
@@ -16,6 +17,7 @@ export class ItemImageSaveComponent implements OnInit {
   itemImageForm: FormGroup;
   itemsTvc: TextValueCheckedModel; //item ddl
   images: UploadMultipleImagesModel[] = []; // images from db + newly uploaded images
+  selectedItemId: string = "-1";
   // variables for validations
   validationMessage: string = "";
   errorMessage: string = "";
@@ -23,12 +25,26 @@ export class ItemImageSaveComponent implements OnInit {
 
   constructor(
     private itemApiService: ItemApiService,
-    private calculationService: CalculationService
+    private calculationService: CalculationService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.getRouteParams();
     this.populateItemsTvc();
     this.generateItemImageForm();
+  }
+
+  private getRouteParams(){
+    this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        let _selectedItemId = params['itemId'];
+        if(_selectedItemId){
+          this.selectedItemId = _selectedItemId.toUpperCase();
+          this.populateItemImages(this.selectedItemId);
+        }
+      }
+    );
   }
 
  /* -------------------  PRIVATE METHODS ---------------------- */
@@ -65,7 +81,7 @@ export class ItemImageSaveComponent implements OnInit {
   // generate html form
   private generateItemImageForm(){ 
     this.itemImageForm = new FormGroup({
-      'itemsTvs': new FormControl(-1, Validators.min(1))
+      'itemsTvs': new FormControl(this.selectedItemId, Validators.min(1))
     });
   }
   // check if user selected main image
@@ -99,8 +115,8 @@ export class ItemImageSaveComponent implements OnInit {
   // When item reselected from item ddl
   onItemSelected(_event:any){
     this.cleanMessages();
-    let selectedItemId: string = _event.target.value;
-    this.populateItemImages(selectedItemId);
+    this.selectedItemId = _event.target.value;
+    this.populateItemImages(this.selectedItemId);
   }
   // getting image array from UploadMultipleImagesComponent
   // on delete, upload, change to mainImage

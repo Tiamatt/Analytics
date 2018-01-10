@@ -7,6 +7,7 @@ import { TextValueCheckedModel } from "../../models/text-value-checked.model";
 import { ItemDetailModel } from "../../models/item-detail.model";
 import { ItemImageModel } from "../../models/item-image.model";
 import { ColorSizeMatrixModel } from "../../../items/item-view/color-size-matrix-box/color-size-matrix.model";
+import { ItemActivateModel } from "../../../items/item-save/item-activate-save/item-activate/item-activate.model";
 
 @Injectable()
 
@@ -23,6 +24,7 @@ export class ItemApiService{
     private apiUrl_getItemDetails: string;
     private apiUrl_getColorSizeMatrix: string;
     private apiUrl_getItemDetail: string;
+    private apiUrl_getItemActivity: string;
     private apiUrl_insertItem: string;
     private apiUrl_insertItemDetail: string;
     private apiUrl_insertItemImage: string;
@@ -33,7 +35,7 @@ export class ItemApiService{
     private apiUrl_deleteItemDetail: string;
 
     constructor(private http: HttpClient){
-        this.apiUrl_base = 'https://localhost:44385/api/analytics/'; //kali
+        this.apiUrl_base = 'https://www.tiamatt.com/api/analytics/';
         this.apiUrl_getItemsTvc = this.apiUrl_base + 'items-tvc/';
         this.apiUrl_getItemNamesLowercase = this.apiUrl_base + 'item-names-lowercase/';
         this.apiUrl_getItemModel = this.apiUrl_base + 'item-model/'
@@ -43,6 +45,7 @@ export class ItemApiService{
         this.apiUrl_getItemDetails = this.apiUrl_base + 'item-details/';
         this.apiUrl_getColorSizeMatrix = this.apiUrl_base + 'color-size-matrix/';
         this.apiUrl_getItemDetail = this.apiUrl_base + 'item-detail/';
+        this.apiUrl_getItemActivity = this.apiUrl_base + 'item-activity/';
         this.apiUrl_insertItem = this.apiUrl_base + 'insert-item/' + this.employeeId;
         this.apiUrl_insertItemDetail = this.apiUrl_base + 'insert-item-detail/' + this.employeeId;
         this.apiUrl_insertItemImage = this.apiUrl_base + 'insert-item-image/' + this.employeeId;
@@ -101,6 +104,11 @@ export class ItemApiService{
     getItemDetail(_itemDetailId: string): any{
         let apiUrl = this.apiUrl_getItemDetail + _itemDetailId;
         return this.http.post<ItemDetailModel>(apiUrl, {headers: this.header}); 
+    }
+
+    getItemActivity(_itemId: string): any{
+        let apiUrl = this.apiUrl_getItemActivity + _itemId;
+        return this.http.post<ItemActivateModel>(apiUrl, {headers: this.header}); 
     }
 
     insertItem(_newItem: ItemModel){

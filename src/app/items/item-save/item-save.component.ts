@@ -34,7 +34,7 @@ export class ItemSaveComponent implements OnInit {
       title: '3. Add images',
       linkStatus: null },
     { rowNum: 4,
-      url:  '/item-save/item-activate',
+      url:  '/item-save/item-activate-save',
       title: '4. Activate item',
       linkStatus: null }
     ];

@@ -8,3 +8,9 @@
 .nav-shrink_M{
     margin-left: 44px;
 }
+
+@media screen and (min-height: 751px){
+    .app_M{
+        min-height: 1024px;
+    }
+}

@@ -1,10 +1,10 @@
-<div *ngIf="input" class="item-active-box_M">
-  <label class="control-title_M">{{'"' + input.itemName + '" item' | uppercase}}</label>
+<div *ngIf="data" class="item-active-box_M">
+  <label class="control-title_M">{{'"' + data.itemName + '" item' | uppercase}}</label>
  
   <!-- Show reasons if any -->
-  <div *ngIf="input.itemActivities && input.itemActivities.length>0; else elseItemActiveBlock">
+  <div *ngIf="data.itemActivities && data.itemActivities.length>0; else elseItemActiveBlock">
     <p>This item is inactive for the following reasons:</p>
-    <p *ngFor="let msg of input.itemActivities" class="text-danger reason-box_M">
+    <p *ngFor="let msg of data.itemActivities" class="text-danger reason-box_M">
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
         <span *ngIf="msg==1">Item details are missing.<a routerLink="/item-save/item-detail-save">Add details</a></span>
         <span *ngIf="msg==2">Item images are missing.<a routerLink="/item-save/item-image-save">Add images</a></span>
@@ -14,11 +14,11 @@
 
   <!-- Otherwise allow to activate/deactivate -->
   <ng-template #elseItemActiveBlock>
-    <div *ngIf="input.isItemActive">
+    <div *ngIf="data.isItemActive">
         <p>This item can be deactivated.</p>
         <button type="button" class="btn btn-danger btn-sm" (click)="onDeactivateItem()">Deactivate</button>
     </div>
-    <div *ngIf="!input.isItemActive">
+    <div *ngIf="!data.isItemActive">
         <p>This item can be activated.</p>
         <button type="button" class="btn btn-success btn-sm" (click)="onActivateItem()">Activate</button>
     </div>

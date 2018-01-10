@@ -17,7 +17,7 @@ export class FilterApiService{
     private apiUrl_getCustomers: string;
 
     constructor(private http: HttpClient){
-        this.apiUrl_base = 'https://localhost:44385/api/analytics/'; //kali
+        this.apiUrl_base = 'https://www.tiamatt.com/api/analytics/';
         this.apiUrl_getGenders = this.apiUrl_base + 'genders';
         this.apiUrl_getCategories = this.apiUrl_base + 'categories';
         this.apiUrl_getBrands = this.apiUrl_base + 'brands';

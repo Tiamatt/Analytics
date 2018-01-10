@@ -1,6 +1,17 @@
-<app-color-size-matrix-box [itemIdInput]="itemIdInput"></app-color-size-matrix-box>
+<!-- color-size-matrix -->
+<app-color-size-matrix-box [colorSizeMatrixInputModel]="colorSizeMatrix"></app-color-size-matrix-box>
 <br>
 
+
+<!-- link -->
+<a class="link_M" (click)="onEditOrAddItemDetail(null)">
+  <i class="fa fa-plus-square"></i>
+  <span>Add details</span>
+</a>
+<br>
+
+
+<!-- grid -->
 <div *ngIf="tableData && tableData.length > 0; else elseMajorBlock">
   
   <!-- main table -->
@@ -25,7 +36,7 @@
         <td>{{d.itemActionName}}</td>
         <td>{{d.customerEmail}}</td>
         <td>{{d.quantity}}</td>
-        <td class="td-icon_M" (click)="onEditItemDetail(d.itemDetailId)">
+        <td class="td-icon_M" (click)="onEditOrAddItemDetail(d.itemDetailId)">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </td>
         <td class="td-icon_M" (click)="onDeleteItemDetail(d.itemDetailId)">
@@ -38,15 +49,16 @@
   <!-- pagination -->
   <app-paging-simple [input]="pageData" (onPageChangeOutput)="onPageChange($event)"></app-paging-simple>
 
-  <!-- Modal dialogs: Edit, etc. -->
-  <app-modal-dialog [uniqueId]="0">
-    <div #modalDialogBody>
-      <app-item-detail-save [itemDetailIdInput]="selectedEditItemDetailId" (onSavedOutput)="onEditItemDetailFromChild($event)"></app-item-detail-save>
-    </div>
-  </app-modal-dialog>
-  <button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>
-  
 </div>
 <ng-template #elseMajorBlock>
   <div class="alert alert-danger maxWidth_M">Sorry, no results found</div>
 </ng-template>
+
+
+<!-- Modal dialogs: Edit, Add -->
+<app-modal-dialog [uniqueId]="0">
+  <div #modalDialogBody>
+    <app-item-detail-save [itemDetailIdInput]="selectedItemDetailId"  [itemIdInput]="itemIdInput" (onSavedOutput)="onEditOrAddItemDetailFromChild($event)"></app-item-detail-save>
+  </div>
+</app-modal-dialog>
+<button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>

@@ -2,23 +2,28 @@ import { Component, OnChanges, Input } from '@angular/core';
 import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 import { ItemDetailModel } from '../../../shared/models/item-detail.model';
 import { PagingSimpleModel } from '../../../shared/components/custom-components/paging-simple/paging-simple.model';
+import { ColorSizeMatrixInputModel } from '../../item-view/color-size-matrix-box/color-size-matrix-input.model';
 
 @Component({
   selector: 'app-item-details-view-box',
   templateUrl: './item-details-view-box.component.html',
   styleUrls: ['./item-details-view-box.component.css', '../../../shared/styles/general.css', '../../../shared/styles/table.css']
 })
+
 export class ItemDetailsViewBoxComponent implements OnChanges {
   @Input() itemIdInput: string; // guid
   tableData: ItemDetailModel[] = [];
   tableDataSliced: ItemDetailModel[] = [];
   pageData: PagingSimpleModel;
   isSortAsc: boolean = true;
-  selectedEditItemDetailId: string; 
+  selectedItemDetailId: string; 
   currentSortedTableHeaderName: string = "quantity";
+  colorSizeMatrix: ColorSizeMatrixInputModel;
+  
   constructor(private itemApiService: ItemApiService) { }
 
   ngOnChanges() {
+    this.populateColorSizeMatrix();
     this.populateTableData();
   }
 
@@ -71,9 +76,16 @@ export class ItemDetailsViewBoxComponent implements OnChanges {
   }
   private populatePageData(_currentPage: number){
     this.pageData = new PagingSimpleModel();
-    this.pageData.maxRowsPerPage = 5;
+    this.pageData.maxRowsPerPage = 10;
     this.pageData.currentPage = _currentPage;
     this.pageData.rowsCount = this.tableData.length;
+  }
+  private populateColorSizeMatrix(){
+    this.colorSizeMatrix = new ColorSizeMatrixInputModel();
+    this.colorSizeMatrix.itemId = this.itemIdInput;
+    this.colorSizeMatrix.isShowAddDetailsLink = false;
+    this.colorSizeMatrix.isShowViewDetailsLink = false;
+    this.colorSizeMatrix.forceToRefresh = (this.colorSizeMatrix.forceToRefresh) ? !this.colorSizeMatrix.forceToRefresh : true;
   }
 
   /* -------------------  EVENTS ---------------------- */
@@ -93,20 +105,21 @@ export class ItemDetailsViewBoxComponent implements OnChanges {
         res => {
           alert('Selected item detail deleted successfully');
           this.populateTableData();
+          this.populateColorSizeMatrix();
         },
         err => alert('Failed to delete selected item detail.')
       );
     }
   }
-  onEditItemDetail(_itemDetailId:string){
+  onEditOrAddItemDetail(_itemDetailId:string){
     document.getElementById("openModalAlert").click();
-    this.selectedEditItemDetailId = _itemDetailId;
+    this.selectedItemDetailId = _itemDetailId;
   }
-  onEditItemDetailFromChild(_isSucceded){
-    if(_isSucceded)
+  onEditOrAddItemDetailFromChild(_isSucceded){
+    if(_isSucceded){
       this.populateTableData();
+      this.populateColorSizeMatrix();
+    }
   }
-
-
 
 }

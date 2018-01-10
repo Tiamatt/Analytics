@@ -23,7 +23,7 @@
         <td>{{d.item.categoryName}}</td>
         <td>{{d.item.brandName}}</td>
         <td>{{d.item.price | currency}}</td>
-        <td class="td-icon_M" (click)="onShowItemActivities(d)">
+        <td class="td-icon_M" (click)="onShowItemActivities(d.item.itemId)">
             <i *ngIf="!d.item.isActive" class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>
             <i *ngIf="d.item.isActive"  class="fa fa-check-circle text-success" aria-hidden="true"></i>
         </td>
@@ -47,7 +47,7 @@
 
 
 <!-- item activate -->
-<app-item-activate *ngIf="dataForItemActivate" [input]="dataForItemActivate" (onChangeActivityOutput)="onChangeItemActivity($event)"></app-item-activate>
+<app-item-activate *ngIf="selectedActivateItemId" [itemIdInput]="selectedActivateItemId" (onChangeActivityOutput)="onChangeItemActivity($event)"></app-item-activate>
 
 
 <!-- Modal dialogs: Edit, etc. -->

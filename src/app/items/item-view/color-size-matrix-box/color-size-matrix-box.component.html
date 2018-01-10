@@ -19,16 +19,16 @@
   </table>
 
 
-  <a *ngIf="isShowViewDetails" class="link_M">
+  <a *ngIf="colorSizeMatrixInputModel.isShowViewDetailsLink" class="link_M">
       <i class="fa fa-eye" aria-hidden="true"></i>
       <span>View details</span>
   </a>
 
 </div>
 <ng-template #elseMatrixDataBlock>
-    <span>None. Please add details.</span>
-    <a class="link_M">
-        <i class="fa fa-plus-square" aria-hidden="true"></i>
-        <span>Add details</span>
-    </a>
+  <span>None. Please add details.</span>
+  <a class="link_M" *ngIf="colorSizeMatrixInputModel.isShowAddDetailsLink">
+      <i class="fa fa-plus-square" aria-hidden="true"></i>
+      <span>Add details</span>
+  </a>
 </ng-template>

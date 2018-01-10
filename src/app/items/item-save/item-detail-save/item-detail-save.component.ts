@@ -15,6 +15,7 @@ import { RequiredWithTrimValidator } from '../../../shared/custom-directives/val
 
 export class ItemDetailSaveComponent implements OnInit, OnChanges {
   @Input() itemDetailIdInput:string; // guid
+  @Input() itemIdInput:string; // guid
   @Output() onSavedOutput = new EventEmitter<boolean>();
 
   itemDetail: ItemDetailModel = new ItemDetailModel();
@@ -31,8 +32,6 @@ export class ItemDetailSaveComponent implements OnInit, OnChanges {
   isShowCustomersDdl: boolean = false;
   isShowAllValidations: boolean = false;
   isItemActionValid: boolean = false;
-  // notifications
-  resultNotification: string;
 
   constructor(
     private filterApiService: FilterApiService,
@@ -48,9 +47,10 @@ export class ItemDetailSaveComponent implements OnInit, OnChanges {
     this.generateItemDetailForm();
   }
   ngOnChanges(_changes: SimpleChanges){
-    if(_changes.itemDetailIdInput != undefined)
+    if(_changes.itemDetailIdInput != undefined || _changes.itemIdInput != undefined)
     {
-      this.itemDetailIdInput = _changes.itemDetailIdInput.currentValue;
+      if(_changes.itemDetailIdInput != undefined)
+        this.itemDetailIdInput = _changes.itemDetailIdInput.currentValue;
       this.prepopulateItemDetailModel(this.itemDetailIdInput);
     }
   }
@@ -105,17 +105,19 @@ export class ItemDetailSaveComponent implements OnInit, OnChanges {
   private prepopulateItemDetailModel(_itemDetailId: string){
     this.itemApiService.getItemDetail(_itemDetailId).subscribe(
       res => {
-        this.itemDetail = (res)? res : new ItemDetailModel();
+        this.itemDetail = (res) ? res : new ItemDetailModel();
         this.generateItemDetailForm();
         this.populateItemActions(this.itemDetail.itemActionId);
         this.onItemActionSelected(this.itemDetail.itemActionId);
-        this.title = "Update item detail";
-        this.saveButtonName = "Update";
+        this.title = (res) ? "Update item detail" : "Add item detail";
+        this.saveButtonName = (res) ? "Update" : "Add";
       },
       err => console.log("Error. Can't call GetItemDetail(X) HttpGet method")
     );
   }
   private generateItemDetailForm(){ 
+    if(this.itemIdInput)
+      this.itemDetail.itemId = this.itemIdInput;
     this.itemDetailForm = new FormGroup({
       'itemsTvs': new FormControl((this.itemDetail.itemId) ? this.itemDetail.itemId.toUpperCase() : -1, Validators.min(1)),
       'sizes': new FormControl((this.itemDetail.sizeId) ? this.itemDetail.sizeId : -1, Validators.min(1)),
@@ -127,7 +129,8 @@ export class ItemDetailSaveComponent implements OnInit, OnChanges {
   
   /* -------------------  EVENTS ---------------------- */
   // get selected ItemAction from Custom RadiobuttonsSimple
-  onItemActionSelected(_selectedItemActionId: number){    this.itemDetail.itemActionId = _selectedItemActionId;
+  onItemActionSelected(_selectedItemActionId: number){    
+    this.itemDetail.itemActionId = _selectedItemActionId;
     this.isItemActionValid = true;
     // if Sold (2) or Returned (3) then add CustomerId
     this.isShowCustomersDdl = (_selectedItemActionId == 2 || _selectedItemActionId == 3) ? true : false;
@@ -158,13 +161,13 @@ export class ItemDetailSaveComponent implements OnInit, OnChanges {
       if(this.itemDetailIdInput)
       {
         this.itemApiService.updateItemDetail(this.itemDetail).subscribe(
-          res => { 
-            this.resultNotification = "Item Detail updated successfully"; 
-            this.onSavedOutput.emit(true);
+          res => {
+            this.onSavedOutput.emit(true); 
+            alert("Item Detail updated successfully");            
           },
-          err => { 
-            this.resultNotification = "Failed to updated Item Detail";
+          err => {
             this.onSavedOutput.emit(false); 
+            alert("Failed to updated Item Detail");
             console.log(err);
           }
         );
@@ -172,12 +175,13 @@ export class ItemDetailSaveComponent implements OnInit, OnChanges {
       else{
         this.itemApiService.insertItemDetail(this.itemDetail).subscribe(
           res => { 
-            this.resultNotification = "Item Detail created successfully";
-            this.onSavedOutput.emit(true); 
+            this.onSavedOutput.emit(true);
+            alert("Item Detail created successfully"); 
+            this.onResetClick();           
           },
-          err => { 
-            this.resultNotification = "Failed to create Item Detail";
-            this.onSavedOutput.emit(false);  
+          err => {
+            this.onSavedOutput.emit(false);
+            alert("Failed to create Item Detail"); 
             console.log(err);
           }
         );
@@ -185,13 +189,15 @@ export class ItemDetailSaveComponent implements OnInit, OnChanges {
     }
   }
   // "Reset" button
-  onResetClick(){ // kali
+  onResetClick(){
     if(this.itemDetailIdInput)
       this.prepopulateItemDetailModel(this.itemDetailIdInput);
     else{
       this.itemDetail = new ItemDetailModel();
       this.generateItemDetailForm();
     }
+    this.populateItemActions(this.itemDetail.itemActionId);
+    this.onItemActionSelected(this.itemDetail.itemActionId);
   }
 
 }

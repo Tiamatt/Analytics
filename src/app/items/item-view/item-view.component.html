@@ -3,7 +3,7 @@
 
     <!-- Item (single selection, dropdowns)-->
     <label class="control-title_M" for="itemsTvs">{{'item' | uppercase}}</label>
-    <select id="itemsTvs" class="form-control"
+    <select id="itemsTvs" class="form-control maxWidth_M"
     [(ngModel)]="selectedItemId"  (ngModelChange)="onReselectItemTvc($event)">
         <option *ngFor="let o of itemsTvc" [value]="o.valueStr">{{ o.text }}</option>
     </select>

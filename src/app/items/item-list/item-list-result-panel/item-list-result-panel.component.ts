@@ -22,8 +22,8 @@ import { Component, Input, OnChanges, SimpleChanges, EventEmitter, Output } from
 import { ItemViewModel } from '../../item-view/item-view.model';
 import { ItemApiService } from '../../../shared/services/api/itemApi.service';
 import { Router } from '@angular/router';
-import { ItemActivateModel } from '../../item-save/item-activate/item-activate.model';
 import { PagingSimpleModel } from '../../../shared/components/custom-components/paging-simple/paging-simple.model';
+import { ItemActivateModel } from '../../item-save/item-activate-save/item-activate/item-activate.model';
 
 @Component({
   selector: 'app-item-list-result-panel',
@@ -36,11 +36,11 @@ export class ItemListResultPanelComponent implements OnChanges {
   @Output() onRepopulateDataOutput = new EventEmitter<void>(); //refresh input and resend here
 
   tableData: ItemViewModel[];
-  dataForItemActivate: ItemActivateModel;
   isSortAsc: boolean = true;
   pageData: PagingSimpleModel;
   currentSortedTableHeaderName: string = "name";
   selectedEditItemId: string;
+  selectedActivateItemId: string;
 
   constructor( private itemApiService: ItemApiService, private router: Router) { }
 
@@ -94,12 +94,8 @@ export class ItemListResultPanelComponent implements OnChanges {
     this.populatePageData(_currentPage);   
     this.sortingAndPagingTable(this.currentSortedTableHeaderName);
   }
-  onShowItemActivities(_selectedRow: ItemViewModel){
-      this.dataForItemActivate = new ItemActivateModel();
-      this.dataForItemActivate.itemId = _selectedRow.item.itemId;
-      this.dataForItemActivate.itemName = _selectedRow.item.name;
-      this.dataForItemActivate.isItemActive = _selectedRow.item.isActive;
-      this.dataForItemActivate.itemActivities = _selectedRow.itemActivities;
+  onShowItemActivities(_itemId: string){
+    this.selectedActivateItemId = _itemId;
   }
   onChangeItemActivity(_isItemActive: boolean){
     this.onRepopulateDataOutput.emit();

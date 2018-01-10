@@ -8,7 +8,7 @@ ul, li, p, h1, h2, h3, h4, h5, h6{
 }
 
 .maxWidth_M{
-    max-width: 600px;
+    max-width: 296px;
 }
 
 p.validation_M{
@@ -37,3 +37,19 @@ label.control-title_M{
 .btn_M{
     width: 90px;
 }
+
+
+/* link */
+a.link_M {
+    color: rgba(23, 162, 184, 1);
+    font-weight: 700;
+    display: block;
+}
+    a.link_M:hover{
+        color: rgba(0, 123, 255, 1);
+        cursor: pointer;
+    }
+    a.link_M span{
+        text-decoration: underline;
+        font-size: 14px;
+    }

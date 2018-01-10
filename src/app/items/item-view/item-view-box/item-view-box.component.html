@@ -13,20 +13,29 @@
             <p><b>Brand: </b>{{itemView.item.brandName}}</p>
             <p><b>Price: </b>{{itemView.item.price | currency}}</p>
             <p><b>Active: </b>{{itemView.item.isActive? 'yes': 'no'}}</p>
-            <a class="edit_M">
+            <a class="edit_M" (click)="onEditItem()">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 <span>Edit item</span>
             </a>
-            <a class="edit_M">
+            <a class="edit_M" [routerLink]="['/item-save/item-image-save', itemView.item.itemId]">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 <span>Edit images</span>
             </a>
             <br>
             
-            <app-color-size-matrix-box [itemIdInput]="itemIdInput" [isShowViewDetails]="true"></app-color-size-matrix-box>
+            <app-color-size-matrix-box [colorSizeMatrixInputModel]="colorSizeMatrixInputModel"></app-color-size-matrix-box>
             <br>
             
         </div>
 
     </div>
 </div>
+
+<!-- Modal dialogs: Edit, etc. -->
+<app-modal-dialog *ngIf="itemView" [uniqueId]="0">
+    <div #modalDialogBody>
+        <app-item-general-save [itemIdInput]="itemView.item.itemId" (onSavedOutput)="onEditItemFromChild($event)"></app-item-general-save>
+    </div>
+</app-modal-dialog>
+<button id="openModalAlert" hidden data-toggle="modal" data-target="#ModalAlert0">Open Modal Alert (hidden)</button>
+  
