@@ -17,6 +17,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/item-list', pathMatch: 'full' },
+    { path: 'item-list', component: ItemListComponent },
     { path: 'item-save', component: ItemSaveComponent, children:[
         { path: '', redirectTo: 'item-general-save', pathMatch: 'full' },
         { path: 'item-general-save', component: ItemGeneralSaveComponent },
@@ -28,7 +29,6 @@ const appRoutes: Routes = [
     { path: 'item-view', component: ItemViewComponent },
     { path: 'item-view/:itemId', component: ItemViewComponent },
     { path: 'item-details-view', component: ItemDetailsViewComponent },
-    { path: 'item-list', component: ItemListComponent },
     { path: 'under-construction', component: UnderConstructionComponent},
     { path: '**', component: ErrorComponent }
 ];
