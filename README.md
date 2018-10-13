@@ -1,9 +1,9 @@
 # Analytics app
-This [web application](https://tiamatt.github.io/Analytics) app is a custom admin interface built with Angular and ASP.NET Core Web API. User can create/read/update/delete items.
+This web app is a custom admin interface built with Angular and ASP.NET Core Web API. User can create/read/update/delete items.
 
+### Note, Api for this project is not running on the server anymore.
 
 ## DEMO
-Live DEMO [here](https://tiamatt.github.io/Analytics) </br>
 </br>
 ![AnalyticsScreenshot](/src/assets/general-images/screenshot.png?raw=true "Analytics screenshot")
 
