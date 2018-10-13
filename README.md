@@ -4,7 +4,7 @@ This web app is a custom admin interface built with Angular and ASP.NET Core Web
 ### Note, Api for this project is not running on the server anymore.
 
 ## DEMO
-</br>
+
 ![AnalyticsScreenshot](/src/assets/general-images/screenshot.png?raw=true "Analytics screenshot")
 
 
